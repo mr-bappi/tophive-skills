@@ -80,6 +80,58 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
    }
  }
  if(pageName==="home"){
+ const closing=await page.evaluate(()=>{
+   const section=document.querySelector(".closing");
+   const actions=[...section.querySelectorAll(".closing-links a")].map(a=>({href:a.getAttribute("href"),label:a.textContent.trim()}));
+   const proof=document.querySelector(".proof");
+   return {height:section.getBoundingClientRect().height,
+     headingAccessible:section.getAttribute("aria-labelledby")==="closing-title"&&!!section.querySelector("#closing-title"),
+     actions,hasRedundantCaption:!!section.querySelector(".closing-caption"),
+     codeFontSize:parseFloat(getComputedStyle(proof.querySelector(".code-content")).fontSize),
+     proofBottomPadding:parseFloat(getComputedStyle(proof).paddingBottom),
+     buttonMarginTop:parseFloat(getComputedStyle(section.querySelector(".closing-links .btn")).marginTop),
+     copyToButtonGap:section.querySelector(".closing-links .btn").getBoundingClientRect().top-section.querySelector(".closing-action p").getBoundingClientRect().bottom};
+ });
+ check(closing.buttonMarginTop===0&&closing.copyToButtonGap>=8&&closing.copyToButtonGap<=24,"Final CTA button dropped below description "+JSON.stringify(closing));
+ check(closing.headingAccessible,"Final CTA missing accessible heading");
+ check(closing.height<(width<=430?540:width<=730?500:420),"Final CTA oversized "+JSON.stringify(closing));
+ check(closing.actions.length===2&&closing.actions[0].href==="skills/tophive-design/"&&closing.actions[1].href==="docs/","Final CTA targets changed "+JSON.stringify(closing));
+ check(closing.actions[0].label.includes("View Web & UI Design")&&!closing.hasRedundantCaption,"Final CTA specificity or footer cleanup regressed "+JSON.stringify(closing));
+ check(closing.codeFontSize>=(width<=430?11:12.5)&&closing.proofBottomPadding<=70,"Editor legibility or proof rhythm regressed "+JSON.stringify(closing));
+ const method=await page.evaluate(()=>{
+   const section=document.querySelector(".method");
+   const headings=[...section.querySelectorAll(".method-rail h3")].map(x=>x.textContent.trim());
+   const rows=[...section.querySelectorAll(".method-rail article")].map(x=>x.getBoundingClientRect());
+   const head=section.querySelector(".method-head h2");
+   return {height:section.getBoundingClientRect().height,
+     headingAccessible:head.id==="method-heading"&&section.getAttribute("aria-labelledby")==="method-heading",
+     headings,rows:rows.map(r=>({top:r.top,width:r.width}))};
+ });
+ check(method.headingAccessible&&method.headings.join("|")==="Discover|Install|Use with intent","Method workflow hierarchy regressed "+JSON.stringify(method));
+ check(method.height<=(width<=430?730:width<=730?800:width<1200?470:520),"Method excessive vertical height "+JSON.stringify(method));
+ if(width<=730)check(method.rows[0].top<method.rows[1].top&&method.rows[1].top<method.rows[2].top,"Mobile Method steps are not vertically ordered");
+ else check(Math.abs(method.rows[0].top-method.rows[1].top)<1&&Math.abs(method.rows[1].top-method.rows[2].top)<1,"Desktop Method columns lost alignment");
+ const directory=await page.evaluate(()=>{
+   const section=document.querySelector(".library-directory");
+   const row=section.querySelector("[data-skill-item]");
+   const search=section.querySelector("[data-search]");
+   const title=section.querySelector("#library-heading");
+   return {height:section.getBoundingClientRect().height,
+    rowHeight:row.getBoundingClientRect().height,
+    searchVisible:search.getBoundingClientRect().width>0,
+    hasHeading:!!title,
+    count:section.querySelector("[data-skill-count]").textContent,
+    href:row.getAttribute("href")};
+ });
+ check(directory.height<525,"Library dead space regressed "+JSON.stringify(directory));
+ check(directory.rowHeight>=65 && directory.searchVisible && directory.hasHeading,"Homepage Library directory inaccessible "+JSON.stringify(directory));
+ check(directory.count==="01" && directory.href==="skills/tophive-design/","Published skill row or count changed");
+ if(width===1440){
+   await page.keyboard.press("/");
+   check(await page.$eval("[data-search]",el=>document.activeElement===el),"Slash shortcut did not focus skill search");
+   await page.keyboard.press("Escape");
+   check(await page.$eval("[data-search]",el=>document.activeElement!==el),"Escape did not dismiss skill search");
+ }
  check(await page.$eval("main h1",el=>el.textContent).then(t=>t.includes("Give your agents")&&t.includes("better instincts")),"Original editorial hero not restored");
  check(await page.$eval(".hero-actions .btn",el=>el.getAttribute("href"))==="library/","Hero should link to minimalist skills library");
 

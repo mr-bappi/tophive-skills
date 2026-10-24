@@ -58,3 +58,12 @@ This directory deliberately contains **no fake skill installation counts** or us
 ## All Skills Library
 
 Visit https://skills.tophive.dev/library/ to browse the published catalog. Category filters and skill cards are progressively enhanced from `catalog.json`; a first-skill fallback remains usable without JavaScript or when network requests fail. Only verified published skills are listed, no fabricated counts.
+
+
+## One shared global header
+
+The canonical source is partials/site-header.html. Do not edit the generated page headers by hand.
+After editing the shared header, run python3 scripts/sync-site-header.py.
+Before deploying, run python3 scripts/sync-site-header.py --check.
+GitHub Pages serves pre-generated static HTML so the navigation remains usable without JavaScript.
+The approved homepage header style governs all pages.

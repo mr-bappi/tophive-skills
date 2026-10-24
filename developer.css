@@ -1,15 +1,6 @@
 /* TOPHIVE Skills: purposeful developer-first visual language */
 .dev-site{--paper:#f9faf8;--ink:#171f1d;--hair:#e2e6e1;--muted:#697770;--green:#4e8269;background:var(--paper);color:var(--ink)}
-.dev-site .site-header{background:rgba(249,250,248,.97);border-color:#e1e5e0}
-.dev-site .nav-wrap{min-height:65px}
-.dev-site .brand{font-size:15px;letter-spacing:-.044em}
-.dev-site .brandmark{width:26px;height:26px;font-size:13px;border-width:1.7px}
-.dev-site .brand-suffix{color:#8a958c}
-.dev-site .nav{gap:24px}
-.dev-site .nav a{font-size:12px;font-weight:610;color:#49564f}
-.dev-site .nav a:hover,.dev-site .nav a[aria-current=page]{color:#18241b}
-.dev-site .nav-action{padding:10px 15px;border-radius:5px;font-weight:660;font-size:11px;background:#1e2924}
-.dev-site .nav-action:hover,.dev-site .btn-dark:hover{background:#34493c}
+.dev-site .btn-dark:hover{background:#34493c}
 .dev-site .site-footer{border-top:1px solid #e0e6e0}
 .dev-site .footer-wrap{min-height:91px}
 .dev-site .btn-dark{border-radius:5px;background:#1d2923}

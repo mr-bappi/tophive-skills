@@ -62,10 +62,6 @@
 /* Library polish: compact header, quiet search, single-purpose table. */
 .library-view{display:flex;flex-direction:column;min-height:100svh}
 .library-view main{flex:1}
-.library-view .nav-wrap{min-height:58px;gap:19px}
-.library-view .nav{gap:19px}
-.library-view .nav-action{padding:9px 13px;font-size:11px}
-.library-view .brand-suffix{letter-spacing:.09em}
 .library-view .directory{min-height:0;padding-top:31px;padding-bottom:40px}
 .library-view .directory-path{color:#a2aba3;font-size:9px;letter-spacing:.035em}
 .library-view .directory-path a{color:#87988d}

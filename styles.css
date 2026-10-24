@@ -8,14 +8,14 @@ button,input{font:inherit}button{cursor:pointer}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #669c86;outline-offset:4px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(23px,5vw,66px)}
 .skip-link{position:absolute;top:-100px;left:20px;background:var(--ink);color:#fff;padding:12px;z-index:100}.skip-link:focus{top:12px}
-.site-header{border-bottom:1px solid var(--hair);position:relative;z-index:30;background:var(--paper)}
+.site-header{border-bottom:1px solid #dce3de;position:relative;z-index:30;background:#f7f8f4;color:#1b2423}
 .nav-wrap{min-height:78px;display:flex;align-items:center;gap:35px}
 .brand{display:inline-flex;align-items:center;gap:11px;white-space:nowrap;font-size:16px;font-weight:830;letter-spacing:-.054em}
 .brandmark{display:grid;place-items:center;width:29px;height:29px;border:2px solid currentColor;border-radius:7px;font-size:14px;font-weight:750;transform:rotate(-8deg);transition:transform .34s cubic-bezier(.2,1.4,.3,1)}
 .brand:hover .brandmark,.brand:focus-visible .brandmark{transform:rotate(12deg) translateY(-1px) scale(1.05)}
 .brand-suffix{font-size:10px;color:#7d8982;letter-spacing:.12em;font-weight:700;margin-left:8px}
 .nav{display:flex;align-items:center;gap:25px;margin-left:auto}
-.nav a{font-size:12px;font-weight:690}.nav a:hover,.site-footer nav a:hover{color:#368269}
+.nav a{font-size:12px;font-weight:690}.nav a:hover,.nav a[aria-current=page],.site-footer nav a:hover{color:#368269}
 .nav-action{background:#1c2424;color:#fff;border-radius:999px;padding:13px 19px;font-size:12px;font-weight:730;display:inline-flex;gap:15px;align-items:center}
 .nav-action:hover,.btn-dark:hover{background:#34463f}
 .mobile-toggle{display:none}
@@ -108,3 +108,6 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #669c
 
 .homepage-library-link{font-size:11px;font-weight:750;display:inline-flex;align-items:center;gap:15px;border-bottom:1px solid #9fb4a4;color:#3b6547;padding-bottom:5px}
 .homepage-library-link:hover{color:#1f3727;border-color:#497957}
+
+/* Shared global header: identical surface on every page, including mobile menu. */
+@media(max-width:730px){.site-header .nav{background:#f7f8f4}}

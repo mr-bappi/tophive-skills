@@ -83,14 +83,42 @@ const assert=(ok,msg)=>{if(!ok)throw Error(msg)};
  await nojs.close();
  const page=await browser.newPage();
  await page.goto(`http://127.0.0.1:${port}/`,{waitUntil:'load'});
- assert(await page.$eval('.nav-action',x=>x.getAttribute('href'))==='library/','homepage main CTA not pointing to library');
- assert(await page.$eval('.hero-actions .btn',x=>x.getAttribute('href'))==='library/','hero CTA not pointing to library');
+ assert(await page.$eval('.nav-action',x=>new URL(x.href).pathname)==='/library/','homepage main CTA not pointing to library');
+ assert(await page.$eval('.hero-actions .btn',x=>new URL(x.href).pathname)==='/library/','hero CTA not pointing to library');
  await page.goto(`http://127.0.0.1:${port}/docs/`,{waitUntil:'load'});
- assert(await page.$eval('[data-nav] a',x=>x.getAttribute('href'))==='../library/','docs nav incorrect');
+ assert(await page.$eval('[data-nav] a',x=>new URL(x.href).pathname)==='/library/','docs nav incorrect');
  await page.goto(`http://127.0.0.1:${port}/skills/tophive-design/`,{waitUntil:'load'});
- assert(await page.$eval('[data-nav] a',x=>x.getAttribute('href'))==='../../library/','skill detail nav incorrect');
+ assert(await page.$eval('[data-nav] a',x=>new URL(x.href).pathname)==='/library/','skill detail nav incorrect');
  console.log('PASS cross-page library navigation');
- await page.close();await browser.close();
+ await page.close();
+ // One visual header contract, tested across all four static pages and breakpoints.
+ for(const width of [390,1440]){
+  let reference=null;
+  for(const route of ['/','/library/','/docs/','/skills/tophive-design/']){
+   const view=await browser.newPage();
+   await view.setViewport({width,height:850});
+   await view.goto('http://127.0.0.1:'+port+route,{waitUntil:'load'});
+   const state=await view.evaluate(()=>{
+    const header=document.querySelector('[data-shared-header]');
+    if(!header)return null;
+    const cs=getComputedStyle(header);
+    const b=getComputedStyle(header.querySelector('.brand'));
+    const cta=getComputedStyle(header.querySelector('.nav-action'));
+    return {height:Math.round(header.getBoundingClientRect().height),
+      bg:cs.backgroundColor,color:cs.color,
+      brandSize:b.fontSize,brandWeight:b.fontWeight,
+      ctaPadding:cta.padding,ctaRadius:cta.borderRadius,
+      navText:[...header.querySelectorAll('nav a')].map(a=>a.textContent.trim()).join('|'),
+      ctaText:header.querySelector('.nav-action').textContent.trim()};
+   });
+   assert(!!state,'Shared header missing on '+route);
+   if(!reference)reference=state;
+   else assert(JSON.stringify(state)===JSON.stringify(reference),'Global header style drift at '+width+' '+route+' expected '+JSON.stringify(reference)+' actual '+JSON.stringify(state));
+   await view.close();
+  }
+  console.log('PASS identical global header',width,'4 pages');
+ }
+ await browser.close();
  console.log('SUMMARY: 6 viewports, 1 multi-category fixture, no-JS fallback, navigation; failures',errors.length);
  if(errors.length)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>server.close());

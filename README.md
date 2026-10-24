@@ -12,7 +12,7 @@ The public skill lives under `skills/tophive-design/`. Use its source for open r
 npx skills add mr-bappi/tophive-skills -g
 ```
 
-Website: `https://mr-bappi.github.io/tophive-skills/` (GitHub Pages live and public).
+Website: `https://skills.tophive.dev/` (GitHub Pages live and public).
 
 Download: `downloads/tophive-design-skill.zip`.
 
@@ -49,6 +49,6 @@ Browser tests cover 360/390/768/1024/1440/1920px for all three pages, no horizon
 
 ## Hosting
 
-Static GitHub Pages deploys from `main` repository root. An optional custom domain (for example `skills.tophive.dev`) requires explicitly configured DNS/Pages CNAME; do not invent or automatically modify DNS.
+Static GitHub Pages deploys from `main` repository root to **https://skills.tophive.dev/**. The `CNAME` file pins the configured custom domain; DNS is managed separately and was not changed by this repository commit.
 
 This directory deliberately contains **no fake skill installation counts** or user-submitted publishing backend. To add skills, include authentic SKILL.md and update catalog/listing sources after review.

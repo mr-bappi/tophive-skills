@@ -111,3 +111,50 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #669c
 
 /* Shared global header: identical surface on every page, including mobile menu. */
 @media(max-width:730px){.site-header .nav{background:#f7f8f4}}
+
+
+/* SITE STRUCTURAL GRID — subtle architectural frame, no new layout or content.
+   A single constrained pair of vertical rails connects header, all page
+   sections and footer. The original .wrap is the content alignment authority.
+   Lines are decorative; they never intercept clicks or change geometry. */
+:root{
+  --site-grid-max:1240px;
+  --site-grid-ink:rgba(101,125,106,.19);
+  --site-grid-outer:clamp(14px,2vw,22px);
+}
+body{position:relative;min-height:100vh}
+/* Position rails at the same centered max-width as .wrap. */
+body::before{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(calc(100% - (2 * var(--site-grid-outer))),var(--site-grid-max));
+  border-inline:1px solid var(--site-grid-ink);
+  pointer-events:none;
+  z-index:35;
+}
+/* Tiny ruler nodes where the header meets both vertical frame lines. */
+.site-header::before,.site-header::after{
+  content:"";
+  position:absolute;
+  width:7px;height:7px;
+  bottom:-4px;
+  border:1px solid #ccd8ce;
+  background:var(--paper);
+  border-radius:50%;
+  z-index:36;
+  pointer-events:none;
+}
+.site-header::before{left:max(var(--site-grid-outer),calc((100% - var(--site-grid-max))/2));transform:translateX(-50%)}
+.site-header::after{right:max(var(--site-grid-outer),calc((100% - var(--site-grid-max))/2));transform:translateX(50%)}
+/* Section boundaries are quiet and consistently anchored to the same grid. */
+main>section+section{border-top:1px solid var(--site-grid-ink)}
+@media(max-width:730px){
+  :root{--site-grid-outer:12px}
+  .site-header::before,.site-header::after{width:6px;height:6px;bottom:-3px}
+}
+@media(prefers-reduced-motion:reduce){
+  body::before,.site-header::before,.site-header::after{transition:none}
+}

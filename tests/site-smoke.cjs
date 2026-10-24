@@ -19,6 +19,19 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
  check(vals.scroll<=vals.view+1,"Horizontal overflow "+JSON.stringify(vals));
  check(vals.h1===1,"Expected exactly one H1 "+vals.h1);
  check(vals.header&&vals.footer,"Missing shared header/footer");
+ // The structural grid is decorative and shared, not a new page layout.
+ const frame=await page.evaluate(()=>{
+  const rail=getComputedStyle(document.body,'::before');
+  const left=getComputedStyle(document.querySelector('.site-header'),'::before');
+  const right=getComputedStyle(document.querySelector('.site-header'),'::after');
+  return {width:parseFloat(rail.width),borderLeft:rail.borderLeftWidth,
+   borderRight:rail.borderRightWidth,events:rail.pointerEvents,
+   leftNode:left.content,rightNode:right.content};
+ });
+ check(frame.width>=300||width<350,"Structural frame too narrow "+JSON.stringify(frame));
+ check(frame.borderLeft==="1px"&&frame.borderRight==="1px","Structural rails missing");
+ check(frame.events==="none","Decorative rails must not block UI");
+ check(frame.leftNode!=="none"&&frame.rightNode!=="none","Header intersections missing");
  if(width===390){
  const toggle=await page.$("[data-menu-toggle]");
  await toggle.click();

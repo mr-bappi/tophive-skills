@@ -61,6 +61,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #669c
 .searchbox input{border:0;background:none;outline:none!important;width:100%;font-size:13px;color:var(--ink);min-width:0}
 .skill-listing{display:grid;grid-template-columns:46px 64px minmax(0,1fr) 100px 30px;gap:25px;align-items:center;border-bottom:1px solid var(--hair);padding:36px 0;transition:padding .2s ease}
 .skill-listing:hover{padding-left:10px;padding-right:10px;background:#edf2ed}
+.skill-listing[hidden]{display:none!important}
 .listing-index{font:12px ui-monospace,monospace;color:#64756b}.listing-index span{opacity:.5}
 .listing-icon{background:#172f3b;padding:7px;width:62px;height:62px;border-radius:11px}.listing-icon img{width:100%;height:100%;object-fit:contain;border-radius:8px}
 .listing-info{min-width:0}.listing-heading{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.listing-heading h3{font-size:clamp(21px,2.6vw,29px);font-weight:760;letter-spacing:-.05em;margin:0}.listing-category{font:700 9px ui-monospace,monospace;letter-spacing:.08em;background:#e2ece4;padding:7px 9px;color:#547461}

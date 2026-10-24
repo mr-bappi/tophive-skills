@@ -12,7 +12,7 @@ The public skill lives under `skills/tophive-design/`. Use its source for open r
 npx skills add mr-bappi/tophive-skills -g
 ```
 
-Website: `https://mr-bappi.github.io/tophive-skills/` (after GitHub Pages successfully deploys).
+Website: `https://mr-bappi.github.io/tophive-skills/` (GitHub Pages live and public).
 
 Download: `downloads/tophive-design-skill.zip`.
 

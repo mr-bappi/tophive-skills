@@ -29,8 +29,10 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
  if(pageName==="home"){
  await page.type("[data-search]","not-a-skill");
  check(await page.$eval("[data-empty]",el=>el.hidden)===false,"No matches notice missing");
+ check(await page.$eval("[data-skill-item]",el=>getComputedStyle(el).display)==="none","Filtered item remains visible");
  await page.$eval("[data-search]",el=>{el.value="design";el.dispatchEvent(new Event("input",{bubbles:true}))});
  check(await page.$eval("[data-empty]",el=>el.hidden)===true,"Search did not recover");
+ check(await page.$eval("[data-skill-item]",el=>getComputedStyle(el).display)!=="none","Filtered item did not return");
  if(width===1440){await page.click('[data-mode="ui"]');check((await page.$eval("[data-mode-label]",el=>el.textContent))==="PRODUCT_UI","Mode switch failed");}
  }
  check(runtime.length===0,runtime.join(" | "));

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-24",
+  "count": 1,
+  "skills": [
+    {
+      "slug": "tophive-design",
+      "name": "TOPHIVE Design",
+      "version": "1.1.0",
+      "category": "Design",
+      "description": "Premium SaaS websites and product UI design",
+      "source": "https://github.com/mr-bappi/tophive-skills/tree/main/skills/tophive-design",
+      "download": "downloads/tophive-design-skill.zip",
+      "sha256": "1f91689fcf2138690a6479e57b2a88b2d203080758953362a7779c1155278422",
+      "install": "npx skills add mr-bappi/tophive-skills -g"
+    }
+  ]
+}

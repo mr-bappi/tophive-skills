@@ -1,0 +1,9 @@
+interface:
+  display_name: "TOPHIVE Design"
+  short_description: "Premium SaaS websites and product UI design"
+  icon_small: "./assets/icon-256.png"
+  icon_large: "./assets/icon-512.png"
+  brand_color: "#18303C"
+  default_prompt: "Use $tophive-design to create three distinctive art directions for a premium standalone SaaS landing page."
+policy:
+  allow_implicit_invocation: true

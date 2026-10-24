@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mr-bappi.github.io/tophive-skills/sitemap.xml

@@ -3,7 +3,7 @@ const {pathToFileURL}=require('node:url');
 const puppeteer=require('puppeteer');
 const root=path.resolve(__dirname,'..');
 const pages=[['home','index.html'],['library','library/index.html'],['docs','docs/index.html'],['detail','skills/tophive-design/index.html']];
-const widths=[390,1024,1440],errors=[];
+const widths=[390,1024,1440,1600,1920],errors=[];
 (async()=>{
  const browser=await puppeteer.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
  for(const [name,relative] of pages){
@@ -14,11 +14,16 @@ const widths=[390,1024,1440],errors=[];
     await page.goto(pathToFileURL(path.join(root,relative)).href,{waitUntil:'load'});
     const original=await page.evaluate(()=>{
      const html=document.documentElement;
+     const frameWidth=parseFloat(getComputedStyle(document.body,'::before').width);
+     const header=document.querySelector('.site-header');
+     const markerLeft=parseFloat(getComputedStyle(header,'::before').left);
+     const markerRight=parseFloat(getComputedStyle(header,'::after').right);
+     const wrapperWidth=document.querySelector('.nav-wrap').getBoundingClientRect().width;
      const probe=document.createElement('div');
      probe.style.cssText='position:absolute;top:-9999px;left:-9999px;width:100px;height:100px;overflow:scroll;scrollbar-width:auto;visibility:hidden';
      const inner=document.createElement('div');inner.style.height='200px';probe.append(inner);
      html.append(probe);const nativeWidth=probe.offsetWidth-probe.clientWidth;probe.remove();
-     return {nativeWidth,classic:html.dataset.classicScrollbar==='true',
+     return {nativeWidth,frameWidth,wrapperWidth,markerLeft,markerRight,classic:html.dataset.classicScrollbar==='true',
       gutter:getComputedStyle(html).scrollbarGutter,
       width:html.clientWidth,bodyWidth:document.body.getBoundingClientRect().width,
       left:document.querySelector('.site-header .brand').getBoundingClientRect().left,
@@ -30,6 +35,17 @@ const widths=[390,1024,1440],errors=[];
     if(original.gutter!==(original.classic?'stable':'auto'))throw Error('Wrong gutter for platform: '+JSON.stringify(original));
     if(!original.classic&&Math.abs(original.width-original.bodyWidth)>1)throw Error('Blank strip on overlay platform '+JSON.stringify(original));
     if(original.scrollWidth>original.width+1)throw Error('Horizontal overflow '+JSON.stringify(original));
+    if(width>=1440){
+      const outside=(original.width-original.frameWidth)/2;
+      if(Math.abs(original.frameWidth-original.wrapperWidth)>1)
+        throw Error('Rail no longer aligned to header + section container '+JSON.stringify(original));
+      if(Math.abs(original.markerLeft-outside)>1||Math.abs(original.markerRight-outside)>1)
+        throw Error('Header intersections misaligned with rails '+JSON.stringify(original));
+      if(width===1440&&Math.abs(outside-100)>1)
+        throw Error('Approved 1440px frame changed '+JSON.stringify(original));
+      if(width===1920&&outside>42)
+        throw Error('Large right-side dead margin remains '+JSON.stringify(original));
+    }
     await page.evaluate(()=>{
      document.querySelector('main').style.setProperty('display','none','important');
      document.querySelector('footer').style.setProperty('display','none','important');

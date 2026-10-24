@@ -39,6 +39,34 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
  await toggle.click();
  check(await page.$eval("[data-nav]",el=>el.dataset.open)!=="true","Mobile menu failed to close");
  }
+ if(pageName==="docs"){
+   check(await page.$eval(".docs-content section",el=>el.id)==="install","Docs install should lead content");
+   check(await page.$$eval(".docs-aside a",els=>els.length)===5,"Docs must provide 5 anchored sections");
+   check(await page.$$eval(".codebox [data-copy-install]",els=>els.length)===2,"Docs copy actions missing");
+   check(await page.$eval("main h1",el=>el.textContent.trim())==="Documentation.","Docs should not use the old oversized marketing hero");
+   if(width===1440){
+     check(await page.$eval(".docs-content section",el=>el.getBoundingClientRect().top)<450,"Docs start too far below header");
+     check(await page.$eval(".site-header",el=>el.getBoundingClientRect().height)<=70,"Shared header too tall");
+   }
+   if(width===390){
+     check(await page.$eval(".docs-aside",el=>getComputedStyle(el).overflowX)==="auto","Mobile TOC must remain horizontally navigable");
+   }
+   if(width===1440){
+     await page.click(".docs-content .codebox [data-copy-install]");
+     await page.waitForFunction(()=>document.querySelector("[data-toast]").dataset.visible==="true",{timeout:1500});
+     check(await page.$eval("[data-toast]",el=>el.textContent.length)>0,"Code copy feedback missing");
+     await page.$eval("[data-toast]",el=>el.dataset.visible="false");
+   }
+ }
+ if(pageName==="detail"){
+   check(await page.$$eval(".workflow-row",els=>els.length)===3,"Real three workflow routes are missing");
+   check(await page.$eval("main h1",el=>el.textContent.includes("UI Design")),"Skill title absent");
+   check(await page.$eval(".install-box [data-copy-install]",el=>el.getAttribute("aria-label")?.includes("installation command")),"Install copy lacks accessible name");
+   if(width===1440){
+     check(await page.$eval(".detail-main",el=>el.getBoundingClientRect().top)<500,"Skill details hidden too far below header");
+     check(await page.$eval(".site-header",el=>el.getBoundingClientRect().height)<=70,"Shared header too tall");
+   }
+ }
  if(pageName==="home"){
  check(await page.$eval("main h1",el=>el.textContent).then(t=>t.includes("Give your agents")&&t.includes("better instincts")),"Original editorial hero not restored");
  check(await page.$eval(".hero-actions .btn",el=>el.getAttribute("href"))==="library/","Hero should link to minimalist skills library");

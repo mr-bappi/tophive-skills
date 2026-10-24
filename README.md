@@ -67,3 +67,8 @@ After editing the shared header, run python3 scripts/sync-site-header.py.
 Before deploying, run python3 scripts/sync-site-header.py --check.
 GitHub Pages serves pre-generated static HTML so the navigation remains usable without JavaScript.
 The approved homepage header style governs all pages.
+
+
+## Docs and single skill page visual contract
+
+content-pages.css holds only Docs and Skill Detail layout/density rules. Both use the same global header partial and the same structural grid as the approved homepage. Docs is a documentation page (compact title + TOC + readable sections), not another marketing landing page. Skill Detail prioritizes real scope, workflow distinctions, source inspection and install. No skill instructions or package contents are modified by these page-specific styles.

@@ -237,14 +237,3 @@ body::before{width:min(calc(100% - (2 * var(--site-grid-outer))),var(--max))}
  .nav-action,.btn-dark,.hero-side,.mini-orbit,.copy-btn,.editor-tabs button,.hero-actions a span[aria-hidden],.nav-action span[aria-hidden],.listing-arrow{transition:none!important}
  .nav-action:hover,.btn-dark:hover,.hero-side:hover .mini-orbit,.hero-actions a:hover span[aria-hidden],.nav-action:hover span[aria-hidden]{transform:none}
 }
-
-/* Fluid architectural frame for wide desktop screens.
-   Keep the existing 1240px composition through 1440px, then widen the
-   content grid progressively to avoid huge empty margins on 1920px displays.
-   Grid rails, shared header, sections and footer all follow the same --max. */
-@media (min-width:1440px){
- :root{
-  --max:min(calc(100vw - 80px),calc(125vw - 560px),2200px);
-  --site-grid-max:var(--max);
- }
-}

@@ -12,7 +12,12 @@
       "source": "https://github.com/mr-bappi/tophive-skills/tree/main/skills/tophive-design",
       "download": "downloads/tophive-design-skill.zip",
       "sha256": "975585fed2a35856a0aa89536945c8c72840389aacf49b6520595446951308dc",
-      "install": "npx skills add mr-bappi/tophive-skills -g"
+      "install": "npx skills add mr-bappi/tophive-skills -g",
+      "tags": [
+        "Websites",
+        "Dashboards",
+        "UI review"
+      ]
     }
   ]
 }

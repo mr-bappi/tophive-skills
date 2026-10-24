@@ -20,7 +20,8 @@ For eligible ChatGPT Skills upload, download the ZIP. ChatGPT Skills upload and 
 
 ## Structure
 
-- `index.html` — responsive home and skill directory
+- `index.html` — responsive homepage with a curated skill preview
+- `library/index.html`, `library/library.css`, `library/library.js` — searchable All Skills page with catalog-driven filters
 - `skills/tophive-design/index.html` — skill detail with verified scope
 - `docs/index.html` — installation/usage/security guide
 - `styles.css` and `app.js` — plain CSS/JS (no CDN or framework)
@@ -52,3 +53,8 @@ Browser tests cover 360/390/768/1024/1440/1920px for all three pages, no horizon
 Static GitHub Pages deploys from `main` repository root to **https://skills.tophive.dev/**. The `CNAME` file pins the configured custom domain; DNS is managed separately and was not changed by this repository commit.
 
 This directory deliberately contains **no fake skill installation counts** or user-submitted publishing backend. To add skills, include authentic SKILL.md and update catalog/listing sources after review.
+
+
+## All Skills Library
+
+Visit https://skills.tophive.dev/library/ to browse the published catalog. Category filters and skill cards are progressively enhanced from `catalog.json`; a first-skill fallback remains usable without JavaScript or when network requests fail. Only verified published skills are listed, no fabricated counts.

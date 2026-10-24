@@ -1,56 +1,125 @@
-(()=>{'use strict';
-const root=document.querySelector('[data-library-items]'),search=document.querySelector('[data-library-search]'),filters=document.querySelector('[data-categories]');if(!root||!search||!filters)return;
-const $=q=>document.querySelector(q);
-const params=new URLSearchParams(location.search),state={q:params.get('q')||'',category:params.get('category')||'all'};
-let skills=[],toastId;
-const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el};
-function rows(){return [...root.querySelectorAll('[data-library-item]')]}
-function url(){if(location.protocol==='file:')return;const u=new URL(location.href);if(state.q)u.searchParams.set('q',state.q);else u.searchParams.delete('q');if(state.category!=='all')u.searchParams.set('category',state.category);else u.searchParams.delete('category');history.replaceState(null,'',u.pathname+u.search+u.hash)}
-function renderFilters(){
- const counts=new Map();for(const s of skills){const key=String(s.category||'Uncategorized');counts.set(key,(counts.get(key)||0)+1)}
- if(!counts.size)return;
- if(state.category!=='all'&&![...counts.keys()].some(c=>c.toLowerCase()===state.category))state.category='all';
- filters.replaceChildren();
- const items=[['All skills','all',skills.length],...[...counts].sort((a,b)=>a[0].localeCompare(b[0])).map(([c,n])=>[c,c.toLowerCase(),n])];
- for(const [label,key,n] of items){const b=make('button','library-category');b.type='button';b.dataset.category=key;b.setAttribute('aria-pressed',String(state.category===key));b.append(make('span','',label),make('span','category-count',String(n).padStart(2,'0')));filters.append(b)}
-}
-function build(s){
- const slug=String(s.slug);if(!/^[a-z0-9-]+$/.test(slug))return;
- const a=make('article','library-skill');a.dataset.libraryItem='';a.dataset.categoryName=String(s.category);
- a.dataset.searchKey=[s.name,s.description,s.category,slug,...(Array.isArray(s.tags)?s.tags:[])].join(' ').toLowerCase();
- const main=make('div','library-skill-main'),icon=make('div','library-icon'),img=make('img');
- img.src='../assets/icon-256.png';img.alt='';img.width=52;img.height=52;icon.append(img);
- const info=make('div','library-skill-content'),top=make('div','library-item-top');
- top.append(make('span','library-skill-category',String(s.category).toUpperCase()+' / SKILL'),make('span','library-source-label','● SOURCE AVAILABLE'));
- const h3=make('h3'),link=make('a');link.href='../skills/'+slug+'/';link.append(document.createTextNode(s.name+' '),make('span','','↗'));h3.append(link);
- const tags=make('div','library-tags');for(const tag of (Array.isArray(s.tags)?s.tags:[s.category]).slice(0,4))tags.append(make('span','',tag));
- info.append(top,h3,make('p','',s.description),tags);main.append(icon,info);
- const version=make('div','library-skill-version');version.append(make('span','library-version','v'+s.version),make('span','library-version-sub','SKILL.md'));
- const actions=make('div','library-skill-actions'),view=make('a','library-view-link','View details ↗');view.href=link.href;
- const copy=make('button','library-install-copy','⧉  Copy install');copy.type='button';copy.dataset.libraryCopy=String(s.install||'');copy.setAttribute('aria-label','Copy install command for '+s.name);
- actions.append(view,copy);a.append(main,version,actions);root.append(a);
-}
-function update(){
- const q=state.q.trim().toLowerCase();let found=0;
- for(const row of rows()){const match=(state.category==='all'||String(row.dataset.categoryName).toLowerCase()===state.category)&&(!q||String(row.dataset.searchKey).toLowerCase().includes(q));row.hidden=!match;if(match)found++}
- const n=rows().length;filters.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===state.category)));
- $('[data-count-total]').textContent=String(n).padStart(2,'0');
- $('[data-results-count]').textContent=found+' '+(found===1?'skill':'skills')+' available';
- $('[data-library-showing]').textContent='SHOWING '+String(found).padStart(2,'0')+' OF '+String(n).padStart(2,'0');
- $('[data-library-empty]').hidden=found!==0;
-}
-function reset(){state.q='';state.category='all';search.value='';url();update();search.focus()}
-search.value=state.q;search.addEventListener('input',()=>{state.q=search.value;url();update()});
-filters.addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;state.category=b.dataset.category;url();update()});
-$('[data-library-reset]').addEventListener('click',reset);
-document.addEventListener('keydown',e=>{const typing=e.target.closest('input,textarea,[contenteditable]');if(e.key==='/'&&!typing&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();search.focus()}if(e.key==='Escape'&&document.activeElement===search){if(search.value)reset();else search.blur()}});
-function toast(message){const el=$('[data-toast]');el.textContent=message;el.dataset.visible='true';clearTimeout(toastId);toastId=setTimeout(()=>{el.dataset.visible='false'},2200)}
-async function copy(text){try{await navigator.clipboard.writeText(text);toast('Install command copied');return}catch(e){}const t=make('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();toast(ok?'Install command copied':'Copy from the skill page')}
-root.addEventListener('click',e=>{const b=e.target.closest('[data-library-copy]');if(b){e.preventDefault();copy(b.dataset.libraryCopy)}});
-update();
-if(location.protocol!=='file:')fetch('../catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json()}).then(data=>{
- skills=Array.isArray(data.skills)?data.skills.filter(x=>x.slug&&x.name&&x.category&&x.version):[];
- if(!skills.length)return;
- root.replaceChildren();for(const item of skills)build(item);renderFilters();url();update();
-}).catch(()=>{});
+(() => {
+  "use strict";
+  const input = document.querySelector("[data-library-search]");
+  const select = document.querySelector("[data-library-category]");
+  const body = document.querySelector("[data-library-items]");
+  const empty = document.querySelector("[data-library-empty]");
+  if (!input || !select || !body || !empty) return;
+  const query = new URLSearchParams(location.search);
+  const state = { q: query.get("q") || "", category: (query.get("category") || "all").toLowerCase() };
+  const make = (tag, cls, text) => {
+    const el = document.createElement(tag);
+    if (cls) el.className = cls;
+    if (text !== undefined) el.textContent = String(text);
+    return el;
+  };
+  const rows = () => [...body.querySelectorAll("[data-library-item]")];
+  const setUrl = () => {
+    if (location.protocol === "file:") return;
+    const url = new URL(location.href);
+    state.q ? url.searchParams.set("q", state.q) : url.searchParams.delete("q");
+    state.category !== "all" ? url.searchParams.set("category", state.category) : url.searchParams.delete("category");
+    history.replaceState(null, "", url.pathname + url.search + url.hash);
+  };
+  const filter = () => {
+    const q = state.q.trim().toLowerCase();
+    let matched = 0;
+    rows().forEach(row => {
+      const show = (state.category === "all" || row.dataset.categoryName.toLowerCase() === state.category)
+        && (!q || row.dataset.searchKey.includes(q));
+      row.hidden = !show;
+      if (show) matched++;
+    });
+    const total = rows().length;
+    document.querySelector("[data-count-total]").textContent = String(total).padStart(2, "0");
+    document.querySelector("[data-results-count]").textContent = matched + " " + (matched === 1 ? "skill" : "skills");
+    document.querySelector("[data-library-showing]").textContent = "Showing " + matched + " of " + total + " skills";
+    empty.hidden = matched > 0;
+  };
+  const reset = () => {
+    state.q = ""; state.category = "all";
+    input.value = ""; select.value = "all";
+    setUrl(); filter(); input.focus();
+  };
+  let toastTimer;
+  const feedback = text => {
+    const toast = document.querySelector("[data-toast]");
+    if (!toast) return;
+    toast.textContent = text;
+    toast.dataset.visible = "true";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.dataset.visible = "false"; }, 1900);
+  };
+  const copy = async text => {
+    try { await navigator.clipboard.writeText(text); feedback("Install command copied"); }
+    catch {
+      const el = make("textarea"); el.value = text; el.readOnly = true;
+      el.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+      document.body.append(el); el.select();
+      const success = document.execCommand("copy"); el.remove();
+      feedback(success ? "Install command copied" : "Copy from the skill details page");
+    }
+  };
+  const build = skill => {
+    if (!/^[a-z0-9-]+$/.test(skill.slug)) return;
+    const tr = make("tr");
+    tr.dataset.libraryItem = "";
+    tr.dataset.categoryName = skill.category;
+    tr.dataset.searchKey = [skill.name, skill.description, skill.category, ...(skill.tags || [])].join(" ").toLowerCase();
+    const url = "../skills/" + skill.slug + "/";
+    const name = make("td"); name.dataset.label = "SKILL";
+    const link = make("a", "directory-name"); link.href = url;
+    const icon = make("img"); icon.src = "../assets/icon-256.png"; icon.width = 28; icon.height = 28; icon.alt = "";
+    link.append(icon, make("strong", "", skill.name)); name.append(link);
+    const desc = make("td", "directory-description", skill.description); desc.dataset.label = "DESCRIPTION";
+    const category = make("td"); category.dataset.label = "CATEGORY"; category.append(make("span", "directory-tag", skill.category));
+    const version = make("td"); version.dataset.label = "VERSION"; version.append(make("span", "directory-version", "v" + skill.version));
+    const actions = make("td"); actions.dataset.label = "ACTIONS";
+    const group = make("div", "directory-row-actions");
+    const view = make("a", "", "View ↗"); view.href = url; view.setAttribute("aria-label", "View " + skill.name + " details");
+    const button = make("button", "", "Copy ⧉"); button.type = "button";
+    button.dataset.libraryCopy = String(skill.install || "");
+    button.setAttribute("aria-label", "Copy install command for " + skill.name);
+    group.append(view, button); actions.append(group);
+    tr.append(name, desc, category, version, actions); body.append(tr);
+  };
+  const updateCategories = skills => {
+    const available = [...new Set(skills.map(s => String(s.category)))].sort();
+    select.replaceChildren();
+    select.append(new Option("All categories", "all"));
+    available.forEach(category => select.append(new Option(category, category.toLowerCase())));
+    if (state.category !== "all" && !available.some(cat => cat.toLowerCase() === state.category)) state.category = "all";
+    select.value = state.category;
+  };
+  input.value = state.q;
+  input.addEventListener("input", () => { state.q = input.value; setUrl(); filter(); });
+  select.addEventListener("change", () => { state.category = select.value; setUrl(); filter(); });
+  document.querySelector("[data-library-reset]").addEventListener("click", reset);
+  body.addEventListener("click", event => {
+    const btn = event.target.closest("[data-library-copy]");
+    if (btn) { event.preventDefault(); copy(btn.dataset.libraryCopy); }
+  });
+  document.addEventListener("keydown", event => {
+    const typing = event.target.closest("input,textarea,select,[contenteditable]");
+    if (event.key === "/" && !typing && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      event.preventDefault(); input.focus();
+    }
+    if (event.key === "Escape" && document.activeElement === input) {
+      if (input.value) reset(); else input.blur();
+    }
+  });
+  filter();
+  if (location.protocol === "http:" || location.protocol === "https:") {
+    fetch("../catalog.json", { cache: "no-cache" })
+      .then(response => { if (!response.ok) throw Error("Catalog unavailable"); return response.json(); })
+      .then(data => {
+        const published = Array.isArray(data.skills) ? data.skills.filter(s => s.slug && s.name && s.description && s.category && s.version) : [];
+        if (!published.length) return;
+        body.replaceChildren();
+        published.forEach(build);
+        updateCategories(published);
+        filter();
+      })
+      .catch(() => { /* Static HTML fallback remains usable */ });
+  }
 })();

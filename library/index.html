@@ -1,78 +1,42 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="canonical" href="https://skills.tophive.dev/library/">
-<title>Skill Library — TOPHIVE Skills</title>
-<meta name="description" content="Explore installable AI agent skills from TOPHIVE. Search by purpose, inspect the source and install with one command.">
-<meta name="theme-color" content="#f7f8f4">
-<meta property="og:title" content="Skill Library — TOPHIVE Skills">
-<meta property="og:description" content="Source-first skills for thoughtful AI agents. Browse, inspect and install.">
-<link rel="icon" type="image/png" href="../assets/icon-256.png">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="library.css">
-<script src="../app.js" defer></script>
-<script src="library.js" defer></script>
-</head>
-<body>
-<a href="#library-results" class="skip-link">Skip to skills</a>
+<title>All Skills — TOPHIVE Skills</title>
+<meta name="description" content="Search and install published AI coding skills from TOPHIVE. Simple directory, inspectable source, one-command install.">
+<meta name="theme-color" content="#f9faf8"><link rel="icon" href="../assets/icon-256.png" type="image/png">
+<link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../developer.css"><link rel="stylesheet" href="library.css">
+<script defer src="../app.js"></script><script defer src="library.js"></script></head>
+<body class="dev-site"><a href="#skills-table" class="skip-link">Skip to skill list</a>
 <header class="site-header"><div class="wrap nav-wrap">
 <a href="../" class="brand" aria-label="TOPHIVE Skills home"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a>
 <button class="mobile-toggle" type="button" aria-controls="main-nav" aria-expanded="false" data-menu-toggle aria-label="Open menu"><span></span><span></span></button>
-<nav id="main-nav" class="nav" data-nav aria-label="Main navigation"><a href="./" aria-current="page">Library</a><a href="../#how">How it works</a><a href="../docs/">Documentation</a><a href="https://github.com/mr-bappi/tophive-skills" rel="noopener" target="_blank">GitHub <span aria-hidden="true">↗</span></a></nav>
-<a href="#library-results" class="nav-action">Browse skills <span aria-hidden="true">↘</span></a>
-</div></header>
-<main id="main">
-<section class="library-hero">
-<div class="wrap">
-<nav class="library-breadcrumb" aria-label="Breadcrumb"><a href="../">HOME</a><span aria-hidden="true">/</span><span aria-current="page">LIBRARY</span></nav>
-<div class="library-hero-grid">
-<div>
-<div class="eyebrow library-eyebrow"><span class="signal" aria-hidden="true"></span> THE CAPABILITY DIRECTORY <span class="eyebrow-dash" aria-hidden="true"></span> INDEX 01</div>
-<h1>Explore<br><em>the library.</em></h1>
+<nav class="nav" id="main-nav" data-nav aria-label="Main navigation"><a href="./" aria-current="page">Skills</a><a href="../#how">How it works</a><a href="../docs/">Docs</a><a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">GitHub ↗</a></nav>
+<a class="nav-action" href="../docs/">Installation guide ↗</a></div></header>
+<main id="main" class="directory-page">
+<section class="wrap directory">
+<div class="directory-path"><a href="../">TOPHIVE SKILLS</a><span>/</span><span>LIBRARY</span></div>
+<div class="directory-head"><div><h1>All skills <span class="directory-total" data-count-total>01</span></h1><p>Find focused workflows for your coding agent. Inspect before installing.</p></div><a href="https://github.com/mr-bappi/tophive-skills" class="directory-github" rel="noopener" target="_blank">View source on GitHub ↗</a></div>
+<div class="directory-tools">
+<label class="directory-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input data-library-search type="search" placeholder="Search skills..." autocomplete="off" aria-label="Search skills"><kbd aria-hidden="true">/</kbd></label>
+<label class="directory-filter">Category <select data-library-category aria-label="Filter by category"><option value="all">All categories</option><option value="design">Design</option></select></label>
+<span class="directory-results" data-results-count aria-live="polite">1 skill</span>
 </div>
-<div class="library-hero-aside"><span class="library-aside-index">OPEN SKILLS / CURATED BY TOPHIVE</span><p>Less noise. More capability.</p><span>Focused instructions for the work your agents actually do. Explore what is published, inspect the source, and install with confidence.</span></div>
+<div class="directory-table-scroll" id="skills-table">
+<table class="directory-table">
+<thead><tr><th scope="col">SKILL</th><th scope="col">DESCRIPTION</th><th scope="col">CATEGORY</th><th scope="col">VERSION</th><th scope="col" class="directory-actions-col">ACTIONS</th></tr></thead>
+<tbody data-library-items><tr data-library-item data-category-name="Design" data-search-key="web ui design saas websites dashboards product interfaces design frontend review typography" >
+<td data-label="SKILL"><a class="directory-name" href="../skills/tophive-design/"><img src="../assets/icon-256.png" alt="" width="28" height="28"><strong>Web &amp; UI Design</strong></a></td>
+<td data-label="DESCRIPTION" class="directory-description">SaaS websites, dashboards and product interfaces</td>
+<td data-label="CATEGORY"><span class="directory-tag">Design</span></td>
+<td data-label="VERSION"><span class="directory-version">v1.2.0</span></td>
+<td data-label="ACTIONS"><div class="directory-row-actions"><a href="../skills/tophive-design/" aria-label="View Web & UI Design details">View ↗</a><button type="button" data-library-copy="npx skills add mr-bappi/tophive-skills -g" aria-label="Copy install command for Web & UI Design">Copy <span aria-hidden="true">⧉</span></button></div></td>
+</tr></tbody></table>
+<div class="directory-empty" data-library-empty hidden><p>No skills match your search.</p><button type="button" data-library-reset>Clear filters →</button></div>
 </div>
-<div class="library-hero-rule"><span>01 / DISCOVER</span><span>REAL SKILLS. READABLE SOURCES. <span aria-hidden="true">↙</span></span></div>
-</div>
+<div class="directory-foot"><span data-library-showing>Showing 1 of 1 skills</span><span>Source-visible · No fabricated rankings</span></div>
+<div class="directory-help"><span>New to agent skills?</span><a href="../docs/">Installation and usage guide ↗</a></div>
 </section>
-<section class="library-main" id="library-results" aria-labelledby="browse-heading">
-<div class="wrap">
-<div class="library-main-intro"><div><span class="eyebrow">02 / EXPLORE THE COLLECTION</span><h2 id="browse-heading">All skills<span class="library-total" data-count-total>01</span></h2></div><p>Browse by capability. The catalog lists only skills that have a published source and a working installation path.</p></div>
-<div class="library-workspace">
-<aside class="library-side" aria-label="Filter skills">
-<div class="library-side-title">BROWSE BY CATEGORY</div>
-<div class="library-categories" data-categories>
-<button class="library-category" data-category="all" aria-pressed="true"><span>All skills</span><span class="category-count">01</span></button>
-<button class="library-category" data-category="design" aria-pressed="false"><span>Design</span><span class="category-count">01</span></button>
-</div>
-<div class="library-side-footer"><span class="library-side-mark" aria-hidden="true">↗</span><p>Every skill is source-visible.<br>Every install is your choice.</p><a href="../docs/">How installation works <span aria-hidden="true">↗</span></a></div>
-</aside>
-<div class="library-directory">
-<div class="library-controls">
-<label class="library-search"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input type="search" autocomplete="off" placeholder="Search by skill, workflow, or capability..." aria-label="Search skills" data-library-search><kbd aria-hidden="true">/</kbd></label>
-<div class="library-view-count"><span class="library-status-dot" aria-hidden="true"></span><span data-results-count aria-live="polite">1 skill available</span></div>
-</div>
-<div class="library-table-head" aria-hidden="true"><span>SKILL / CAPABILITY</span><span>VERSION</span><span>EXPLORE</span></div>
-<div class="library-items" data-library-items>
-<article class="library-skill" data-library-item data-skill-name="Web & UI Design" data-category-name="Design" data-search-key="web ui design saas websites dashboards landing pages typography layout application visual reviews">
-<div class="library-skill-main"><div class="library-icon"><img src="../assets/icon-256.png" alt="" width="52" height="52"></div>
-<div class="library-skill-content"><div class="library-item-top"><span class="library-skill-category">DESIGN / FRONTEND</span><span class="library-source-label"><span aria-hidden="true">●</span> SOURCE AVAILABLE</span></div>
-<h3><a href="../skills/tophive-design/">Web & UI Design <span aria-hidden="true">↗</span></a></h3><p>Design responsive SaaS websites and practical dashboards with distinct rules for marketing pages and operational interfaces.</p><div class="library-tags"><span>Websites</span><span>Dashboards</span><span>UI review</span></div></div></div>
-<div class="library-skill-version"><span class="library-version">v1.2.0</span><span class="library-version-sub">SKILL.md</span></div>
-<div class="library-skill-actions"><a href="../skills/tophive-design/" class="library-view-link">View details <span aria-hidden="true">↗</span></a><button type="button" class="library-install-copy" data-library-copy="npx skills add mr-bappi/tophive-skills -g" aria-label="Copy install command for Web & UI Design"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg><span>Copy install</span></button></div>
-</article>
-</div>
-<div class="library-empty" data-library-empty hidden><span class="library-empty-glyph" aria-hidden="true">⌕</span><h3>No matching skills.</h3><p>Try another keyword or choose All skills to reset your search.</p><button type="button" data-library-reset>Clear filters <span aria-hidden="true">↗</span></button></div>
-<div class="library-bottom-note"><span data-library-showing>SHOWING 01 OF 01</span><span>ONLY PUBLISHED SKILLS ARE LISTED</span></div>
-</div>
-</div>
-</div>
-</section>
-<section class="library-conclusion"><div class="wrap library-conclusion-grid"><div><span class="eyebrow">03 / BEFORE YOU INSTALL</span><h2>Read the source.<br><em>Trust the process.</em></h2></div><div><p>Skills are instructions, not access grants. Review what they ask an agent to do before installing. Your tools and permissions remain under your control.</p><a href="../docs/" class="btn btn-dark">Read the installation guide <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
-<footer class="site-footer"><div class="wrap footer-wrap"><a href="../" class="brand footer-brand"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE <span class="brand-suffix">/ SKILLS</span></span></a><span>Purpose-built skills for purposeful agents.</span><nav aria-label="Footer navigation"><a href="./">Library</a><a href="../docs/">Docs</a><a href="https://github.com/mr-bappi/tophive-skills">Source ↗</a></nav></div></footer>
+<footer class="site-footer"><div class="wrap footer-wrap"><a href="../" class="brand footer-brand"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a><span>Focused instructions. Better results.</span><nav aria-label="Footer navigation"><a href="./">Library</a><a href="../docs/">Docs</a><a href="https://github.com/mr-bappi/tophive-skills">Source ↗</a></nav></div></footer>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
-</body>
-</html>
+</body></html>

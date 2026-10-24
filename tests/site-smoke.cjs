@@ -27,14 +27,11 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
  check(await page.$eval("[data-nav]",el=>el.dataset.open)!=="true","Mobile menu failed to close");
  }
  if(pageName==="home"){
- await page.type("[data-search]","not-a-skill");
- check(await page.$eval("[data-empty]",el=>el.hidden)===false,"No matches notice missing");
- check(await page.$eval("[data-skill-item]",el=>getComputedStyle(el).display)==="none","Filtered item remains visible");
- await page.$eval("[data-search]",el=>{el.value="design";el.dispatchEvent(new Event("input",{bubbles:true}))});
- check(await page.$eval("[data-empty]",el=>el.hidden)===true,"Search did not recover");
- check(await page.$eval("[data-skill-item]",el=>getComputedStyle(el).display)!=="none","Filtered item did not return");
- if(width===1440){await page.click('[data-mode="ui"]');check((await page.$eval("[data-mode-label]",el=>el.textContent))==="PRODUCT_UI","Mode switch failed");}
+  check(await page.$eval('.hero-actions .btn',a=>a.getAttribute('href'))==='library/',"Browse skills CTA missing");
+  check(await page.$eval('.dev-install-panel [data-install-command]',el=>el.textContent.trim())==='npx skills add mr-bappi/tophive-skills -g',"Wrong installer");
+  check(await page.$eval('.dev-featured-row',a=>a.getAttribute('href'))==='skills/tophive-design/',"Featured skill broken");
  }
+
  check(runtime.length===0,runtime.join(" | "));
  if(width===1440||width===390){
  const dir=path.join(root,"tests/screenshots");fs.mkdirSync(dir,{recursive:true});

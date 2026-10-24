@@ -1,0 +1,79 @@
+/* TOPHIVE Skills: purposeful developer-first visual language */
+.dev-site{--paper:#f9faf8;--ink:#171f1d;--hair:#e2e6e1;--muted:#697770;--green:#4e8269;background:var(--paper);color:var(--ink)}
+.dev-site .site-header{background:rgba(249,250,248,.97);border-color:#e1e5e0}
+.dev-site .nav-wrap{min-height:65px}
+.dev-site .brand{font-size:15px;letter-spacing:-.044em}
+.dev-site .brandmark{width:26px;height:26px;font-size:13px;border-width:1.7px}
+.dev-site .brand-suffix{color:#8a958c}
+.dev-site .nav{gap:24px}
+.dev-site .nav a{font-size:12px;font-weight:610;color:#49564f}
+.dev-site .nav a:hover,.dev-site .nav a[aria-current=page]{color:#18241b}
+.dev-site .nav-action{padding:10px 15px;border-radius:5px;font-weight:660;font-size:11px;background:#1e2924}
+.dev-site .nav-action:hover,.dev-site .btn-dark:hover{background:#34493c}
+.dev-site .site-footer{border-top:1px solid #e0e6e0}
+.dev-site .footer-wrap{min-height:91px}
+.dev-site .btn-dark{border-radius:5px;background:#1d2923}
+.dev-site .text-link{border-color:#b3c2b7}
+.dev-kicker,.dev-overline,.dev-panel-header,.dev-row-head,.dev-row-foot,.dev-item-version,.directory-path,.directory-table thead,.directory-foot{font:670 10px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.055em}
+.dev-online{display:inline-block;background:#52996d;border-radius:50%;height:6px;width:6px;vertical-align:middle;margin-right:8px}
+.dev-kicker{color:#63756b}.dev-slash{margin:0 7px;color:#aab5ab}
+.dev-hero{padding:clamp(66px,7vw,103px) 0 88px}
+.dev-hero-grid{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(310px,.77fr);align-items:end;gap:clamp(45px,6vw,92px);margin-top:29px}
+.dev-hero h1{font-size:clamp(48px,5.4vw,75px);font-weight:760;line-height:1.07;letter-spacing:-.074em;margin:0}
+.dev-hero h1 span{color:#7f9d8a}
+.dev-lede{margin:24px 0 0;color:#67766b;font-size:16px;line-height:1.68;max-width:520px}
+.dev-hero-actions{margin-top:29px;display:flex;align-items:center;gap:24px}
+.dev-hero-actions .btn{padding:14px 17px;gap:25px;font-size:12px}
+.dev-inline-link{font-size:12px;font-weight:730;color:#273c30;display:inline-flex;align-items:center;gap:11px;padding-bottom:4px;border-bottom:1px solid #b6c9bc}
+.dev-inline-link:hover{color:#53906a}
+.dev-install-panel{border:1px solid #d6dfd7;background:#fff;border-radius:8px;padding:24px;box-shadow:0 18px 42px -34px #253b2d2d}
+.dev-panel-header{display:flex;align-items:center;justify-content:space-between;color:#6c8471}
+.dev-panel-header span:last-child{color:#9ca9a0}
+.dev-install-panel>p{font-size:14px;line-height:1.6;color:#657568;margin:29px 0 16px;max-width:280px}
+.dev-install-panel .command-inline{background:#202e26;border:1px solid #30453a;border-radius:5px;gap:10px;padding:8px 8px 8px 12px}
+.dev-install-panel .command-inline code{font-size:11px}
+.dev-install-panel .copy-btn{width:32px;height:32px;border-radius:4px;background:#e5efe6}
+.dev-panel-foot{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#769181;font:11px ui-monospace,Menlo,monospace}
+.dev-panel-foot a{color:#4a7056;text-decoration:underline;text-underline-offset:3px}
+.dev-featured{border-top:1px solid #e2e8e2;padding:62px 0 70px;background:#fff}
+.dev-section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:27px}
+.dev-overline{color:#66826f}
+.dev-section-head h2{font-size:clamp(28px,3vw,42px);letter-spacing:-.055em;margin:11px 0 0;font-weight:760;display:flex;align-items:center;gap:11px;line-height:1.12}
+.dev-count{font:600 11px ui-monospace,Menlo,monospace;letter-spacing:0;border:1px solid #d9e5dc;padding:5px 8px;color:#517965;border-radius:4px}
+.dev-row-head,.dev-featured-row{display:grid;grid-template-columns: 245px minmax(0,1fr) 86px 60px;align-items:center;gap:16px}
+.dev-row-head{color:#86958b;border-block:1px solid #e0e7e1;padding:13px 15px}
+.dev-featured-row{padding:19px 15px;border-bottom:1px solid #e0e7e1;transition:background .2s}
+.dev-featured-row:hover{background:#f4f7f3}
+.dev-item-title{display:flex;align-items:center;gap:13px}
+.dev-item-title img{border-radius:7px}
+.dev-item-title strong{font-size:15px;letter-spacing:-.025em}
+.dev-item-description{color:#75847a;font-size:12px;line-height:1.55}
+.dev-item-version{color:#64776a}
+.dev-item-action{justify-self:end;font-size:20px}
+.dev-row-foot{padding:16px 0;display:flex;justify-content:space-between;gap:20px;color:#89978d}
+.dev-row-foot a{font-family:inherit;font-size:12px;color:#48745a;letter-spacing:0;font-weight:650}
+.dev-how{background:#f1f4f0;border-top:1px solid #e4eae4;padding:66px 0 80px}
+.dev-how .dev-section-head p{font-size:13px;color:#728075;max-width:250px;line-height:1.65;margin:0}
+.dev-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #d7dfd8}
+.dev-steps>div{padding:23px 25px 10px 0}
+.dev-steps>div+div{border-left:1px solid #d7dfd8;padding-left:25px}
+.dev-steps span{display:block;font:11px ui-monospace,Menlo,monospace;color:#6d8c77;margin-bottom:29px}
+.dev-steps strong{font-size:22px;font-weight:720;letter-spacing:-.045em}
+.dev-steps p{font-size:13px;line-height:1.65;color:#758279;margin:10px 0 0;max-width:260px}
+@media(max-width:920px){.dev-hero-grid{grid-template-columns:1fr;align-items:start;gap:35px}.dev-install-panel{max-width:590px}.dev-hero{padding-bottom:65px}.dev-row-head,.dev-featured-row{grid-template-columns:minmax(190px,.9fr) minmax(0,1fr) 70px 30px}}
+@media(max-width:730px){.dev-site .nav{gap:16px;background:#f9faf8}.dev-hero{padding-top:65px}.dev-hero h1{font-size:clamp(44px,8.5vw,66px)}.dev-section-head{align-items:start}.dev-how .dev-section-head{flex-direction:column;gap:8px}.dev-item-description{display:none}.dev-row-head,.dev-featured-row{grid-template-columns:minmax(0,1fr) 74px 24px}.dev-row-head span:nth-child(2){display:none}.dev-steps{grid-template-columns:1fr}.dev-steps>div,.dev-steps>div+div{border-left:0;border-bottom:1px solid #d7dfd8;padding:20px 0}.dev-steps span{margin-bottom:14px}}
+@media(max-width:425px){.dev-kicker{font-size:9px}.dev-hero h1{font-size:45px}.dev-lede{font-size:14px}.dev-hero-actions{flex-wrap:wrap;gap:20px}.dev-install-panel{padding:17px}.dev-panel-foot{flex-wrap:wrap}.dev-item-title strong{font-size:13px}.dev-item-version{font-size:9px}.dev-row-head,.dev-featured-row{gap:9px}.dev-item-title{gap:8px}}
+@media(prefers-reduced-motion:reduce){.dev-featured-row{transition:none}}
+
+
+/* Prevent long CLI commands from enforcing a min-content grid width on mobile. */
+.dev-hero-grid > *{min-width:0}
+.dev-install-panel .command-inline{min-width:0;max-width:100%}
+.dev-install-panel .command-inline code{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:920px){.dev-hero-grid{grid-template-columns:minmax(0,1fr)}}
+
+
+/* Command-line text must be readable on the dark installer background. */
+.dev-install-panel .command-inline,
+.dev-install-panel .command-inline code{color:#e2ede5}
+.dev-install-panel .command-inline .dollar{color:#9bc8a9}

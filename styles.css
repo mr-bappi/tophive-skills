@@ -1,29 +1,34 @@
 /* TOPHIVE Skills — original editorial directory interface */
 :root{--paper:#f7f8f4;--white:#fff;--ink:#1b2423;--muted:#6b7973;--hair:#dce3de;--mint:#a9cbb5;--forest:#123128;--soft:#ecf0ec;--max:1240px}
 *{box-sizing:border-box}
-/* Reserve native scrollbar space even when a route or state is too short to scroll.
-   Avoids horizontal jumps in the centered global grid when content height changes.
-   Retain normal native scrolling, keyboard navigation and OS overlay scrollbars. */
+/* Native overlay scrollbars need no layout gutter. Reserving a stable gutter
+   on macOS creates a visible empty strip. Classic non-overlay scrollbars use
+   stable width to prevent shifts when content height changes. */
 html{
   scroll-behavior:smooth;
   scroll-padding-top:90px;
   overflow-y:auto;
-  scrollbar-gutter:stable;
+  scrollbar-gutter:auto;
   scrollbar-width:thin;
+  scrollbar-color:#9eb8a5 transparent;
+}
+html[data-classic-scrollbar="true"]{
+  scrollbar-gutter:stable;
   scrollbar-color:#9eb8a5 #eef2ec;
 }
 html::-webkit-scrollbar{width:10px}
-html::-webkit-scrollbar-track{background:#eef2ec}
+html::-webkit-scrollbar-track{background:transparent}
+html[data-classic-scrollbar="true"]::-webkit-scrollbar-track{background:#eef2ec}
 html::-webkit-scrollbar-thumb{
   background:#9eb8a5;
-  border:2px solid #eef2ec;
+  border:2px solid transparent;
   border-radius:999px;
   min-height:40px;
 }
+html[data-classic-scrollbar="true"]::-webkit-scrollbar-thumb{border-color:#eef2ec}
 html::-webkit-scrollbar-thumb:hover{background:#739780}
-/* Old engines without stable gutters: always reserve a classical scrollbar lane. */
 @supports not (scrollbar-gutter:stable){
-  html{overflow-y:scroll}
+  html[data-classic-scrollbar="true"]{overflow-y:scroll}
 }
 @media(forced-colors:active){
   html{scrollbar-color:auto}

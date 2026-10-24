@@ -13,39 +13,67 @@ const widths=[390,1024,1440],errors=[];
    try{
     await page.goto(pathToFileURL(path.join(root,relative)).href,{waitUntil:'load'});
     const original=await page.evaluate(()=>{
-     const header=document.querySelector('.site-header'),brand=header.querySelector('.brand').getBoundingClientRect(),nav=header.querySelector('.nav-action').getBoundingClientRect();
-     return {scrollbarGutter:getComputedStyle(document.documentElement).scrollbarGutter,
-      scrollHeight:document.documentElement.scrollHeight,scrollWidth:document.documentElement.scrollWidth,
-      clientWidth:document.documentElement.clientWidth,left:brand.left,ctaRight:nav.right,
-      headerWidth:header.getBoundingClientRect().width};
+     const html=document.documentElement;
+     const probe=document.createElement('div');
+     probe.style.cssText='position:absolute;top:-9999px;left:-9999px;width:100px;height:100px;overflow:scroll;scrollbar-width:auto;visibility:hidden';
+     const inner=document.createElement('div');inner.style.height='200px';probe.append(inner);
+     html.append(probe);const nativeWidth=probe.offsetWidth-probe.clientWidth;probe.remove();
+     return {nativeWidth,classic:html.dataset.classicScrollbar==='true',
+      gutter:getComputedStyle(html).scrollbarGutter,
+      width:html.clientWidth,bodyWidth:document.body.getBoundingClientRect().width,
+      left:document.querySelector('.site-header .brand').getBoundingClientRect().left,
+      cta:document.querySelector('.site-header .nav-action').getBoundingClientRect().right,
+      scrollWidth:html.scrollWidth
+     };
     });
-    if(original.scrollbarGutter!=='stable')throw Error('Scrollbar lane not reserved '+JSON.stringify(original));
-    if(original.scrollWidth>original.clientWidth+1)throw Error('Horizontal overflow '+JSON.stringify(original));
+    if(original.classic!==(original.nativeWidth>0))throw Error('Mode detection incorrect: '+JSON.stringify(original));
+    if(original.gutter!==(original.classic?'stable':'auto'))throw Error('Wrong gutter for platform: '+JSON.stringify(original));
+    if(!original.classic&&Math.abs(original.width-original.bodyWidth)>1)throw Error('Blank strip on overlay platform '+JSON.stringify(original));
+    if(original.scrollWidth>original.width+1)throw Error('Horizontal overflow '+JSON.stringify(original));
     await page.evaluate(()=>{
      document.querySelector('main').style.setProperty('display','none','important');
      document.querySelector('footer').style.setProperty('display','none','important');
     });
     const short=await page.evaluate(()=>({
-     scrollHeight:document.documentElement.scrollHeight,
-     brandLeft:document.querySelector('.site-header .brand').getBoundingClientRect().left,
-     ctaRight:document.querySelector('.site-header .nav-action').getBoundingClientRect().right,
-     clientWidth:document.documentElement.clientWidth
+      scrollHeight:document.documentElement.scrollHeight,
+      clientWidth:document.documentElement.clientWidth,
+      left:document.querySelector('.site-header .brand').getBoundingClientRect().left,
+      cta:document.querySelector('.site-header .nav-action').getBoundingClientRect().right
     }));
-    if(short.scrollHeight>901)throw Error('Simulated short page remains scrollable '+short.scrollHeight);
-    if(Math.abs(short.brandLeft-original.left)>1||Math.abs(short.ctaRight-original.ctaRight)>1||short.clientWidth!==original.clientWidth)
-     throw Error('Page jumped without scrollbar '+JSON.stringify({original,short}));
+    if(short.scrollHeight>901)throw Error('Short page remains scrollable: '+short.scrollHeight);
+    if(Math.abs(short.left-original.left)>1||Math.abs(short.cta-original.cta)>1||short.clientWidth!==original.width)
+      throw Error('Page shifted when scrollbar no longer needed '+JSON.stringify({original,short}));
     await page.evaluate(()=>{
      document.querySelector('main').style.removeProperty('display');
      document.querySelector('footer').style.removeProperty('display');
      document.documentElement.style.overflow='hidden';
     });
-    const hidden=await page.evaluate(()=>({
-     brandLeft:document.querySelector('.site-header .brand').getBoundingClientRect().left,
-     clientWidth:document.documentElement.clientWidth
+    const scrollLocked=await page.evaluate(()=>({
+      left:document.querySelector('.site-header .brand').getBoundingClientRect().left,
+      width:document.documentElement.clientWidth
     }));
-    if(Math.abs(hidden.brandLeft-original.left)>1||hidden.clientWidth!==original.clientWidth)
-     throw Error('Scroll-lock caused layout shift '+JSON.stringify({original,hidden}));
-    console.log('PASS scrollbar stable',name,width);
+    if(Math.abs(scrollLocked.left-original.left)>1||scrollLocked.width!==original.width)
+      throw Error('Scroll lock changed layout '+JSON.stringify({original,scrollLocked}));
+    await page.evaluate(()=>{
+     document.documentElement.style.overflow='';
+     document.documentElement.dataset.classicScrollbar='true';
+    });
+    const reserved=await page.evaluate(()=>({
+      gutter:getComputedStyle(document.documentElement).scrollbarGutter,
+      brandLeft:document.querySelector('.site-header .brand').getBoundingClientRect().left
+    }));
+    if(reserved.gutter!=='stable')throw Error('Traditional scrollbar fallback missing');
+    await page.evaluate(()=>{
+     document.querySelector('main').style.setProperty('display','none','important');
+     document.querySelector('footer').style.setProperty('display','none','important');
+    });
+    const reservedShort=await page.evaluate(()=>({
+      brandLeft:document.querySelector('.site-header .brand').getBoundingClientRect().left,
+      gutter:getComputedStyle(document.documentElement).scrollbarGutter
+    }));
+    if(Math.abs(reserved.brandLeft-reservedShort.brandLeft)>1)
+      throw Error('Traditional gutter jump '+JSON.stringify({reserved,reservedShort}));
+    console.log('PASS scrollbar adapts',name,width,'platform '+(original.classic?'classic':'overlay'));
    }catch(e){errors.push(name+' '+width+': '+e.message);console.error('FAIL',name,width,e.message)}
    await page.close();
   }

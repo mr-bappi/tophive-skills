@@ -1,20 +1,98 @@
 <!doctype html><html lang="en"><head>
 <link rel="canonical" href="https://skills.tophive.dev/docs/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Documentation — TOPHIVE Skills</title><meta name="description" content="Learn to install and use TOPHIVE AI agent skills with the Skills CLI or ChatGPT Skills uploads.">
-<link rel="icon" type="image/png" href="../assets/icon-256.png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../developer.css"><link rel="stylesheet" href="../content-pages.css"><script src="../app.js" defer></script></head>
+<link rel="icon" type="image/png" href="../assets/icon-256.png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../developer.css"><link rel="stylesheet" href="../content-pages.css"><link rel="stylesheet" href="../docs-v2.css"><script src="../app.js" defer></script><script src="../docs-nav.js" defer></script></head>
 <body class="dev-site docs-view"><a class="skip-link" href="#main">Skip to content</a><header class="site-header" data-shared-header="true"><div class="wrap nav-wrap">
 <a href="../" class="brand" aria-label="TOPHIVE Skills home"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a>
 <button class="mobile-toggle" type="button" aria-controls="main-nav" aria-expanded="false" data-menu-toggle aria-label="Open menu"><span></span><span></span></button>
 <nav id="main-nav" class="nav" data-nav aria-label="Main navigation"><a href="../library/">Library</a><a href="../#how">How it works</a><a href="../docs/" aria-current="page">Documentation</a><a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
 <a class="nav-action" href="../library/">Explore skills <span aria-hidden="true">↗</span></a>
 </div></header>
-<main id="main" class="docs"><div class="wrap subhero"><div class="breadcrumbs"><a href="../">SKILLS</a><span>/</span> DOCUMENTATION</div><div class="docs-heading"><div><div class="eyebrow">GUIDES / GETTING STARTED</div><h1>Documentation<span class="doc-heading-point">.</span></h1></div><p class="docs-intro">Install, inspect and use TOPHIVE Skills. Follow a clear setup for your coding agent or ChatGPT, with practical guidance on permissions and publishing.</p></div></div>
-<div class="wrap docs-layout"><aside class="docs-aside" aria-label="On this page"><span class="docs-aside-heading">ON THIS PAGE</span><a href="#install"><span>01</span> CLI installation</a><a href="#chatgpt"><span>02</span> ChatGPT upload</a><a href="#use"><span>03</span> Using the skill</a><a href="#permissions"><span>04</span> Security & access</a><a href="#publish"><span>05</span> Publishing</a></aside><div class="docs-content">
-<section id="install"><div class="eyebrow">01 / INSTALL</div><h2>One command.</h2><p>The open Skills CLI installs from a public GitHub repository into supported coding agents. This is distinct from ChatGPT cloud Skills upload. <a class="text-link" href="https://github.com/vercel-labs/skills">CLI documentation ↗</a></p><div class="codebox"><code>npx skills add mr-bappi/tophive-skills -g</code><button type="button" data-copy-install aria-label="Copy Skills CLI installation command">Copy</button></div><p>Global installation makes the skill available across local projects. Your CLI may prompt you to select the target coding agent.</p></section>
-<section id="chatgpt"><div class="eyebrow">02 / CHATGPT</div><h2>Upload the portable skill.</h2><p>For eligible ChatGPT accounts, use the Skills upload flow and select the packaged ZIP. This does not automatically sync the local GitHub skill with ChatGPT.</p><p><a href="../downloads/tophive-design-skill.zip" class="text-link">Download the portable Skill ZIP ↗</a></p></section>
-<section id="use"><div class="eyebrow">03 / USAGE</div><h2>Give it a real design task.</h2><p>The skill routes landing-page design, information-dense dashboard UI and visual review separately. A product URL is information—not permission to modify the website.</p><div class="codebox"><code>Use Web & UI Design to propose three original creative directions for an AnyLicense standalone SaaS landing page. Verify actual product capabilities. Do not create a Gutenberg product description.</code><button type="button" data-copy-install aria-label="Copy example AI design prompt">Copy</button></div></section>
-<section id="permissions"><div class="eyebrow">04 / TRUST</div><h2>Know the boundaries.</h2><p>Skills contain instructions and references. Installing one does not grant access to local files, browser sessions, private code, production systems, tokens, hosting or payment details. Always review SKILL.md and any source before use.</p><div class="callout"><strong>Source of truth</strong><p>Real product documentation and the target repository's AGENTS.md override a generic design example. Never substitute conceptual screenshots for operational proof.</p></div></section>
-<section id="publish"><div class="eyebrow">05 / CONTRIBUTE</div><h2>Open and inspectable.</h2><p>All currently published TOPHIVE Skills content is available in the <a class="text-link" href="https://github.com/mr-bappi/tophive-skills">GitHub repository ↗</a>. Future skills should be evidence-backed, scoped to one purpose, and reviewed before release. No automatic user-submitted publishing workflow is available yet.</p></section>
-</div></div></main>
+<main id="main" class="docs docs-manual">
+  <div class="wrap docs-manual-frame">
+    <aside class="docs-manual-nav" aria-label="Documentation sections">
+      <div class="docs-manual-label">DOCUMENTATION <span>/ 01</span></div>
+      <nav class="docs-manual-menu" aria-label="On this page">
+        <a href="#install" aria-current="location"><span>01</span> Get started</a>
+        <a href="#chatgpt"><span>02</span> ChatGPT setup</a>
+        <a href="#use"><span>03</span> Use the skill</a>
+        <a href="#permissions"><span>04</span> Permissions</a>
+        <a href="#publish"><span>05</span> Source &amp; publishing</a>
+      </nav>
+      <div class="docs-manual-nav-foot">
+        <span class="docs-manual-available"><i aria-hidden="true"></i> Open source</span>
+        <a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">Inspect GitHub ↗</a>
+      </div>
+    </aside>
+    <div class="docs-manual-body">
+      <header class="docs-manual-heading">
+        <div class="breadcrumbs"><a href="../">TOPHIVE SKILLS</a><span>/</span> DOCS</div>
+        <div class="docs-overline"><span class="docs-overline-dot" aria-hidden="true"></span> GETTING STARTED <span class="docs-overline-rule" aria-hidden="true"></span> QUICK START</div>
+        <h1>Make skills<br><em>work for you.</em></h1>
+        <p>Set up the published Web &amp; UI Design skill, understand what it can do, and give your agent a real task. Choose the installation path that matches where you work.</p>
+      </header>
+
+      <div class="docs-manual-journey" aria-label="Quick overview">
+        <div><span>01 / INSTALL</span><strong>Choose your agent</strong></div>
+        <div><span>02 / USE</span><strong>Give a real task</strong></div>
+        <div><span>03 / VERIFY</span><strong>Review the output</strong></div>
+      </div>
+
+      <section class="docs-manual-section docs-install" id="install" aria-labelledby="docs-install-title">
+        <div class="docs-section-eyebrow">01 <span>/</span> INSTALLATION</div>
+        <div class="docs-section-head">
+          <h2 id="docs-install-title">For coding agents.</h2>
+          <p>Use the open Skills CLI to install from the public GitHub repository into supported coding agents.</p>
+        </div>
+        <div class="docs-terminal">
+          <div class="docs-terminal-top"><div><span class="docs-terminal-dot" aria-hidden="true"></span><span>TERMINAL</span></div><span>MAC / LINUX / WINDOWS</span></div>
+          <div class="codebox docs-cli-command"><code>npx skills add mr-bappi/tophive-skills -g</code><button type="button" data-copy-install aria-label="Copy Skills CLI installation command" title="Copy command">Copy <span aria-hidden="true">↗</span></button></div>
+          <div class="docs-terminal-foot"><span><i aria-hidden="true"></i> Public repository</span><a href="https://github.com/vercel-labs/skills" target="_blank" rel="noopener">Skills CLI documentation ↗</a></div>
+        </div>
+        <div class="docs-context"><span class="docs-context-index">NOTE / 01</span><p><code>mr-bappi</code> is the current GitHub repository owner—not an account or machine requirement. Global installation makes this skill available across local projects. Your CLI may prompt you to select a supported agent.</p></div>
+      </section>
+
+      <section class="docs-manual-section" id="chatgpt" aria-labelledby="docs-chatgpt-title">
+        <div class="docs-section-eyebrow">02 <span>/</span> CHATGPT</div>
+        <div class="docs-chatgpt-row">
+          <div>
+            <h2 id="docs-chatgpt-title">Prefer ChatGPT?</h2>
+            <p>For eligible ChatGPT accounts, download the portable Skill ZIP and upload it through the Skills interface. This is separate from the local CLI install and does not auto-sync with GitHub.</p>
+          </div>
+          <a class="docs-download" href="../downloads/tophive-design-skill.zip" download><span class="docs-download-icon" aria-hidden="true">↓</span><span><strong>Download Skill ZIP</strong><small>Portable package</small></span><span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="docs-manual-section" id="use" aria-labelledby="docs-use-title">
+        <div class="docs-section-eyebrow">03 <span>/</span> USE THE SKILL</div>
+        <h2 id="docs-use-title">Ask for the right output.</h2>
+        <p>Web &amp; UI Design distinguishes landing-page design, operational dashboard UI, and visual review. Start with a concrete task and real product sources.</p>
+        <div class="docs-prompt-example">
+          <div class="docs-prompt-top"><span>EXAMPLE / DESIGN REQUEST</span><span>EDIT BEFORE USING</span></div>
+          <div class="codebox docs-prompt-code"><code>Use Web &amp; UI Design to propose three original creative directions for an AnyLicense standalone SaaS landing page. Verify actual product capabilities. Do not create a Gutenberg product description.</code><button type="button" data-copy-install aria-label="Copy example AI design prompt" title="Copy prompt">Copy <span aria-hidden="true">↗</span></button></div>
+        </div>
+        <p class="docs-hint">A product URL provides context. It is not permission to modify production files or deploy anything.</p>
+      </section>
+
+      <section class="docs-manual-section" id="permissions" aria-labelledby="docs-security-title">
+        <div class="docs-section-eyebrow">04 <span>/</span> TRUST &amp; ACCESS</div>
+        <h2 id="docs-security-title">Instructions, not access.</h2>
+        <p>Skills provide guidance and reference files. Installing one does not grant access to your Mac, private code, browser sessions, production systems, tokens, hosting, or payment details.</p>
+        <div class="docs-boundaries">
+          <div><span>SKILLS PROVIDE</span><strong>Workflow instructions</strong><p>Readable rules, examples and links that guide the agent's work.</p></div>
+          <div><span>SKILLS DO NOT GRANT</span><strong>System permissions</strong><p>Tools, credentials and production access need separate authorization.</p></div>
+        </div>
+        <div class="docs-source-truth"><strong>Source of truth</strong><p>Real product documentation and the target repository’s AGENTS.md override generic design examples. Conceptual screenshots are not operational proof.</p></div>
+      </section>
+
+      <section class="docs-manual-section" id="publish" aria-labelledby="docs-source-title">
+        <div class="docs-section-eyebrow">05 <span>/</span> SOURCE &amp; PUBLISHING</div>
+        <h2 id="docs-source-title">Open. Readable. Inspectable.</h2>
+        <p>Published TOPHIVE Skills source is available on GitHub. Future skills should be reviewed, evidence-backed and scoped to a clear purpose. No automatic user-submitted publishing workflow is available yet.</p>
+        <div class="docs-last-links"><a href="../skills/tophive-design/">Inspect Web &amp; UI Design ↗</a><a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">Browse repository ↗</a></div>
+      </section>
+    </div>
+  </div>
+</main>
 <footer class="site-footer"><div class="wrap footer-wrap"><a class="brand" href="../"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE <span class="brand-suffix">/ SKILLS</span></span></a><span>Readable instructions. Real boundaries.</span><nav aria-label="Footer navigation"><a href="../library/">Skills</a><a href="../">Home</a></nav></div></footer><div class="toast" data-toast role="status" aria-live="polite"></div>
 </body></html>

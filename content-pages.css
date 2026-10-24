@@ -1,36 +1,11 @@
 /* TOPHIVE Skills — documentation & skill detail density / hierarchy.
    Content surfaces only. Global header uses shared styles.css and one partial. */
-.docs-view,.detail-view{--content-ink:#24362a;--content-muted:#66776c}
-.docs-view .subhero,.detail-view .subhero{padding-top:clamp(29px,3.6vw,48px);padding-bottom:clamp(23px,3.2vw,41px)}
-.docs-view .breadcrumbs,.detail-view .breadcrumbs{margin-bottom:25px;font-size:10px;letter-spacing:.08em;color:#91a296}
-.docs-view .breadcrumbs a,.detail-view .breadcrumbs a{color:#738778}
-.docs-view .eyebrow,.detail-view .eyebrow{font-size:9px;letter-spacing:.11em}
-.docs-view .docs-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.52fr);gap:clamp(25px,5vw,66px);align-items:end}
-.docs-view h1,.detail-view h1{font-size:clamp(39px,4.1vw,61px);line-height:1.05;letter-spacing:-.07em}
-.docs-view .doc-heading-point{color:#8caf97}
-.docs-view .docs-intro{font-size:13px;line-height:1.7;max-width:355px;margin:0 0 4px;color:#708276}
-.docs-view .docs{padding-bottom:32px}
-.docs-view .docs-layout{display:grid;grid-template-columns:185px minmax(0,1fr);gap:clamp(34px,5vw,75px);margin-top:0;padding-top:28px;padding-bottom:65px;border-top:1px solid #e0e7df}
-.docs-view .docs-aside{gap:0;position:sticky;top:19px;align-self:start;border-top:1px solid #d9e3da}
-.docs-view .docs-aside-heading{font:700 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;color:#829588;padding:16px 12px 12px}
-.docs-view .docs-aside a{display:flex;align-items:center;gap:13px;font-size:12px;font-weight:620;color:#73877a;padding:11px 12px;border-radius:4px;line-height:1.45;transition:background .15s,color .15s}
-.docs-view .docs-aside a span{font:10px ui-monospace,Menlo,monospace;color:#99aa9d;min-width:17px}
-.docs-view .docs-aside a:hover,.docs-view .docs-aside a:focus-visible{color:#285a3f;background:#eef4ee}
-.docs-view .docs-content{max-width:850px;min-width:0}
-.docs-view .docs-content section{scroll-margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin:0;border-bottom:1px solid #e3eae2;padding:25px 0 29px}
-.docs-view .docs-content section:first-child{padding-top:0}
-.docs-view .docs-content section>.eyebrow{margin-bottom:10px;color:#73917c}
-.docs-view .docs-content h2{font-size:clamp(24px,2.7vw,31px);letter-spacing:-.056em;line-height:1.16;margin:0 0 13px}
-.docs-view .docs-content p{max-width:725px;font-size:13px;line-height:1.75;color:#65796a;margin:0 0 14px}
-.docs-view .docs-content p:last-child{margin-bottom:0}
-.docs-view .docs-content .text-link{display:inline-flex;font-size:12px;padding-bottom:3px;gap:5px;color:#416b50}
-.docs-view .docs-content .codebox{display:flex;align-items:flex-start;gap:14px;justify-content:space-between;min-width:0;margin:10px 0 15px;padding:11px 12px 11px 17px;background:#1b3026;border:1px solid #365544;border-radius:6px;overflow:visible}
-.docs-view .codebox code{flex:1;min-width:0;overflow-wrap:anywhere;white-space:pre-wrap;font:12px/1.7 ui-monospace,Menlo,monospace;color:#e1f0e6;padding-top:5px}
-.docs-view .codebox button{position:static;flex:none;border:1px solid #5a8b68;background:#3a6249;color:#fff;font-size:11px;font-weight:700;border-radius:4px;line-height:1.4;min-height:31px;padding:6px 10px}
-.docs-view .codebox button:hover{background:#4d785b}
-.docs-view .callout{background:#edf3ee;border-left:2px solid #7eac8a;padding:18px 21px;margin:8px 0 0}
-.docs-view .callout strong{font-size:12px}
-.docs-view .callout p{margin-top:7px;font-size:12px}
+.detail-view{--content-ink:#24362a;--content-muted:#66776c}
+.detail-view .subhero{padding-top:clamp(29px,3.6vw,48px);padding-bottom:clamp(23px,3.2vw,41px)}
+.detail-view .breadcrumbs{margin-bottom:25px;font-size:10px;letter-spacing:.08em;color:#91a296}
+.detail-view .breadcrumbs a{color:#738778}
+.detail-view .eyebrow{font-size:9px;letter-spacing:.11em}
+.detail-view h1{font-size:clamp(39px,4.1vw,61px);line-height:1.05;letter-spacing:-.07em}
 /* Skill detail: make install action and proof of scope visible sooner. */
 .detail-view .detail-head{grid-template-columns:minmax(0,1fr) minmax(200px,.32fr);gap:clamp(24px,4vw,55px);align-items:end}
 .detail-view .detail h1{margin-top:13px}
@@ -67,23 +42,14 @@
 .detail-view .install-box p{font-size:11px;line-height:1.6;margin:14px 0 0}
 .detail-view .detail-aside-links{margin-top:15px;gap:0}
 .detail-view .detail-aside-links a{padding:11px 2px;font-size:12px;line-height:1.4}
-.docs-view .footer-wrap,.detail-view .footer-wrap{min-height:76px}
+.detail-view .footer-wrap{min-height:76px}
 @media(max-width:920px){
- .docs-view .docs-heading{grid-template-columns:1fr;gap:12px}
- .docs-view .docs-intro{max-width:650px}
  .detail-view .detail-head{grid-template-columns:1fr}
  .detail-view .detail-meta{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px;border-left:0;border-top:1px solid #e1e8e0;padding:15px 0 0}
  .detail-view .detail-main{grid-template-columns:minmax(0,1fr) 255px;gap:26px}
 }
 @media(max-width:730px){
- .docs-view .subhero,.detail-view .subhero{padding-top:27px;padding-bottom:22px}
- .docs-view .docs-layout{grid-template-columns:1fr;gap:17px;padding-top:19px;padding-bottom:40px}
- .docs-view .docs-aside{position:static;display:flex;flex-wrap:nowrap;align-items:center;gap:4px;border-top:0;border-bottom:1px solid #e0e8e0;padding:0 0 10px;overflow-x:auto;scrollbar-width:thin}
- .docs-view .docs-aside-heading{display:none}
- .docs-view .docs-aside a{flex:none;font-size:11px;white-space:nowrap;padding:9px 10px;border:1px solid #e0e8e0;background:#fbfcfa}
- .docs-view .docs-aside a span{font-size:9px}
- .docs-view .docs-content section{padding:24px 0}
- .docs-view .docs-content section:first-child{padding-top:8px}
+ .detail-view .subhero{padding-top:27px;padding-bottom:22px}
  .detail-view .detail-main{grid-template-columns:1fr;gap:20px;padding-top:25px;padding-bottom:45px}
  .detail-view .detail-aside{position:static;order:-1;margin:0;display:grid;grid-template-columns:1fr}
  .detail-view .detail-aside-links{display:flex;flex-wrap:wrap;gap:9px 20px}
@@ -93,9 +59,6 @@
  .detail-view .workflow-row{grid-template-columns:minmax(0,1fr);gap:7px}
 }
 @media(max-width:420px){
- .docs-view .docs-heading h1{font-size:37px}
- .docs-view .docs-content .codebox{flex-wrap:wrap}
- .docs-view .codebox button{margin-left:auto}
  .detail-view .detail h1{font-size:clamp(36px,10vw,48px)}
  .detail-view .detail-meta{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
  .detail-view .detail-meta div{display:flex;flex-direction:column;gap:3px;min-width:0}

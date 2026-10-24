@@ -72,3 +72,8 @@ The approved homepage header style governs all pages.
 ## Docs and single skill page visual contract
 
 content-pages.css holds only Docs and Skill Detail layout/density rules. Both use the same global header partial and the same structural grid as the approved homepage. Docs is a documentation page (compact title + TOC + readable sections), not another marketing landing page. Skill Detail prioritizes real scope, workflow distinctions, source inspection and install. No skill instructions or package contents are modified by these page-specific styles.
+
+
+## Documentation design (October 2026)
+
+The docs page is an install-first developer guide with two distinct paths (Skills CLI and ChatGPT portable ZIP), usage example, permission boundaries, and links to real published source. Design lives in docs-v2.css only; shared content-pages.css is limited to the Skill Detail page. The header remains the single global partial, and the Skills CLI command intentionally uses the actual GitHub owner mr-bappi. Rebrand display text separately from installation identifiers.

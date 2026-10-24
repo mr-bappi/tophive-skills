@@ -40,21 +40,33 @@ for(const [pageName,relative] of [["home","index.html"],["detail","skills/tophiv
  check(await page.$eval("[data-nav]",el=>el.dataset.open)!=="true","Mobile menu failed to close");
  }
  if(pageName==="docs"){
-   check(await page.$eval(".docs-content section",el=>el.id)==="install","Docs install should lead content");
-   check(await page.$$eval(".docs-aside a",els=>els.length)===5,"Docs must provide 5 anchored sections");
-   check(await page.$$eval(".codebox [data-copy-install]",els=>els.length)===2,"Docs copy actions missing");
-   check(await page.$eval("main h1",el=>el.textContent.trim())==="Documentation.","Docs should not use the old oversized marketing hero");
+   check(await page.$eval("#install h2",el=>el.textContent.trim())==="For coding agents.","CLI install must be clearly labeled");
+   check(await page.$$eval(".docs-manual-menu a",els=>els.length)===5,"Five anchored guide sections required");
+   check(await page.$$eval(".docs-manual .codebox [data-copy-install]",els=>els.length)===2,"Both copy controls required");
+   check(await page.$eval("main h1",el=>el.textContent.includes("Make skills")),"New documentation intro not rendered");
+   check(await page.$eval("#chatgpt .docs-download",el=>el.getAttribute("href"))==="../downloads/tophive-design-skill.zip","Skill ZIP path changed");
+   check(await page.$eval(".docs-cli-command code",el=>el.textContent.trim())==="npx skills add mr-bappi/tophive-skills -g","Install command incorrect");
    if(width===1440){
-     check(await page.$eval(".docs-content section",el=>el.getBoundingClientRect().top)<450,"Docs start too far below header");
-     check(await page.$eval(".site-header",el=>el.getBoundingClientRect().height)<=70,"Shared header too tall");
+     check(await page.$eval("#install",el=>el.getBoundingClientRect().top)<780,"Install not visible on first screen");
+     check(await page.$eval(".site-header",el=>el.getBoundingClientRect().height)<=70,"Global header height drift");
    }
    if(width===390){
-     check(await page.$eval(".docs-aside",el=>getComputedStyle(el).overflowX)==="auto","Mobile TOC must remain horizontally navigable");
+     check(await page.$eval(".docs-manual-menu",el=>getComputedStyle(el).overflowX)==="auto","Mobile Docs navigation must scroll");
+     const cli=await page.evaluate(()=>{
+       const code=document.querySelector(".docs-cli-command code").getBoundingClientRect();
+       const button=document.querySelector(".docs-cli-command button").getBoundingClientRect();
+       const container=document.querySelector(".docs-cli-command").getBoundingClientRect();
+       return {codeRight:code.right,containerRight:container.right,codeBottom:code.bottom,buttonTop:button.top};
+     });
+     check(cli.codeRight<=cli.containerRight-9,"Mobile install command extends outside panel");
+     check(cli.buttonTop>=cli.codeBottom-1,"Mobile Copy overlaps the command "+JSON.stringify(cli));
+     await page.click(".docs-manual-menu a[href='#chatgpt']");
+     check(await page.$eval(".docs-manual-menu a[href='#chatgpt']",el=>el.getAttribute("aria-current"))==="location","Docs chapter selection state absent");
    }
    if(width===1440){
-     await page.click(".docs-content .codebox [data-copy-install]");
+     await page.click(".docs-cli-command [data-copy-install]");
      await page.waitForFunction(()=>document.querySelector("[data-toast]").dataset.visible==="true",{timeout:1500});
-     check(await page.$eval("[data-toast]",el=>el.textContent.length)>0,"Code copy feedback missing");
+     check(await page.$eval("[data-toast]",el=>el.textContent.length)>0,"CLI copy feedback missing");
      await page.$eval("[data-toast]",el=>el.dataset.visible="false");
    }
  }

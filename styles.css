@@ -149,7 +149,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #669c
    sections and footer. The original .wrap is the content alignment authority.
    Lines are decorative; they never intercept clicks or change geometry. */
 :root{
-  --site-grid-max:1240px;
+  --site-grid-max:var(--max);
   --site-grid-ink:rgba(101,125,106,.19);
   --site-grid-outer:clamp(14px,2vw,22px);
 }
@@ -223,20 +223,6 @@ main>section+section{border-top:1px solid var(--site-grid-ink)}
 .editor-tabs button{transition:color var(--ui-fast) ease,border-color var(--ui-fast) ease}
 .editor-tabs button:hover{color:#e1f2e6}
 .searchbox:focus-within{border-color:#91b79e;box-shadow:0 0 0 3px rgba(124,168,138,.12)}
-/* Align all section rules to the global grid; content remains within .wrap. */
-body::before{width:min(calc(100% - (2 * var(--site-grid-outer))),var(--max))}
-.site-header::before{left:max(var(--site-grid-outer),calc((100% - var(--max))/2))}
-.site-header::after{right:max(var(--site-grid-outer),calc((100% - var(--max))/2))}
-/* On wide desktops, the decorative rails move toward the viewport edges,
-   instead of visually boxing in an extra empty column beside the 1240px content.
-   At 1440px they start at the original 100px position; by 1920px at 20px.
-   The actual .wrap width, typography, table and content grid NEVER change. */
-@media(min-width:1441px){
- :root{--grid-frame-inset:clamp(20px,calc(340px - 16.6667vw),100px)}
- body::before{width:calc(100% - 2 * var(--grid-frame-inset))}
- .site-header::before{left:var(--grid-frame-inset)}
- .site-header::after{right:var(--grid-frame-inset)}
-}
 @media(max-width:730px){
  .hero-eyebrow{white-space:normal;line-height:1.6}
  .hero-layout{padding-top:32px}

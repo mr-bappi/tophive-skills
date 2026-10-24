@@ -36,18 +36,18 @@ const widths=[390,1024,1440,1600,1920],errors=[];
     if(original.gutter!==(original.classic?'stable':'auto'))throw Error('Wrong gutter for platform: '+JSON.stringify(original));
     if(!original.classic&&Math.abs(original.width-original.bodyWidth)>1)throw Error('Blank strip on overlay platform '+JSON.stringify(original));
     if(original.scrollWidth>original.width+1)throw Error('Horizontal overflow '+JSON.stringify(original));
-    // Wide-screen Ruler frame is decoupled from the approved 1240px content layout.
+    // The approved Grid Ruler MUST surround the same constrained 1240px
+    // layout at every desktop width; outside whitespace is intentional.
     if(width>=1440){
-      if(Math.abs(original.navWidth-1240)>1)throw Error('Approved 1240px content has stretched '+JSON.stringify(original));
+      if(Math.abs(original.navWidth-1240)>1)
+        throw Error('Approved content width changed '+JSON.stringify(original));
+      if(Math.abs(original.frameWidth-original.navWidth)>1)
+        throw Error('Decorative frame detached from 1240px content '+JSON.stringify(original));
+      if(Math.abs(original.frameLeft-(original.width-original.navWidth)/2)>1)
+        throw Error('Grid frame not centered around content '+JSON.stringify(original));
       if(Math.abs(original.frameLeft-original.markerLeft)>1||
          Math.abs(original.frameLeft-original.markerRight)>1)
-        throw Error('Header ruler nodes no longer align with vertical rails '+JSON.stringify(original));
-      if(width===1440&&Math.abs(original.frameLeft-100)>1)
-        throw Error('Approved 1440px rails moved '+JSON.stringify(original));
-      if(width===1600&&original.frameLeft>80)
-        throw Error('1600px still has excessive empty strip '+JSON.stringify(original));
-      if(width===1920&&original.frameLeft>25)
-        throw Error('1920px still has excessive empty strip '+JSON.stringify(original));
+        throw Error('Header ruler nodes no longer align with rails '+JSON.stringify(original));
     }
     await page.evaluate(()=>{
      document.querySelector('main').style.setProperty('display','none','important');

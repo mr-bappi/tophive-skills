@@ -1,9 +1,9 @@
 ---
 name: tophive-design
-description: "Design or review premium SaaS landing pages, websites, responsive typography, grids, motion and product UI using TOPHIVE Design Intelligence v2. Use for AnyLicense, LandingKit, NodeX or other product-design requests; not for Gutenberg product descriptions or Rank Math SEO."
+description: "Design responsive websites, SaaS landing pages, admin dashboards, product UI and visual reviews using distinct website and application-UI workflows. Route typography, grids, information density and interaction appropriately; not Gutenberg product descriptions or Rank Math SEO."
 ---
 
-# TOPHIVE Design
+# Web & UI Design
 
 **Design the right artifact, then design it well.** This skill routes visual work through the established TOPHIVE Design Intelligence v2 principles. It is not a plugin that grants local filesystem, WordPress, Figma or deployment access.
 
@@ -22,9 +22,11 @@ description: "Design or review premium SaaS landing pages, websites, responsive 
 
 Follow the user's latest goal and approved choices first. Read the target product's own `AGENTS.md`, verified code/docs, approved positioning and actual screenshots **when accessible**. Then apply these bundled references:
 
-- `references/DESIGN-PRINCIPLES.md` — typography, composition, grid, motion, tokens
-- `references/WEBSITE-WORKFLOW.md` — creative direction and landing-page execution
-- `references/UI-REVIEW.md` — app UI, screenshot review, quality gates
+**Load only route-relevant references** — not the entire design brain for every task:
+
+- **Website/landing page:** `references/WEBSITE-WORKFLOW.md` and selected website composition/typography rules from `references/DESIGN-PRINCIPLES.md`.
+- **Admin dashboard / Product UI:** `references/UI-REVIEW.md` first. Use `DESIGN-PRINCIPLES.md` only for shared legibility, contrast, spacing and restrained motion; **exclude** its marketing hero scales, oversized section gaps, editorial asymmetry and landing-page storytelling.
+- **Visual review:** `references/UI-REVIEW.md` and only the source relevant to the actual screenshot.
 
 The full canonical library is `~/Documents/tophive-design-system/` **only if a tool actually has access to that Mac**. The bundled references are portable and sufficient for conceptual work. Never pretend to have opened inaccessible local files. Existing product engineering contracts always override sample tokens and layouts.
 
@@ -32,7 +34,7 @@ The full canonical library is `~/Documents/tophive-design-system/` **only if a t
 
 **Website design:** Verify product facts, audience, differentiator and real CTA. Unless a direction is already approved, propose **three materially different visual directions** and recommend one. Establish typography, grid, buyer story and motion. Build a standalone responsive prototype only when requested or already approved. Keep existing production untouched.
 
-**Product UI:** Inspect real component hierarchy, functionality and interaction states. Preserve native app/WordPress/platform conventions. Never copy marketing gallery CSS wholesale into an operational product.
+**Product UI / admin dashboards:** Inspect real workflows, navigation, tables, forms, controls, design tokens and existing application states first. Prioritize usable density, predictable alignment, accessible focus, permission and loading/empty/error/success states. Do not apply large marketing typography, decorative cards, huge section gaps or mandatory landing-page grids to operational UI. Do not propose three marketing art directions unless the user explicitly asks for exploration. Never copy marketing gallery CSS wholesale into an app.
 
 **Visual review:** State what is visibly wrong, why it matters and how to fix it. Implement only within the user's requested scope.
 
@@ -40,6 +42,6 @@ For every route: use real product visuals or label mockups illustrative. Do not 
 
 ## 4. Output style
 
-Be decisive and specific. Prefer premium editorial hierarchy, readable fonts, intentional whitespace, authentic software demonstration, varied section composition and purposeful lightweight motion. Avoid generic gradients, fake analytics and repeated feature-card templates.
+Be decisive within the selected route. **Websites:** expressive typography, intentional whitespace, authentic product demonstration and varied section composition. **Product UI:** information hierarchy, efficient density, usable tables/forms, clear control states, consistent alignment and quiet motion. Avoid generic gradients, fake analytics and repeated decorative cards everywhere.
 
 **Before delivery:** Check that the result is the artifact the user asked for. A design request should end with art direction or a visual prototype—not an unrelated content/SEO deliverable.

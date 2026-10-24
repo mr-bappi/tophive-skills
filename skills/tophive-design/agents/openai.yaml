@@ -1,9 +1,9 @@
 interface:
-  display_name: "TOPHIVE Design"
-  short_description: "Premium SaaS websites and product UI design"
+  display_name: "Web & UI Design"
+  short_description: "SaaS websites, dashboards & product interfaces"
   icon_small: "./assets/icon-256.png"
   icon_large: "./assets/icon-512.png"
   brand_color: "#18303C"
-  default_prompt: "Use $tophive-design to create three distinctive art directions for a premium standalone SaaS landing page."
+  default_prompt: "Use $tophive-design for the requested website or product UI. Route dashboards to operational UI rules, and landing pages to website rules. Verify available product sources first."
 policy:
   allow_implicit_invocation: true

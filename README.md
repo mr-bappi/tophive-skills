@@ -4,7 +4,7 @@ A compact, original static skills directory for publishing TOPHIVE agent skills 
 
 ## Current published skill
 
-**TOPHIVE Design v1.1.0** — responsive product websites, premium editorial art direction, product UI and visual review. The portable skill contains exactly 7 files with a self-contained SKILL.md, references, metadata and icons.
+**Web & UI Design v1.2.0** — responsive product websites, operational dashboard UI, admin component systems and visual review. Website and dashboard references are applied separately to prevent clutter. The portable skill contains exactly 7 files with a self-contained SKILL.md, references, metadata and icons.
 
 The public skill lives under `skills/tophive-design/`. Use its source for open review and install:
 

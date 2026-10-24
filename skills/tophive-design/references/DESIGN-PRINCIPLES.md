@@ -2,6 +2,8 @@
 
 This is a compact portable synopsis of the canonical design library, **not** a replacement for its full Markdown rules. Each product must express its own personality rather than reproduce the teaching pages.
 
+**Route scope:** This document chiefly illustrates **marketing website** composition. Hero typography, expressive serif accents, buyer-journey sections, 12/8/4 Grid Ruler demonstrations, bento patterns and large whitespace are **not default rules for admin dashboards**. For application UI load `UI-REVIEW.md` first and follow the product's real component system; only legibility, contrast and consistent spacing principles are shared.
+
 ## Typography
 
 - Use a distinct display role, section-heading role, content-heading role, body role and utility/metadata role.

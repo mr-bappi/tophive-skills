@@ -58,3 +58,67 @@
 .directory-description{color:#5b6e62}
 .directory-row-actions button{color:#4b6d55}
 .directory-foot{color:#6d8072}
+
+/* Library polish: compact header, quiet search, single-purpose table. */
+.library-view{display:flex;flex-direction:column;min-height:100svh}
+.library-view main{flex:1}
+.library-view .nav-wrap{min-height:58px;gap:19px}
+.library-view .nav{gap:19px}
+.library-view .nav-action{padding:9px 13px;font-size:11px}
+.library-view .brand-suffix{letter-spacing:.09em}
+.library-view .directory{min-height:0;padding-top:31px;padding-bottom:40px}
+.library-view .directory-path{color:#a2aba3;font-size:9px;letter-spacing:.035em}
+.library-view .directory-path a{color:#87988d}
+.library-view .directory-head{display:block;margin:25px 0 25px}
+.library-view .directory-head h1{font-size:clamp(33px,3.4vw,44px);line-height:1.12;letter-spacing:-.06em}
+.library-view .directory-head p{margin:9px 0 0;font-size:13px;color:#6f7e73}
+.library-view .directory-tools{margin:0 0 13px;gap:16px}
+.library-view .directory-search{height:42px;width:min(100%,640px);max-width:640px;flex:1;padding-inline:13px;border-color:#e0e5de;box-shadow:0 1px 1px #192e1804}
+.library-view .directory-search:focus-within{border-color:#749783;box-shadow:0 0 0 3px #89a99523}
+.library-view .directory-search input{font-size:13px}
+.library-view .directory-search kbd{font-size:11px;height:21px;width:21px}
+.library-view .directory-results{font-size:11px;color:#718174}
+.directory-category-controls[hidden]{display:none!important}
+.directory-category-controls{min-width:0;flex:0 1 auto}
+.directory-categories{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.directory-category-pill{background:transparent;color:#6d8171;border:1px solid #dce4dc;font-size:11px;line-height:1;padding:9px 12px;border-radius:5px;white-space:nowrap}
+.directory-category-pill[aria-pressed=true]{background:#e7f0e7;color:#2b6041;border-color:#c7ddcb;font-weight:730}
+.directory-category-pill:hover{border-color:#91b19c;color:#315e40}
+.library-view .directory-table thead{background:#f6f8f5;color:#718176}
+.library-view .directory-table th{padding:10px 13px;font-size:10px;border-color:#e6ebe5}
+.library-view .directory-table tbody tr{border-color:#e9eee8}
+.library-view .directory-table td{padding:13px;color:#28372b}
+.library-view .directory-description{color:#627468;line-height:1.5;font-size:12px}
+.library-view .directory-tag{font-size:10px;padding:5px 7px;background:#eff3ee}
+.library-view .directory-version{font-size:11px;color:#67766b}
+.library-view .directory-name{font-size:13px;gap:10px}
+.library-view .directory-name img{width:27px;height:27px;border-radius:6px}
+.library-view .directory-row-actions{gap:13px;flex-wrap:nowrap}
+.library-view .directory-row-actions a{font-size:11px;font-weight:730}
+.library-view .directory-row-actions .directory-copy{height:31px;width:31px;min-width:31px;display:grid;place-items:center;flex:none;border:1px solid #e1e8e0;border-radius:5px;background:#fafcfa;color:#648071;padding:0;transition:background .16s ease,border-color .16s ease,color .16s ease}
+.library-view .directory-row-actions .directory-copy:hover{background:#eaf3ea;border-color:#bed8c5;color:#2a5d40}
+.library-view .directory-row-actions .directory-copy svg{display:block}
+.library-view .directory-help{margin-top:30px;padding-top:14px;gap:15px}
+.library-view .footer-wrap{min-height:68px}
+.library-view .footer-wrap>span{display:none}
+.library-view .site-footer nav{gap:17px}
+@media(max-width:900px){
+ .library-view .directory-tools{flex-wrap:wrap}
+ .library-view .directory-search{width:100%;max-width:none}
+ .directory-category-controls{order:3;width:100%}
+}
+@media(max-width:760px){
+ .library-view .directory{padding-top:24px;padding-bottom:36px}
+ .library-view .directory-head{margin:23px 0 22px}
+ .library-view .directory-head h1{font-size:35px}
+ .library-view .directory-tools{gap:11px}
+ .library-view .directory-table tbody tr{padding:15px;gap:10px}
+ .library-view .directory-table td{padding:0!important}
+ .library-view .directory-table td:nth-child(5){padding-top:11px!important}
+ .library-view .directory-row-actions{justify-content:flex-start}
+ .library-view .directory-help{margin-top:28px}
+ .library-view .footer-wrap{min-height:67px}
+}
+@media(prefers-reduced-motion:reduce){
+ .library-view .directory-row-actions .directory-copy{transition:none}
+}

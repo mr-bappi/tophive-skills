@@ -18,21 +18,20 @@ const assert=(ok,msg)=>{if(!ok)throw Error(msg)};
   const pageErrors=[];page.on('pageerror',e=>pageErrors.push(e.message));page.on('response',res=>{if(res.status()>=400)pageErrors.push(`${res.status()} ${res.url()}`)});
   try{
    await page.goto(`http://127.0.0.1:${port}/library/`,{waitUntil:'networkidle0',timeout:14000});
-   const metrics=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth,h1:document.querySelectorAll('main h1').length,cards:document.querySelectorAll('[data-library-item]').length,items:document.querySelector('[data-count-total]').textContent,filter:document.querySelectorAll('[data-library-category] option').length}));
+   const metrics=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth,h1:document.querySelectorAll('main h1').length,cards:document.querySelectorAll('[data-library-item]').length,items:document.querySelector('[data-results-count]').textContent,filterHidden:document.querySelector('[data-category-container]').hidden}));
    assert(metrics.scroll<=metrics.client+1,'horizontal overflow '+JSON.stringify(metrics));
    assert(metrics.h1===1,'not exactly one h1');
-   assert(metrics.cards===1&&metrics.items==='01','catalog did not render exactly one real skill');
+   assert(metrics.cards===1&&metrics.items==='1 skill','catalog did not render exactly one real skill');
    assert(await page.$eval('table.directory-table',e=>!!e.querySelector('thead th')),'semantic table absent');
-   assert(metrics.filter===2,'category list incorrect');
+   assert(metrics.filterHidden,'One-category filter should be hidden');
    assert((await page.$eval('[data-library-item]',x=>x.querySelector('.directory-name').textContent)).includes('Web & UI Design'),'wrong published skill');
    await page.type('[data-library-search]','not-present');
    assert(await page.$eval('[data-library-item]',x=>getComputedStyle(x).display==='none'),'filter should hide item');
    assert(await page.$eval('[data-library-empty]',x=>!x.hidden),'empty state missing');
    await page.click('[data-library-reset]');
    assert(await page.$eval('[data-library-empty]',x=>x.hidden),'reset did not restore list');
-   await page.select('[data-library-category]','design');
-   assert(await page.$eval('[data-library-category]',x=>x.value)==='design','category not selected');
-   assert(await page.$eval('[data-library-item]',x=>getComputedStyle(x).display!=='none'),'Design category not showing skill');
+   assert(await page.$eval('[data-category-container]',x=>getComputedStyle(x).display==='none'),'Single-category filter visually cluttering layout');
+   assert(await page.$eval('[data-library-item]',x=>getComputedStyle(x).display!=='none'),'Reset did not recover listing');
    const install=await page.$eval('[data-library-copy]',x=>x.dataset.libraryCopy);
    assert(install==='npx skills add mr-bappi/tophive-skills -g','install command should be real');
    await page.click('[data-library-copy]');
@@ -40,6 +39,9 @@ const assert=(ok,msg)=>{if(!ok)throw Error(msg)};
    await new Promise(resolve=>setTimeout(resolve,230));
 
    if(width===390){await page.click('[data-menu-toggle]');assert(await page.$eval('[data-nav]',x=>x.dataset.open)==='true','mobile menu did not open');await page.click('[data-menu-toggle]')}
+   await page.$eval('[data-toast]',el=>el.dataset.visible='false');
+   await new Promise(resolve=>setTimeout(resolve,300));
+   await page.mouse.move(2,2);
    if(width===1440||width===390){
     const out=path.join(root,'tests/screenshots','library-'+width+'.png');
     fs.mkdirSync(path.dirname(out),{recursive:true});
@@ -50,6 +52,35 @@ const assert=(ok,msg)=>{if(!ok)throw Error(msg)};
   }catch(e){errors.push(width+': '+e.message);console.log('FAIL library',width,e.message)}
   await page.close();
  }
+ // Multi-category fixture is test-only: verify filter controls appear when needed.
+ const multi=await browser.newPage();
+ await multi.setRequestInterception(true);
+ multi.on('request',async req=>{
+  if(req.url().endsWith('/catalog.json')){
+   const data=JSON.parse(fs.readFileSync(path.join(root,'catalog.json'),'utf8'));
+   data.skills.push({slug:'test-audit',name:'Fixture Audit',description:'Test-only engineering checks',category:'Engineering',version:'0.0.0',install:'npx skills add test-only'});
+   await req.respond({status:200,contentType:'application/json',body:JSON.stringify(data)});
+  }else await req.continue();
+ });
+ await multi.goto(`http://127.0.0.1:${port}/library/`,{waitUntil:'networkidle0'});
+ assert(await multi.$eval('[data-category-container]',x=>!x.hidden),'Two-category filter should appear');
+ assert(await multi.$$eval('[data-category]',bs=>bs.map(b=>b.textContent).join('|'))==='All|Design|Engineering','Multi-category pills incorrect');
+ await multi.click('[data-category="engineering"]');
+ assert(await multi.$eval('[data-results-count]',x=>x.textContent)==='1 skill','Engineering filter not working');
+ assert(await multi.$eval('[data-category="engineering"]',x=>x.getAttribute('aria-pressed'))==='true','Filter aria-pressed not updated');
+ assert(await multi.$eval('[data-library-item]',x=>getComputedStyle(x).display==='none'),'Wrong category row remains visible');
+ await multi.click('[data-category="all"]');
+ assert(await multi.$eval('[data-results-count]',x=>x.textContent)==='2 skills','All category not restored');
+ console.log('PASS multi-category test fixture');
+ await multi.close();
+ // Without JavaScript, the truthful first skill remains navigable.
+ const nojs=await browser.newPage();
+ await nojs.setJavaScriptEnabled(false);
+ await nojs.goto(`http://127.0.0.1:${port}/library/`,{waitUntil:'load'});
+ assert(await nojs.$eval('[data-library-item]',x=>!!x.querySelector('.directory-name')),'No-JS first skill missing');
+ assert(await nojs.$eval('[data-category-container]',x=>x.hidden),'No-JS category filter should be hidden');
+ console.log('PASS no-JS static listing');
+ await nojs.close();
  const page=await browser.newPage();
  await page.goto(`http://127.0.0.1:${port}/`,{waitUntil:'load'});
  assert(await page.$eval('.nav-action',x=>x.getAttribute('href'))==='library/','homepage main CTA not pointing to library');
@@ -60,6 +91,6 @@ const assert=(ok,msg)=>{if(!ok)throw Error(msg)};
  assert(await page.$eval('[data-nav] a',x=>x.getAttribute('href'))==='../../library/','skill detail nav incorrect');
  console.log('PASS cross-page library navigation');
  await page.close();await browser.close();
- console.log('SUMMARY: 6 library viewports + cross-page links; failures',errors.length);
+ console.log('SUMMARY: 6 viewports, 1 multi-category fixture, no-JS fallback, navigation; failures',errors.length);
  if(errors.length)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>server.close());

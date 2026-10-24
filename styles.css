@@ -227,6 +227,16 @@ main>section+section{border-top:1px solid var(--site-grid-ink)}
 body::before{width:min(calc(100% - (2 * var(--site-grid-outer))),var(--max))}
 .site-header::before{left:max(var(--site-grid-outer),calc((100% - var(--max))/2))}
 .site-header::after{right:max(var(--site-grid-outer),calc((100% - var(--max))/2))}
+/* On wide desktops, the decorative rails move toward the viewport edges,
+   instead of visually boxing in an extra empty column beside the 1240px content.
+   At 1440px they start at the original 100px position; by 1920px at 20px.
+   The actual .wrap width, typography, table and content grid NEVER change. */
+@media(min-width:1441px){
+ :root{--grid-frame-inset:clamp(20px,calc(340px - 16.6667vw),100px)}
+ body::before{width:calc(100% - 2 * var(--grid-frame-inset))}
+ .site-header::before{left:var(--grid-frame-inset)}
+ .site-header::after{right:var(--grid-frame-inset)}
+}
 @media(max-width:730px){
  .hero-eyebrow{white-space:normal;line-height:1.6}
  .hero-layout{padding-top:32px}

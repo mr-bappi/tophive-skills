@@ -3,7 +3,7 @@ const {pathToFileURL}=require('node:url');
 const puppeteer=require('puppeteer');
 const root=path.resolve(__dirname,'..');
 const pages=[['home','index.html'],['library','library/index.html'],['docs','docs/index.html'],['detail','skills/tophive-design/index.html']];
-const widths=[390,1024,1440],errors=[];
+const widths=[390,1024,1440,1600,1920],errors=[];
 (async()=>{
  const browser=await puppeteer.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
  for(const [name,relative] of pages){
@@ -14,12 +14,18 @@ const widths=[390,1024,1440],errors=[];
     await page.goto(pathToFileURL(path.join(root,relative)).href,{waitUntil:'load'});
     const original=await page.evaluate(()=>{
      const html=document.documentElement;
+     const header=document.querySelector('.site-header');
+     const frameWidth=parseFloat(getComputedStyle(document.body,'::before').width);
+     const frameLeft=(document.body.getBoundingClientRect().width-frameWidth)/2;
+     const markerLeft=parseFloat(getComputedStyle(header,'::before').left);
+     const markerRight=parseFloat(getComputedStyle(header,'::after').right);
+     const navWidth=header.querySelector('.nav-wrap').getBoundingClientRect().width;
      const probe=document.createElement('div');
      probe.style.cssText='position:absolute;top:-9999px;left:-9999px;width:100px;height:100px;overflow:scroll;scrollbar-width:auto;visibility:hidden';
      const inner=document.createElement('div');inner.style.height='200px';probe.append(inner);
      html.append(probe);const nativeWidth=probe.offsetWidth-probe.clientWidth;probe.remove();
-     return {nativeWidth,classic:html.dataset.classicScrollbar==='true',
-      gutter:getComputedStyle(html).scrollbarGutter,
+     return {nativeWidth,frameWidth,frameLeft,markerLeft,markerRight,navWidth,
+      classic:html.dataset.classicScrollbar==='true',gutter:getComputedStyle(html).scrollbarGutter,
       width:html.clientWidth,bodyWidth:document.body.getBoundingClientRect().width,
       left:document.querySelector('.site-header .brand').getBoundingClientRect().left,
       cta:document.querySelector('.site-header .nav-action').getBoundingClientRect().right,
@@ -30,6 +36,19 @@ const widths=[390,1024,1440],errors=[];
     if(original.gutter!==(original.classic?'stable':'auto'))throw Error('Wrong gutter for platform: '+JSON.stringify(original));
     if(!original.classic&&Math.abs(original.width-original.bodyWidth)>1)throw Error('Blank strip on overlay platform '+JSON.stringify(original));
     if(original.scrollWidth>original.width+1)throw Error('Horizontal overflow '+JSON.stringify(original));
+    // Wide-screen Ruler frame is decoupled from the approved 1240px content layout.
+    if(width>=1440){
+      if(Math.abs(original.navWidth-1240)>1)throw Error('Approved 1240px content has stretched '+JSON.stringify(original));
+      if(Math.abs(original.frameLeft-original.markerLeft)>1||
+         Math.abs(original.frameLeft-original.markerRight)>1)
+        throw Error('Header ruler nodes no longer align with vertical rails '+JSON.stringify(original));
+      if(width===1440&&Math.abs(original.frameLeft-100)>1)
+        throw Error('Approved 1440px rails moved '+JSON.stringify(original));
+      if(width===1600&&original.frameLeft>80)
+        throw Error('1600px still has excessive empty strip '+JSON.stringify(original));
+      if(width===1920&&original.frameLeft>25)
+        throw Error('1920px still has excessive empty strip '+JSON.stringify(original));
+    }
     await page.evaluate(()=>{
      document.querySelector('main').style.setProperty('display','none','important');
      document.querySelector('footer').style.setProperty('display','none','important');

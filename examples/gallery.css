@@ -1,0 +1,224 @@
+/* TOPHIVE Skills — item-first Examples listing. No marketing/hero sections. */
+.ex-library-page{
+  --ex-line:#e0e5df;
+  --ex-muted:#75837a;
+  --ex-green:#548569;
+  background:#fafbf9;
+  min-height:100vh;
+}
+.ex-library-page [hidden]{display:none!important}
+/* Keep the site's canonical .wrap (1240px) for header, listing and footer.
+   Widening .wrap here broke alignment with the global canvas rails. */
+.ex-library-page .site-footer{background:#fafbf9}
+.ex-sort{
+  margin-left:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#819184;
+  font-size:12px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.ex-sort select{
+  border:1px solid #dce4dd;
+  border-radius:7px;
+  background:#fff;
+  padding:10px 30px 10px 11px;
+  min-height:44px;
+  color:#33493a;
+  font-size:12px;
+  font-weight:650;
+  cursor:pointer;
+}
+.ex-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(15px,2vw,26px);
+  row-gap:30px;
+  align-items:start;
+}
+.ex-card{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.ex-card-art{
+  display:block;
+  position:relative;
+  height:auto;
+  aspect-ratio:1.26;
+  padding:0;
+  overflow:hidden;
+  border:1px solid #dbe5dc;
+  border-radius:11px;
+  background:#e6eee7;
+  transition:border-color .2s, box-shadow .25s,transform .25s;
+}
+.ex-card-art[data-ex-tone=dashboard]{background:#e9eeef}
+.ex-card-screen{
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border:0;
+  border-radius:inherit;
+  background:#f9faf8;
+  box-shadow:0 10px 24px #183a2515;
+}
+.ex-card-thumb{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.ex-card-full{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:auto;
+  display:block;
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(0,0,0);
+  will-change:auto;
+}
+/* The full-height image only loads on hover; then it gently pans its entire page.
+   A real screenshot and a live case link always remain available without motion. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .ex-card[data-ex-scroll-ready="true"]:hover .ex-card-full{
+    opacity:1;
+    will-change:transform;
+    animation:ex-full-page-pan var(--ex-pan-duration,12s) linear 0s infinite alternate;
+  }
+}
+@keyframes ex-full-page-pan{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,calc(-1 * var(--ex-pan-travel,0px)),0)}
+}
+.ex-card:hover .ex-card-art,.ex-card:focus-within .ex-card-art{
+  border-color:#a8c4ad;
+  box-shadow:0 10px 26px #1b392014;
+}
+
+.ex-card-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  min-height:70px;
+  padding:12px 1px 0;
+}
+.ex-card-info{min-width:0}
+.ex-card-info h3{
+  margin:0 0 4px;
+  font-size:clamp(19px,1.55vw,23px);
+  line-height:1.2;
+  letter-spacing:-.045em;
+  font-weight:755;
+}
+.ex-card-info h3 a:hover{color:#447d58}
+.ex-card-info p{
+  margin:0;
+  color:#7b8a7f;
+  font-size:12px;
+  line-height:1.5;
+}
+.ex-card-open{
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  width:34px;
+  height:34px;
+  border:1px solid #dfe8e0;
+  background:#fff;
+  border-radius:8px;
+  color:#52725d;
+  font-size:17px;
+  transition:border-color .18s,background .18s;
+}
+.ex-card-open:hover{background:#eaf3ea;border-color:#a6c8ae}
+.ex-empty{
+  text-align:center;
+  max-width:550px;
+  padding:76px 22px;
+  margin:20px auto;
+}
+.ex-empty-symbol{
+  width:56px;
+  height:56px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 19px;
+  border:1px solid #d9e5d9;
+  background:#edf4ed;
+  border-radius:12px;
+  color:#769780;
+  font-size:35px;
+}
+.ex-empty h2{font-size:25px;letter-spacing:-.045em;margin:0 0 8px}
+.ex-empty p{font-size:13px;color:#748679;margin:0 0 22px}
+.ex-empty button{
+  border:0;
+  background:#223329;
+  color:#fff;
+  padding:13px 19px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:750;
+}
+.ex-more{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:11px;
+  padding:37px 0 0;
+}
+.ex-more p{
+  font:650 11px ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#7b8d7d;
+  margin:0;
+}
+.ex-progress-track{
+  width:210px;
+  max-width:100%;
+  height:4px;
+  border-radius:9px;
+  background:#e4eee5;
+  overflow:hidden;
+}
+.ex-progress-track span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#81a98d;
+  transition:width .2s;
+}
+.ex-more button{
+  border:1px solid #c9daca;
+  background:#fff;
+  border-radius:7px;
+  padding:13px 24px;
+  font-size:12px;
+  color:#213529;
+  font-weight:750;
+}
+.ex-more button:hover{background:#eff5ef;border-color:#91b89b}
+.ex-more button span{margin-left:12px}
+@media(min-width:1640px){
+  .ex-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:1040px){
+  .ex-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .ex-sort{margin-left:auto}
+  .ex-grid{grid-template-columns:1fr;gap:20px}
+  .ex-card-art{aspect-ratio:1.27}
+  .ex-card-bottom{min-height:67px}
+  .ex-card-info h3{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){
+  .ex-card-art,.ex-card-open,.ex-progress-track span{transition:none!important}
+}

@@ -4,25 +4,26 @@
 <title>All Skills — TOPHIVE Skills</title>
 <meta name="description" content="Search and install published AI coding skills from TOPHIVE. Simple directory, inspectable source, one-command install.">
 <meta name="theme-color" content="#f9faf8"><link rel="icon" href="../assets/icon-256.png" type="image/png">
-<link rel="stylesheet" href="../styles.css"><script src="../scrollbar-mode.js"></script><link rel="stylesheet" href="../developer.css"><link rel="stylesheet" href="library.css">
-<script defer src="../app.js"></script><script defer src="library.js"></script></head>
+<link rel="stylesheet" href="../styles.css"><script src="../scrollbar-mode.js"></script><link rel="stylesheet" href="../developer.css"><link rel="stylesheet" href="library.css"><link rel="stylesheet" href="../site-search.css"><link rel="stylesheet" href="../site-listing.css">
+<script defer src="../app.js"></script><script defer src="library.js"></script><script defer src="../site-search.js"></script></head>
 <body class="dev-site library-view"><a href="#skills-table" class="skip-link">Skip to skill list</a>
 <header class="site-header" data-shared-header="true"><div class="wrap nav-wrap">
 <a href="../" class="brand" aria-label="TOPHIVE Skills home"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a>
 <button class="mobile-toggle" type="button" aria-controls="main-nav" aria-expanded="false" data-menu-toggle aria-label="Open menu"><span></span><span></span></button>
-<nav id="main-nav" class="nav" data-nav aria-label="Main navigation"><a href="../library/" aria-current="page">Library</a><a href="../#how">How it works</a><a href="../docs/">Documentation</a><a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
+<nav id="main-nav" class="nav" data-nav aria-label="Main navigation"><a href="../library/" aria-current="page">Library</a><a href="../examples/">Examples</a><a href="../#how">How it works</a><a href="../docs/">Documentation</a><a href="https://github.com/mr-bappi/tophive-skills" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></nav>
 <a class="nav-action" href="../library/">Explore skills <span aria-hidden="true">↗</span></a>
 </div></header>
-<main id="main" class="directory-page">
-<section class="wrap directory">
-<div class="directory-path"><a href="../">TOPHIVE SKILLS</a><span>/</span><span>LIBRARY</span></div>
-<div class="directory-head"><h1>All skills</h1><p>Focused workflows for coding agents. Browse, inspect, install.</p></div>
-<div class="directory-tools">
-<label class="directory-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input data-library-search type="search" placeholder="Search skills..." autocomplete="off" aria-label="Search skills"><kbd aria-hidden="true">/</kbd></label>
-<div class="directory-category-controls" data-category-container hidden><div class="directory-categories" data-library-categories role="group" aria-label="Filter skills by category"></div></div>
-<span class="directory-results" data-results-count aria-live="polite">1 skill</span>
+<main id="main" class="directory-page site-listing-main">
+<section class="wrap directory site-listing-container">
+<header class="site-listing-head">
+<div class="site-listing-title"><h1>All skills</h1><span class="site-listing-count" data-library-total-label>01 SKILL</span></div>
+</header>
+<div class="site-listing-toolbar" role="search">
+<div class="site-listing-filters directory-category-controls" data-category-container hidden><div class="directory-categories" data-library-categories role="group" aria-label="Filter skills by category"></div></div>
+<div class="site-listing-actions"><label class="site-search" data-site-search-field><svg class="site-search-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg><input type="search" data-site-search data-library-search placeholder="Search skills..." aria-label="Search skills" autocomplete="off"><kbd aria-hidden="true">/</kbd></label></div>
 </div>
-<div class="directory-table-scroll" id="skills-table">
+<div class="site-listing-summary"><span class="site-listing-summary-text" data-results-count aria-live="polite">Showing 1 skill</span></div>
+<div class="directory-table-scroll site-listing-results" id="skills-table">
 <table class="directory-table">
 <thead><tr><th scope="col">SKILL</th><th scope="col">DESCRIPTION</th><th scope="col">CATEGORY</th><th scope="col">VERSION</th><th scope="col" class="directory-actions-col">ACTIONS</th></tr></thead>
 <tbody data-library-items><tr data-library-item data-category-name="Design" data-search-key="web ui design saas websites dashboards product interfaces design frontend review typography" >
@@ -38,6 +39,6 @@
 <div class="directory-help"><span>New to agent skills?</span><a href="../docs/#install">Installation guide ↗</a></div>
 </section>
 </main>
-<footer class="site-footer"><div class="wrap footer-wrap"><a href="../" class="brand footer-brand"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a><span>Focused instructions. Better results.</span><nav aria-label="Footer navigation"><a href="./">Library</a><a href="../docs/">Docs</a><a href="https://github.com/mr-bappi/tophive-skills">Source ↗</a></nav></div></footer>
+<footer class="site-footer"><div class="wrap footer-wrap"><a href="../" class="brand footer-brand"><span class="brandmark" aria-hidden="true">T</span><span class="brand-word">TOPHIVE<span class="brand-suffix"> / SKILLS</span></span></a><span>Focused instructions. Better results.</span><nav aria-label="Footer navigation"><a href="./">Library</a><a href="../examples/">Examples</a><a href="../docs/">Docs</a><a href="https://github.com/mr-bappi/tophive-skills">Source ↗</a></nav></div></footer>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body></html>

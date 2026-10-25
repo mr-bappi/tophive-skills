@@ -7,6 +7,7 @@
   const body = document.querySelector("[data-library-items]");
   const empty = document.querySelector("[data-library-empty]");
   const resultCount = document.querySelector("[data-results-count]");
+  const totalLabel = document.querySelector("[data-library-total-label]");
   if (!input || !filters || !filterContainer || !body || !empty || !resultCount) return;
 
   const params = new URLSearchParams(location.search);
@@ -49,7 +50,9 @@
       row.hidden = !matches;
       if (matches) count++;
     }
-    resultCount.textContent = count + " " + (count === 1 ? "skill" : "skills");
+    resultCount.textContent = "Showing " + count + " " + (count === 1 ? "skill" : "skills");
+    const total = rows().length;
+    if (totalLabel) totalLabel.textContent = String(total).padStart(2,"0") + " " + (total === 1 ? "SKILL" : "SKILLS");
     empty.hidden = count !== 0;
     updateFilterButtons();
   }
@@ -64,22 +67,36 @@
   }
 
   function renderCategories(skills) {
-    const available = [...new Set(skills.map(skill => String(skill.category).trim()).filter(Boolean))].sort();
+    const categories = new Map();
+    for (const skill of skills) {
+      const name = String(skill.category || "").trim();
+      if (!name) continue;
+      const key = name.toLowerCase();
+      const existing = categories.get(key);
+      if (existing) existing.count++;
+      else categories.set(key, { name, count: 1 });
+    }
     filters.replaceChildren();
-    filterContainer.hidden = available.length < 2;
-    if (available.length < 2) {
+    filterContainer.hidden = categories.size === 0;
+    if (state.category !== "all" && !categories.has(state.category)) {
       state.category = "all";
+    }
+    if (categories.size === 0) {
       syncUrl();
       return;
     }
-    if (state.category !== "all" && !available.some(cat => cat.toLowerCase() === state.category)) {
-      state.category = "all";
-    }
-    for (const category of ["All", ...available]) {
-      const button = make("button", "directory-category-pill", category);
+    const options = [
+      { key: "all", name: "All skills", count: skills.length },
+      ...[...categories.entries()]
+        .sort((a, b) => a[1].name.localeCompare(b[1].name))
+        .map(([key, category]) => ({ key, ...category })),
+    ];
+    for (const option of options) {
+      const button = make("button", "directory-category-pill", option.name);
       button.type = "button";
-      button.dataset.category = category === "All" ? "all" : category.toLowerCase();
-      button.setAttribute("aria-pressed", String(button.dataset.category === state.category));
+      button.dataset.category = option.key;
+      button.setAttribute("aria-pressed", String(option.key === state.category));
+      button.append(make("span", "", String(option.count).padStart(2, "0")));
       filters.append(button);
     }
     syncUrl();
@@ -179,18 +196,6 @@
     event.preventDefault();
     copy(button.dataset.libraryCopy);
   });
-  document.addEventListener("keydown", event => {
-    const typing = event.target.closest("input,textarea,select,[contenteditable]");
-    if (event.key === "/" && !typing && !event.metaKey && !event.ctrlKey && !event.altKey) {
-      event.preventDefault();
-      input.focus();
-    }
-    if (event.key === "Escape" && document.activeElement === input) {
-      if (input.value) reset();
-      else input.blur();
-    }
-  });
-
   render();
   if (location.protocol === "http:" || location.protocol === "https:") {
     fetch("../catalog.json", { cache: "no-cache" })
@@ -207,6 +212,10 @@
         renderCategories(skills);
         render();
       })
-      .catch(() => { /* The server-rendered first skill remains usable. */ });
+      .catch(() => {
+        /* The real server-rendered skill remains usable, including category filtering. */
+        renderCategories(rows().map(row => ({ category: row.dataset.categoryName })));
+        render();
+      });
   }
 })();

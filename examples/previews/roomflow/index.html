@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RoomFlow — Room bookings workspace (illustrative)</title>
+<meta name="description" content="Illustrative admin workspace for front-desk and manager room bookings. No patient or medical records.">
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to workspace</a>
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+    <a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>roomflow<span class="brand-period">.</span></span></a>
+    <p class="sidebar-label">WORKSPACE</p>
+    <nav class="side-links" aria-label="Primary navigation">
+      <a class="active" href="#bookings"><span aria-hidden="true">▤</span> Bookings</a>
+      <a href="#rooms"><span aria-hidden="true">▦</span> Rooms</a>
+      <a href="#guide"><span aria-hidden="true">ⓘ</span> Guide</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-led" aria-hidden="true"></span><span>LOCAL PROTOTYPE<br><small>No server connection</small></span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="topbar-left"><button type="button" id="sidebar-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation"><span aria-hidden="true">☰</span></button><span>OPERATIONS <span class="slash">/</span> ROOM BOOKINGS</span></div>
+      <div class="topbar-right"><span class="demo-label">ILLUSTRATIVE WORKSPACE</span><label for="role-select">View as</label><select id="role-select" name="role"><option value="front-desk">Front desk</option><option value="manager">Manager</option></select></div>
+    </header>
+    <main id="main">
+      <section class="page-intro" aria-labelledby="heading">
+        <p class="eyebrow">01 / OPERATIONS</p>
+        <div class="page-intro-row"><div><h1 id="heading">Room bookings<span class="tiny-period">.</span></h1><p>A clear view of room requests and scheduled work.</p></div><button class="primary" id="create-booking" type="button"><span aria-hidden="true">＋</span> New booking</button></div>
+      </section>
+      <div id="notice" class="notice" role="status" aria-live="polite">Sample room-booking data only. No patient information or backend connection.</div>
+      <section class="bookings" id="bookings" aria-labelledby="bookings-title">
+        <header class="section-header"><div><p class="eyebrow">ACTIVE WORKLIST</p><h2 id="bookings-title">Bookings <span id="booking-count" aria-live="polite"></span></h2></div><span class="period-tag">SAT, 24 OCT 2026 / DEMO</span></header>
+        <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search bookings</span><input id="search" type="search" placeholder="Search requests or people" autocomplete="off"></label><label class="filter-label" for="room-filter"><span>Room</span><select id="room-filter"><option value="all">All rooms</option><option>Consultation 1</option><option>Meeting Room</option><option>Training Room</option></select></label><button class="reset" id="reset-filters" type="button">Reset filters</button></div>
+        <p class="table-scroll-hint" aria-hidden="true">SWIPE TABLE → VIEW TIME &amp; ACTIONS</p>
+        <div class="table-scroll" role="region" aria-label="Room booking list; scroll horizontally on narrow screens to see all columns" tabindex="0">
+          <table><thead><tr><th scope="col">Booking</th><th scope="col">Room</th><th scope="col">Day / Time</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="booking-body"></tbody></table>
+        </div>
+        <div id="empty-state" class="empty-state" hidden><strong>No matching bookings</strong><p>Try a different search or room filter.</p><button type="button" class="reset" id="clear-empty">Clear filters</button></div>
+        <div class="table-footer"><span>DEMO DATA / THIS SESSION ONLY</span><span id="visible-count"></span></div>
+      </section>
+      <section class="room-overview" id="rooms" aria-labelledby="rooms-title">
+        <div class="section-header"><div><p class="eyebrow">02 / WORKSPACE CONTEXT</p><h2 id="rooms-title">Rooms at a glance</h2></div><span class="side-caption">Choose a room to filter the worklist</span></div>
+        <div class="room-list"><button type="button" data-room="Consultation 1"><span class="room-icon">01</span><span><strong>Consultation 1</strong><small>Room filter</small></span><span class="room-go" aria-hidden="true">↗</span></button><button type="button" data-room="Meeting Room"><span class="room-icon">02</span><span><strong>Meeting Room</strong><small>Room filter</small></span><span class="room-go" aria-hidden="true">↗</span></button><button type="button" data-room="Training Room"><span class="room-icon">03</span><span><strong>Training Room</strong><small>Room filter</small></span><span class="room-go" aria-hidden="true">↗</span></button></div>
+      </section>
+      <section class="guide" id="guide" aria-labelledby="guide-title"><div><p class="eyebrow">03 / DEMO NOTES</p><h2 id="guide-title">Built for the work, not decoration.</h2></div><p>Search, filter, inspect and create a sample room booking. Manager view can remove a sample booking after confirmation. All changes stay in this browser session; reload to reset. No real healthcare or patient data.</p></section>
+      <footer class="footer"><span>ROOMFLOW / ILLUSTRATIVE OPERATIONS UI</span><a href="#main">Back to top ↑</a></footer>
+    </main>
+  </div>
+</div>
+<dialog id="booking-dialog" aria-labelledby="dialog-heading">
+  <form id="booking-form" novalidate><div class="dialog-header"><div><p class="eyebrow">NEW / ROOM BOOKING</p><h2 id="dialog-heading">Schedule a room</h2></div><button class="icon-close" id="close-dialog" type="button" aria-label="Close dialog">×</button></div><p class="dialog-description">Sample only. No patient data or real booking will be created.</p>
+    <label for="booking-title">Booking title <span class="required">*</span></label><input id="booking-title" name="title" placeholder="e.g. Team coordination session" maxlength="70" required>
+    <div class="form-two"><div><label for="booking-room">Room</label><select id="booking-room" name="room"><option>Consultation 1</option><option>Meeting Room</option><option>Training Room</option></select></div><div><label for="booking-day">Day</label><select id="booking-day" name="day"><option value="2026-10-24">Sat, 24 Oct</option><option value="2026-10-25">Sun, 25 Oct</option><option value="2026-10-26">Mon, 26 Oct</option></select></div></div>
+    <label for="booking-time">Start time</label><select id="booking-time" name="time"><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option></select>
+    <p class="form-error" id="booking-error" role="alert" hidden></p>
+    <div class="dialog-actions"><button type="button" class="secondary" id="cancel-booking">Cancel</button><button type="submit" class="primary">Create sample booking</button></div>
+  </form>
+</dialog>
+<dialog id="detail-dialog" aria-labelledby="detail-heading"><div class="dialog-header"><div><p class="eyebrow">BOOKING / DETAILS</p><h2 id="detail-heading">Booking details</h2></div><button class="icon-close" id="close-detail" type="button" aria-label="Close booking details">×</button></div><div id="detail-content" class="detail-content"></div><p class="dialog-description">Information shown is illustrative and exists only in this session.</p><div class="dialog-actions"><button type="button" class="secondary" id="done-detail">Done</button><button type="button" id="delete-booking" class="danger" hidden>Remove sample</button></div></dialog>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title">Remove this sample booking?</h2><p>This action removes the booking from the current demo session only.</p><div class="dialog-actions"><button class="secondary" type="button" id="cancel-delete">Cancel</button><button class="danger" type="button" id="confirm-delete">Remove booking</button></div></dialog>
+</body></html>

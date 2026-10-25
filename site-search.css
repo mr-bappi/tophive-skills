@@ -1,0 +1,80 @@
+/* TOPHIVE Skills — canonical Search field, v1.
+   This is the ONLY visual definition for site search on Home, Library and Examples.
+   Parent layouts may set width/flex only; do not restyle border, icon, focus or input. */
+.site-search{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  height:44px;
+  min-height:44px;
+  min-width:0;
+  box-sizing:border-box;
+  padding:0 13px;
+  border:1px solid #dce4dd;
+  border-radius:8px;
+  background:#fff;
+  color:#809287;
+  transition:border-color .18s ease,box-shadow .18s ease;
+  cursor:text;
+}
+.site-search:hover{border-color:#b4c8b8}
+.site-search:focus-within{
+  border-color:#729d80;
+  box-shadow:0 0 0 3px rgba(128,174,142,.17);
+}
+.site-search .site-search-icon{
+  width:18px;
+  height:18px;
+  display:block;
+  flex:0 0 auto;
+}
+.site-search input[type="search"]{
+  appearance:none;
+  -webkit-appearance:none;
+  flex:1 1 auto;
+  width:100%;
+  min-width:0;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  border-radius:0;
+  background:transparent;
+  color:#22372b;
+  box-shadow:none;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:450;
+  line-height:1.4;
+}
+.site-search input[type="search"]:focus,
+.site-search input[type="search"]:focus-visible{
+  outline:0;
+  border:0;
+  box-shadow:none;
+}
+.site-search input[type="search"]::placeholder{
+  color:#93a398;
+  opacity:1;
+}
+.site-search input[type="search"]::-webkit-search-cancel-button{cursor:pointer}
+.site-search kbd{
+  display:inline-grid;
+  flex:0 0 auto;
+  place-items:center;
+  height:21px;
+  min-width:21px;
+  padding:0 4px;
+  border:1px solid #dee7df;
+  border-radius:4px;
+  color:#899d8d;
+  background:#fff;
+  font:650 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media(max-width:450px){
+  .site-search kbd{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .site-search{transition:none}
+}

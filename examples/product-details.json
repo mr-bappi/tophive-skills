@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "defaults": {
+    "free": {
+      "price": 0,
+      "currency": "USD",
+      "available": true
+    },
+    "pro": {
+      "status": "planned",
+      "price": null,
+      "checkoutUrl": null
+    }
+  },
+  "items": {
+    "flowbridge": {
+      "kicker": "SaaS website · Interactive prototype",
+      "intro": "A complete front-end concept for presenting a workflow product clearly—built to explore the interface, interactions and responsive storytelling.",
+      "highlights": [
+        "Responsive landing page",
+        "Working workflow demo",
+        "Editable source code"
+      ],
+      "features": [
+        {
+          "title": "Guided workflow demo",
+          "description": "Step through illustrative Submit, Review and Approve states inside the page."
+        },
+        {
+          "title": "Keyboard interaction",
+          "description": "Arrow-key controls and visible focus make the workflow demo easier to use."
+        },
+        {
+          "title": "Demo form states",
+          "description": "Client-side validation for the sample form; no messages are sent or stored."
+        },
+        {
+          "title": "Responsive navigation",
+          "description": "Functional mobile menu and layouts tested across six screen widths."
+        },
+        {
+          "title": "Editorial art direction",
+          "description": "Distinctive typography and page composition built around the product story."
+        },
+        {
+          "title": "Simple source structure",
+          "description": "Standalone HTML, CSS and JavaScript without an application build system."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "files": [
+        {
+          "path": "index.html",
+          "note": "Page markup"
+        },
+        {
+          "path": "styles.css",
+          "note": "Responsive styles"
+        },
+        {
+          "path": "app.js",
+          "note": "Demo interactions"
+        }
+      ],
+      "useCases": [
+        "Workflow SaaS concepts",
+        "Product marketing prototypes",
+        "Interaction studies"
+      ],
+      "quickStart": "Extract the ZIP and open index.html in a browser. Edit the HTML, CSS and JavaScript to make the demo your own.",
+      "limitation": "Fictional product. The form, workflow and accounts are visual simulations only; no backend, external integrations or real customer data."
+    },
+    "roomflow": {
+      "kicker": "Dashboard · Booking interface",
+      "intro": "A functional room-booking admin dashboard concept designed around real interaction challenges: dense tables, role-specific controls and responsive workflows.",
+      "highlights": [
+        "Room booking UI",
+        "Filters and validation",
+        "Mobile dashboard"
+      ],
+      "features": [
+        {
+          "title": "Booking management",
+          "description": "Create sample bookings with required-field and duplicate-time validation."
+        },
+        {
+          "title": "Room search and filters",
+          "description": "Browse room requests with live filtering, empty states and reset controls."
+        },
+        {
+          "title": "Role-aware interface",
+          "description": "Switch between front-desk and manager UI states to explore permissions."
+        },
+        {
+          "title": "Confirmation states",
+          "description": "Sample deletion, cancellation and confirmation flows built into the UI."
+        },
+        {
+          "title": "Responsive data tables",
+          "description": "Dense operational data stays scrollable inside the table, including on mobile."
+        },
+        {
+          "title": "Mobile navigation",
+          "description": "Adapted sidebar and controls for narrow dashboards."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "files": [
+        {
+          "path": "index.html",
+          "note": "Dashboard markup"
+        },
+        {
+          "path": "styles.css",
+          "note": "Responsive styles"
+        },
+        {
+          "path": "app.js",
+          "note": "Booking logic (demo)"
+        }
+      ],
+      "useCases": [
+        "Admin dashboard concepts",
+        "Scheduling interfaces",
+        "Table and form studies"
+      ],
+      "quickStart": "Extract the ZIP and open index.html. Use the sample data and interface states to explore booking workflows locally.",
+      "limitation": "All room, clinic and booking information is fictional. Role restrictions and booking validation are front-end demonstrations, not secure server-side enforcement."
+    },
+    "orbitdesk": {
+      "kicker": "Creative SaaS · Workspace concept",
+      "intro": "A playful yet functional product landing page that combines strong visual storytelling with a sample creative-team task workspace.",
+      "highlights": [
+        "Landing + task board",
+        "Board and list views",
+        "Interactive notes"
+      ],
+      "features": [
+        {
+          "title": "Working task board",
+          "description": "Explore illustrative work items using a compact board interface."
+        },
+        {
+          "title": "Board and list views",
+          "description": "Switch perspectives without losing task-stage changes."
+        },
+        {
+          "title": "Editable demo stages",
+          "description": "Change a sample task's stage and see the UI stay synchronized."
+        },
+        {
+          "title": "Add-note dialog",
+          "description": "Create a local demo note with required-title validation and focus restoration."
+        },
+        {
+          "title": "Accessible interactions",
+          "description": "Functional mobile menu, FAQ and keyboard-aware controls."
+        },
+        {
+          "title": "Expressive visual identity",
+          "description": "A tactile, editorial-style marketing interface with responsive layouts."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "files": [
+        {
+          "path": "index.html",
+          "note": "Landing page markup"
+        },
+        {
+          "path": "styles.css",
+          "note": "Responsive styles"
+        },
+        {
+          "path": "app.js",
+          "note": "Workspace demo logic"
+        }
+      ],
+      "useCases": [
+        "Creative workspace concepts",
+        "Task-management UI studies",
+        "SaaS landing page prototypes"
+      ],
+      "quickStart": "Extract the ZIP and open index.html. Explore the sample tasks and adjust HTML, styles and JavaScript locally.",
+      "limitation": "Illustrative product and sample tasks only. No user accounts, persistent task storage, workspace API, or third-party integrations."
+    },
+    "margin-magazine": {
+      "kicker": "Editorial website · Literary journal",
+      "intro": "An independent literary journal concept with original illustration, expressive editorial typography and functional reading interactions.",
+      "highlights": [
+        "Original SVG artwork",
+        "Genre-based browsing",
+        "Story reading dialogs"
+      ],
+      "features": [
+        {
+          "title": "Distinctive editorial identity",
+          "description": "Warm paper tones, large serif typography and custom visual compositions."
+        },
+        {
+          "title": "Original artwork",
+          "description": "Six bundled SVG assets, including story art and the magazine's visual collage."
+        },
+        {
+          "title": "Browse by genre",
+          "description": "Filter four sample stories by Fiction, Poetry and Essays."
+        },
+        {
+          "title": "Reading dialogs",
+          "description": "Open sample story excerpts in accessible reading dialogs with Escape support."
+        },
+        {
+          "title": "Writer information",
+          "description": "A sample submissions information dialog, without collecting actual entries."
+        },
+        {
+          "title": "Newsletter validation",
+          "description": "Functional local-only form feedback. No email is transmitted or stored."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG"
+      ],
+      "files": [
+        {
+          "path": "margin-magazine/index.html",
+          "note": "Magazine markup"
+        },
+        {
+          "path": "margin-magazine/styles.css",
+          "note": "Responsive styles"
+        },
+        {
+          "path": "margin-magazine/script.js",
+          "note": "Reader interactions"
+        },
+        {
+          "path": "margin-magazine/assets/hero-collage.svg",
+          "note": "Artwork (1 of 6 SVGs)"
+        },
+        {
+          "path": "margin-magazine/README.md",
+          "note": "Source notes"
+        },
+        {
+          "path": "margin-magazine/QA.md",
+          "note": "QA summary"
+        }
+      ],
+      "extraFiles": "6 SVG artwork assets and the original QA test files are included in the ZIP.",
+      "useCases": [
+        "Independent magazines",
+        "Editorial design studies",
+        "Publishing site concepts"
+      ],
+      "quickStart": "Extract the ZIP and open margin-magazine/index.html. All six SVG artworks are bundled locally.",
+      "limitation": "Fictional publication and sample stories. No real CMS, accounts, subscriptions, submissions processing or newsletter backend."
+    }
+  }
+}

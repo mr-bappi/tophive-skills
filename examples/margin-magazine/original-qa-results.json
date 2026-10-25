@@ -1,0 +1,77 @@
+{
+  "reports": [
+    {
+      "width": 360,
+      "pass": true,
+      "scrollWidth": 360,
+      "bodyWidth": 360,
+      "height": 8747,
+      "imgOk": true,
+      "h1": "48px",
+      "visibleCards": 4,
+      "navMobile": true,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-360.png"
+    },
+    {
+      "width": 390,
+      "pass": true,
+      "scrollWidth": 390,
+      "bodyWidth": 390,
+      "height": 8643,
+      "imgOk": true,
+      "h1": "48px",
+      "visibleCards": 4,
+      "navMobile": true,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-390.png"
+    },
+    {
+      "width": 768,
+      "pass": true,
+      "scrollWidth": 768,
+      "bodyWidth": 768,
+      "height": 7795,
+      "imgOk": true,
+      "h1": "78.336px",
+      "visibleCards": 4,
+      "navMobile": false,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-768.png"
+    },
+    {
+      "width": 1024,
+      "pass": true,
+      "scrollWidth": 1024,
+      "bodyWidth": 1024,
+      "height": 6720,
+      "imgOk": true,
+      "h1": "104.448px",
+      "visibleCards": 4,
+      "navMobile": false,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-1024.png"
+    },
+    {
+      "width": 1440,
+      "pass": true,
+      "scrollWidth": 1440,
+      "bodyWidth": 1440,
+      "height": 6970,
+      "imgOk": true,
+      "h1": "146.16px",
+      "visibleCards": 4,
+      "navMobile": false,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-1440.png"
+    },
+    {
+      "width": 1920,
+      "pass": true,
+      "scrollWidth": 1920,
+      "bodyWidth": 1920,
+      "height": 7061,
+      "imgOk": true,
+      "h1": "166px",
+      "visibleCards": 4,
+      "navMobile": false,
+      "screenshot": "/mnt/data/margin-magazine/tests/viewport-1920.png"
+    }
+  ],
+  "jsErrors": []
+}

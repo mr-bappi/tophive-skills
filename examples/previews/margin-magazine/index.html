@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="description" content="MARGIN is a fictional independent literary magazine for stories, poems and ideas that stay with you. Explore a sample issue.">
+  <title>MARGIN — A little more room for words</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <noscript><style>
+    @media (max-width:760px) {
+      .menu-toggle { display:none !important; }
+      .mobile-nav[hidden] { display:flex !important; position:static !important; box-shadow:none !important; flex-direction:column; }
+    }
+  </style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="edition-bar wrap" aria-label="Magazine edition">
+      <span>AN INDEPENDENT LITERARY JOURNAL <span class="edition-star" aria-hidden="true">✳</span> A SPACE TO READ SLOWLY</span>
+      <span>AN IMAGINED PUBLICATION · EST. IN STORIES</span>
+    </div>
+    <div class="nav-shell wrap">
+      <a class="wordmark" href="#top" aria-label="Margin magazine home">m<span class="wordmark-a">a</span>rgin<span class="wordmark-period">.</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#issue">The issue</a>
+        <a href="#manifesto">Our thinking</a>
+        <a href="#letter">The letter</a>
+      </nav>
+      <a class="header-action" href="#submissions">For writers <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#issue">The issue <span aria-hidden="true">↗</span></a>
+      <a href="#manifesto">Our thinking <span aria-hidden="true">↗</span></a>
+      <a href="#letter">The letter <span aria-hidden="true">↗</span></a>
+      <a href="#submissions">For writers <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-kicker line-rule reveal">
+        <span><span class="dot"></span> THE DEBUT ISSUE / NO. 001</span>
+        <span>FICTION · POETRY · ESSAYS</span>
+      </div>
+      <div class="hero-display reveal">
+        <h1 id="hero-title">Where words<br><em>find their way.</em></h1>
+        <span class="hero-mark" aria-hidden="true">✳</span>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-intro reveal">
+          <div class="eyebrow"><span class="eyebrow-line"></span> FROM THE EDITORS</div>
+          <p>For the stories that linger. The sentences you underline. The parts of being human that don’t fit neatly into a headline.</p>
+          <a class="round-link" href="#issue"><span class="round-link-disc" aria-hidden="true">↘</span> Step inside the issue</a>
+          <span class="hero-aside">A home for the beautifully in-between.</span>
+        </div>
+        <figure class="hero-art reveal">
+          <img src="assets/hero-collage.svg" alt="Original editorial illustration of a doorway, a sun, and an abstract figure in rust-red and black" width="780" height="820" fetchpriority="high">
+          <figcaption><span>FIG. 01 — A STUDY IN OPEN DOORS</span><span>AN ORIGINAL ILLUSTRATION</span></figcaption>
+        </figure>
+      </div>
+      <div class="hero-edge-note" aria-hidden="true">SCROLL TO UNFOLD <span>↓</span></div>
+    </section>
+
+    <section class="issue-intro" id="issue" aria-labelledby="issue-heading">
+      <div class="wrap">
+        <div class="section-topline"><span>01 / THE CURRENT ISSUE</span><span>A COLLECTION OF SMALL UNIVERSES</span></div>
+        <div class="intro-grid">
+          <h2 id="issue-heading" class="display-title reveal">The art of<br><em>paying attention.</em></h2>
+          <div class="intro-right reveal">
+            <span class="big-asterisk" aria-hidden="true">✳</span>
+            <p>Some things ask to be read twice. This collection brings together invented voices exploring memory, belonging, tenderness, and the unexpected beauty of ordinary life.</p>
+            <span class="small-print">ISSUE 001 — AN EDITORIAL PROTOTYPE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stories-section wrap" aria-labelledby="stories-heading">
+      <div class="stories-heading-row">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> READ SOMETHING GOOD</div>
+          <h2 id="stories-heading">Inside <em>this issue</em><span class="title-dot">.</span></h2>
+        </div>
+        <div class="story-controls" role="group" aria-label="Filter stories by genre">
+          <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All pieces</button>
+          <button type="button" class="filter-btn" data-filter="fiction" aria-pressed="false">Fiction</button>
+          <button type="button" class="filter-btn" data-filter="poetry" aria-pressed="false">Poetry</button>
+          <button type="button" class="filter-btn" data-filter="essay" aria-pressed="false">Essays</button>
+        </div>
+      </div>
+      <p class="filter-count" id="filter-count" role="status" aria-live="polite">Showing all four sample pieces</p>
+      <div class="stories-grid" id="stories-grid">
+        <article class="story-card story-card-featured" data-genre="fiction">
+          <a class="story-cover" href="#issue" data-story="city" aria-label="Read When the city forgets your name">
+            <img src="assets/story-city.svg" alt="Original illustration of a solitary silhouette before a monumental doorway" width="940" height="840" loading="lazy">
+            <span class="story-cover-icon" aria-hidden="true">↗</span>
+          </a>
+          <div class="story-meta"><span>01 / FICTION</span><span>EDITORIAL SAMPLE</span></div>
+          <a class="story-title-link" href="#issue" data-story="city"><h3>When the city forgets your name</h3></a>
+          <p>A story about the streets we leave, and the versions of ourselves that stay behind.</p>
+          <span class="story-byline">WORDS BY MIRA VALE <span class="story-byline-star">✳</span></span>
+        </article>
+        <article class="story-card" data-genre="poetry">
+          <a class="story-cover" href="#issue" data-story="room" aria-label="Read Inventory of a quiet room">
+            <img src="assets/story-room.svg" alt="Original still-life illustration of a flower and a tilted window shadow" width="720" height="720" loading="lazy">
+            <span class="story-cover-icon" aria-hidden="true">↗</span>
+          </a>
+          <div class="story-meta"><span>02 / POETRY</span><span>EDITORIAL SAMPLE</span></div>
+          <a class="story-title-link" href="#issue" data-story="room"><h3>Inventory of a quiet room</h3></a>
+          <p>For everything left on the windowsill.</p>
+          <span class="story-byline">WORDS BY ELI ROWAN <span class="story-byline-star">✳</span></span>
+        </article>
+        <article class="story-card" data-genre="essay">
+          <a class="story-cover" href="#issue" data-story="atlas" aria-label="Read An atlas of almosts">
+            <img src="assets/story-atlas.svg" alt="Original illustration of an orange sun, drifting paper fragments and a deep-blue sea" width="720" height="720" loading="lazy">
+            <span class="story-cover-icon" aria-hidden="true">↗</span>
+          </a>
+          <div class="story-meta"><span>03 / ESSAY</span><span>EDITORIAL SAMPLE</span></div>
+          <a class="story-title-link" href="#issue" data-story="atlas"><h3>An atlas of almosts</h3></a>
+          <p>On the lives we nearly lived and the places we almost called home.</p>
+          <span class="story-byline">WORDS BY NINA SOLIS <span class="story-byline-star">✳</span></span>
+        </article>
+        <article class="story-card story-card-wide" data-genre="fiction">
+          <a class="story-cover" href="#issue" data-story="weather" aria-label="Read A small weather">
+            <img src="assets/story-weather.svg" alt="Original illustration of two paper umbrellas against a deep terracotta sky" width="1000" height="640" loading="lazy">
+            <span class="story-cover-icon" aria-hidden="true">↗</span>
+          </a>
+          <div class="story-wide-copy">
+            <div class="story-meta"><span>04 / FICTION</span><span>EDITORIAL SAMPLE</span></div>
+            <a class="story-title-link" href="#issue" data-story="weather"><h3>A small weather</h3></a>
+            <p>Sometimes the forecast is only another way of asking how someone is doing.</p>
+            <span class="story-byline">WORDS BY THEO ASH <span class="story-byline-star">✳</span></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="quote-band" aria-label="Editorial philosophy">
+      <div class="wrap quote-layout">
+        <span class="quote-overline">AN INVITATION TO LINGER —</span>
+        <p>“Not everything<br>has to be <em>loud</em><br>to be heard.”</p>
+        <span class="quote-bottom">MARGIN / EDITORIAL NOTE <span aria-hidden="true">✳</span></span>
+      </div>
+    </section>
+
+    <section class="manifesto wrap" id="manifesto" aria-labelledby="manifesto-heading">
+      <div class="manifesto-header"><span class="index-label">02 / A NOTE ON WHY WE EXIST</span><span aria-hidden="true">↘</span></div>
+      <div class="manifesto-grid">
+        <div class="manifesto-display reveal"><h2 id="manifesto-heading">A little more<br><em>room</em> for the<br>unordinary.</h2><span class="manifesto-glyph" aria-hidden="true">✳</span></div>
+        <div class="manifesto-prose reveal">
+          <p class="lead">The internet moves fast. Good writing has its own sense of time.</p>
+          <p>MARGIN is a fictional independent magazine imagined around a simple idea: that stories are worth making space for. Not an endless feed. Not a race to the next thing. Just a thoughtful place to encounter words and return to them.</p>
+          <div class="values-list">
+            <div><span>01</span><strong>Wonder over noise</strong></div>
+            <div><span>02</span><strong>Voice over volume</strong></div>
+            <div><span>03</span><strong>Attention over urgency</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="letter" aria-labelledby="letter-heading">
+      <div class="wrap newsletter-grid">
+        <div class="newsletter-copy">
+          <div class="eyebrow light-eyebrow"><span class="eyebrow-line"></span> POSTCARDS FROM THE MARGIN</div>
+          <h2 id="letter-heading">A good letter<br><em>goes a long way.</em></h2>
+          <p>Imagine a quieter kind of inbox: reading notes, small discoveries, and a reason to slow down on a Sunday.</p>
+        </div>
+        <div class="newsletter-form-panel">
+          <div class="letter-number" aria-hidden="true">✳</div>
+          <label for="email">YOUR EMAIL ADDRESS</label>
+          <form id="newsletter-form" novalidate>
+            <div class="email-row"><input id="email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="newsletter-note"><button type="submit" aria-label="Try newsletter preview">↗</button></div>
+            <p id="newsletter-feedback" class="newsletter-feedback" role="status" aria-live="polite"></p>
+          </form>
+          <p class="demo-note" id="newsletter-note">INTERACTIVE DEMO ONLY — NO EMAIL IS SENT OR STORED.</p>
+        </div>
+      </div>
+    </section>
+    <section class="submission-strip" id="submissions">
+      <div class="wrap submission-inner"><div><span>HAVE SOMETHING TO SAY?</span><h2>There’s room for your words, too.</h2></div><button type="button" class="text-cta" id="submission-info">Submission info <span aria-hidden="true">↗</span></button></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top"><p>An imaginary independent literary journal.<br>Designed to make space for good writing.</p><nav aria-label="Footer navigation"><a href="#top">Back to top ↑</a><a href="#issue">Read the issue</a><a href="#manifesto">About</a></nav></div>
+      <div class="footer-logo" aria-label="MARGIN">margin<span>.</span></div>
+      <div class="footer-bottom"><span>© 2026 MARGIN — A FICTIONAL DESIGN CONCEPT</span><span>WORDS ARE THE WHOLE POINT.</span><span>MADE FOR READING, NOT SCROLLING FOREVER.</span></div>
+    </div>
+  </footer>
+
+  <dialog class="reading-dialog" id="reading-dialog" aria-labelledby="reader-title">
+    <div class="dialog-inner">
+      <div class="dialog-top"><span class="dialog-brand">margin<span>.</span> / READING ROOM</span><button type="button" class="dialog-close" id="reader-close" aria-label="Close reading room">✕</button></div>
+      <div class="reading-content"><div class="eyebrow" id="reader-genre">FICTION</div><h2 id="reader-title"></h2><p id="reader-author" class="reader-author"></p><div id="reader-body" class="reader-body"></div><p class="reader-note">ORIGINAL SAMPLE WRITING FOR THIS FICTIONAL MAGAZINE PROTOTYPE.</p></div>
+    </div>
+  </dialog>
+  <dialog class="submissions-dialog" id="submissions-dialog" aria-labelledby="submissions-title">
+    <div class="dialog-inner small-dialog"><div class="dialog-top"><span class="dialog-brand">MARGIN / SUBMISSIONS</span><button class="dialog-close" type="button" id="submissions-close" aria-label="Close submission information">✕</button></div><div class="reading-content"><div class="eyebrow">FOR THE WRITERS</div><h2 id="submissions-title">Your words belong somewhere.</h2><p>This is a design prototype for a fictional literary magazine. Submissions are not open, and there is no submission address or upload service. In a real launch, this space would explain editorial scope, guidelines, response times, and consent before inviting work.</p><button type="button" class="inline-close" id="submissions-done">Back to the magazine ↗</button></div></div>
+  </dialog>
+</body>
+</html>

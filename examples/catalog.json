@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "pageSize": 9,
+  "examples": [
+    {
+      "slug": "flowbridge",
+      "name": "FlowBridge",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "SaaS landing page",
+      "description": "A fictional workflow product brought to life with expressive typography, interactive demo states and purposeful product storytelling.",
+      "cover": "media/flowbridge-poster.webp",
+      "preview": "previews/flowbridge/",
+      "statusLabel": "Manual trial pass",
+      "keywords": [
+        "saas",
+        "b2b",
+        "workflow",
+        "editorial",
+        "landing page"
+      ],
+      "featuredOrder": 1
+    },
+    {
+      "slug": "roomflow",
+      "name": "RoomFlow",
+      "category": "dashboards",
+      "categoryLabel": "Dashboards",
+      "typeLabel": "Admin dashboard",
+      "description": "A fictional scheduling dashboard with practical booking interactions, role states, data tables and careful mobile behavior.",
+      "cover": "media/roomflow-poster.webp",
+      "preview": "previews/roomflow/",
+      "statusLabel": "Pass after repair",
+      "keywords": [
+        "booking",
+        "scheduling",
+        "clinic",
+        "admin",
+        "roles",
+        "tables"
+      ],
+      "featuredOrder": 2
+    },
+    {
+      "slug": "orbitdesk",
+      "name": "OrbitDesk",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Creative-team SaaS landing page",
+      "description": "An illustrative creative-team workspace concept with a tactile editorial website, working task board and list views, stage controls and accessible note dialog.",
+      "cover": "media/orbitdesk-poster.webp",
+      "preview": "previews/orbitdesk/",
+      "statusLabel": "Manual browser trial pass",
+      "keywords": [
+        "creative teams",
+        "workspace",
+        "landing page",
+        "editorial",
+        "project management",
+        "task board",
+        "workflow",
+        "concept"
+      ],
+      "featuredOrder": 3
+    },
+    {
+      "slug": "margin-magazine",
+      "name": "MARGIN",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Literary magazine",
+      "description": "A fictional independent literary journal with original illustrated stories, typographic editorial art direction, reading dialogs and genre filters.",
+      "cover": "media/margin-magazine-poster.webp",
+      "preview": "previews/margin-magazine/",
+      "statusLabel": "Manual browser trial pass",
+      "keywords": [
+        "literary",
+        "magazine",
+        "editorial",
+        "publishing",
+        "independent journal",
+        "fiction",
+        "poetry",
+        "essays",
+        "landing page",
+        "storytelling",
+        "responsive"
+      ],
+      "featuredOrder": 4
+    }
+  ]
+}

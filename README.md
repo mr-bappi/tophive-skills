@@ -24,11 +24,13 @@ For eligible ChatGPT Skills upload, download the ZIP. ChatGPT Skills upload and 
 - `library/index.html`, `library/library.css`, `library/library.js` — searchable All Skills page with catalog-driven filters
 - `skills/tophive-design/index.html` — skill detail with verified scope
 - `docs/index.html` — installation/usage/security guide
+- `examples/` — public-facing Examples Gallery, FlowBridge, RoomFlow, OrbitDesk and MARGIN case studies, downloadable standalone demos and screenshots (local pending publication)
 - `styles.css` and `app.js` — plain CSS/JS (no CDN or framework)
 - `skills/tophive-design/` — installable skill source
 - `downloads/` — matching portable upload package
 - `catalog.json` — real current catalog (1 skill and SHA256)
-- `tests/site-smoke.cjs` — browser UX smoke test
+- `tests/site-smoke.cjs` — existing browser UX regression suite
+- `tests/examples-smoke.cjs` — dedicated six-width Examples and interactive case preview smoke tests
 
 ## Local preview
 
@@ -59,6 +61,32 @@ This directory deliberately contains **no fake skill installation counts** or us
 
 Visit https://skills.tophive.dev/library/ to browse the published catalog. Category filters and skill cards are progressively enhanced from `catalog.json`; a first-skill fallback remains usable without JavaScript or when network requests fail. Only verified published skills are listed, no fabricated counts.
 
+
+## Examples Gallery (local candidate)
+
+The new `/examples/` gallery belongs to **this public website repository**, not to the `design-lab` core repository. It showcases four fictional, front-end-only design examples: FlowBridge (landing page), RoomFlow (dashboard), OrbitDesk (creative-team landing page), and MARGIN (editorial literary magazine). These are manual implementation/browsing trials, not certified installed-Skill invocation. Each case now has a product-first detail page: real live preview, recognizable **source-verified technology icons in the header**, an **always-visible recreation prompt with Copy**, verified feature benefits, and one working Free download action in a **truly sticky desktop card** (static on mobile). Actual ZIP contents are verified by the builder but public filenames/counts and the What's included section are deliberately omitted. Testing evidence remains in a compact disclosure; the prompt is no longer hidden (not guaranteed pixel-identical results). No public Pro/Coming later teasers appear. They are **not** verified automatic skill invocation and are excluded from the official 24-run benchmark.
+
+The design system remains the independent source of design rules, reusable patterns, skill development, and internal evaluation records. Publication of this local gallery must be explicitly authorized; until then the public site remains unchanged.
+
+To add a verified Example, create its case page, preview, real screenshot and source ZIP, add a real entry to `examples/catalog.json` and `examples/product-details.json`, then run `python3 scripts/build-examples.py`, `python3 scripts/build-example-products.py` and `python3 scripts/sync-site-header.py`. Category counts and static cards are generated automatically. The gallery is listing-only with no hero: previews use 3 desktop columns, 4 at very wide sizes, 2 on tablet and 1 on mobile; sorting is exposed from 7+ items and results load 9 at a time. New case pages use the canonical shared header without manual registration. Detailed instructions: `examples/README.md`.
+
+Run `python3 scripts/build-examples.py --check`, `python3 scripts/build-example-products.py --check`, `NODE_PATH=<path-to-puppeteer-node-modules> node tests/examples-smoke.cjs`, `node tests/examples-marketplace.cjs`, `node tests/examples-downloads.cjs` and `node tests/examples-scale.cjs` with the same Puppeteer NODE_PATH. The latter uses 30 test-only in-memory cards, not published examples.
+
+## One shared global Search component
+
+The canonical Search input style lives in `site-search.css`, with shared `/` focus and Escape-clear behavior in `site-search.js`. The homepage Skills directory, `/library/` and `/examples/` all use `<label class="site-search" data-site-search-field>` and `<input data-site-search>`. Only their search terms, page-specific filtering logic, and **placement width** differ. Do **not** recreate border, focus, icon, spacing, height, or keyboard styles in page CSS. The one design uses a 44px field, 8px corner radius, single focus border/ring, and a consistent magnifier and `/` hint.
+
+In Examples, the recommended collection toolbar keeps **category filters at the left and Search on the right** on wide screens; tablet/mobile stack categories above a full-width Search. This is a listing tool, not a hero section. Standalone fictional product demos inside `examples/previews/` retain their own independent interface styling and are not part of the website shell.
+
+Run `NODE_PATH=<path-to-puppeteer> node tests/site-search-smoke.cjs` when editing Search: it checks 18 viewport/page combinations, visual tokens, shortcuts, filters and toolbar placement.
+
+## One global listing header (Library & Examples)
+
+`site-listing.css` is the canonical header/layout contract for both `/library/` and `/examples/`. Both pages use the same `site-listing-main`, `site-listing-container`, `site-listing-head`, `site-listing-title`, `site-listing-count`, `site-listing-toolbar`, `site-listing-filters`, `site-listing-actions`, `site-listing-summary`, and `site-listing-results` classes. The header is **compact Title + count**, then categories/search on a common toolbar, then a quiet result count. Do not add page-specific breadcrumbs, marketing copy, separate header margins, type scales, borders or toolbar patterns.
+
+Page-specific code owns only the *content*: Skills uses its accessible data table and categories from the real skills catalog; Examples uses its image gallery and categories from the real examples catalog. Both reuse `site-search.css` and `site-search.js`. Count badges reflect total real items; filtered result summaries update independently. Category pills remain visible even with only one Skills category, matching Examples (`All skills 01` / `Design 01`). Counts and active states come from the real catalog. Without JavaScript, the first skill remains visible without nonfunctional filter buttons. On mobile, full-width Search sits below any active category filters. Footer navigation/content also matches across listing pages. The shared header partial for the whole site is unchanged.
+
+Before reviewing/deploying, run `NODE_PATH=<path-to-puppeteer> node tests/site-listing-header.cjs`; this protects 7 viewport widths, exact header/toolbar alignment, active filter visual parity, and truthful dynamic badges. It does not force Docs, Skill details, or the homepage hero into a listing-page architecture.
 
 ## One shared global header
 

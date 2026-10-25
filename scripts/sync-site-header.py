@@ -13,9 +13,13 @@ PARTIAL = ROOT / "partials/site-header.html"
 PAGES = {
     "index.html": ("./", ""),
     "library/index.html": ("../", "library"),
+    "examples/index.html": ("../", "examples"),
     "docs/index.html": ("../", "docs"),
     "skills/tophive-design/index.html": ("../../", ""),
 }
+for detail in sorted((ROOT / "examples").glob("*/index.html")):
+    PAGES[str(detail.relative_to(ROOT))] = ("../../", "examples")
+
 HEADER_RE = re.compile(r'<header class="site-header"(?:\s[^>]*)?>.*?</header>', re.S)
 
 
@@ -24,6 +28,7 @@ def render(template: str, root: str, active: str) -> str:
     for key, value in {
         "ROOT": root,
         "ACTIVE_LIBRARY": ' aria-current="page"' if active == "library" else "",
+        "ACTIVE_EXAMPLES": ' aria-current="page"' if active == "examples" else "",
         "ACTIVE_DOCS": ' aria-current="page"' if active == "docs" else "",
     }.items():
         result = result.replace("{{" + key + "}}", value)

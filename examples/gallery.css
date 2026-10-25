@@ -39,6 +39,7 @@
   align-items:start;
 }
 .ex-card{
+  position:relative;
   min-width:0;
   display:flex;
   flex-direction:column;
@@ -47,7 +48,7 @@
   display:block;
   position:relative;
   height:auto;
-  aspect-ratio:1.26;
+  aspect-ratio:1.6;
   padding:0;
   overflow:hidden;
   border:1px solid #dbe5dc;
@@ -70,7 +71,11 @@
 .ex-card-thumb{
   display:block;
   width:100%;
-  height:auto;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  transform-origin:center top;
+  transition:transform .35s ease;
 }
 .ex-card-full{
   position:absolute;
@@ -83,6 +88,16 @@
   pointer-events:none;
   transform:translate3d(0,0,0);
   will-change:auto;
+}
+/* The light UI studies need subtle definition at gallery scale. Keep the actual
+   screenshot and hover-pan colors consistent, without changing darker studies. */
+.ex-card[data-ex-name="FlowBridge"] .ex-card-thumb,
+.ex-card[data-ex-name="FlowBridge"] .ex-card-full{
+  filter:contrast(1.065) saturate(1.035);
+}
+.ex-card[data-ex-name="RoomFlow"] .ex-card-thumb,
+.ex-card[data-ex-name="RoomFlow"] .ex-card-full{
+  filter:contrast(1.055) saturate(1.025);
 }
 /* The full-height image only loads on hover; then it gently pans its entire page.
    A real screenshot and a live case link always remain available without motion. */
@@ -99,26 +114,41 @@
 }
 .ex-card:hover .ex-card-art,.ex-card:focus-within .ex-card-art{
   border-color:#a8c4ad;
-  box-shadow:0 10px 26px #1b392014;
+  box-shadow:0 14px 30px #1b39201c;
+  transform:translateY(-3px);
 }
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .ex-card:hover .ex-card-thumb{transform:scale(1.02)}
+}
+.ex-card-art:focus-visible{outline:2px solid #548569;outline-offset:3px}
 
 .ex-card-bottom{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:12px;
-  min-height:70px;
-  padding:12px 1px 0;
+  min-height:64px;
+  padding:11px 1px 0;
 }
 .ex-card-info{min-width:0}
 .ex-card-info h3{
   margin:0 0 4px;
-  font-size:clamp(19px,1.55vw,23px);
-  line-height:1.2;
-  letter-spacing:-.045em;
-  font-weight:755;
+  font-size:18px;
+  line-height:1.23;
+  letter-spacing:-.032em;
+  font-weight:700;
+}
+/* Extend the case-study link across the card without covering its live-preview action. */
+.ex-card-info h3 a::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border-radius:12px;
 }
 .ex-card-info h3 a:hover{color:#447d58}
+.ex-card-info h3 a:focus-visible{outline:none}
+.ex-card-info h3 a:focus-visible::after{outline:2px solid #548569;outline-offset:3px}
 .ex-card-info p{
   margin:0;
   color:#7b8a7f;
@@ -126,6 +156,8 @@
   line-height:1.5;
 }
 .ex-card-open{
+  position:relative;
+  z-index:2;
   display:grid;
   place-items:center;
   flex:0 0 auto;
@@ -206,19 +238,17 @@
 }
 .ex-more button:hover{background:#eff5ef;border-color:#91b89b}
 .ex-more button span{margin-left:12px}
-@media(min-width:1640px){
-  .ex-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
 @media(max-width:1040px){
   .ex-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:640px){
   .ex-sort{margin-left:auto}
   .ex-grid{grid-template-columns:1fr;gap:20px}
-  .ex-card-art{aspect-ratio:1.27}
-  .ex-card-bottom{min-height:67px}
-  .ex-card-info h3{font-size:21px}
+  .ex-card-art{aspect-ratio:1.5}
+  .ex-card-bottom{min-height:62px}
+  .ex-card-info h3{font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){
-  .ex-card-art,.ex-card-open,.ex-progress-track span{transition:none!important}
+  .ex-card-art,.ex-card-thumb,.ex-card-open,.ex-progress-track span{transition:none!important}
+  .ex-card:hover .ex-card-art,.ex-card:focus-within .ex-card-art{transform:none}
 }

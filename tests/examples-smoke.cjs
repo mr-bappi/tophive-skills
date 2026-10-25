@@ -74,8 +74,10 @@ function check(ok,message){if(!ok)throw Error(message)}
           }else{
             check(await page.$eval("main",el=>el.querySelectorAll("section").length===0),"Examples must not contain hero/promotional sections");
             check(await page.$$eval(".ex-card-full",(imgs,count)=>imgs.length===count&&imgs.every(img=>!img.hasAttribute("src")),catalog.length),"Full-page assets should load only on hover");
-            check(await page.$eval(".ex-grid",el=>getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length)===(width>=1640?4:width>1040?3:width>640?2:1),"Responsive gallery grid columns mismatch at "+width);
+            check(await page.$eval(".ex-grid",el=>getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length)===(width>1040?3:width>640?2:1),"Responsive gallery grid columns mismatch at "+width);
             check(await page.$eval(".ex-card-art",el=>el.getBoundingClientRect().top)<400,"Cards must be visible without scrolling past a hero");
+            check(await page.$eval(".ex-card-info h3",el=>getComputedStyle(el).fontSize)==="18px","Example names must stay compact");
+            check(await page.$eval(".ex-card-art",el=>Math.abs(el.offsetWidth/el.offsetHeight-(window.innerWidth>640?1.6:1.5))<0.06),"Gallery preview ratio mismatch at "+width);
             check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===catalog.length,"Gallery should start with every real catalog card");
             check(await page.$eval("[data-ex-total-label]",(el,total)=>el.textContent.includes(total),String(catalog.length).padStart(2,"0")+" EXAMPLES"),"Catalog count mismatch");
             check(await page.$eval("[data-ex-sort-group]",el=>el.hidden),"Sorting should be hidden until seven real examples exist");

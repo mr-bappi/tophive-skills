@@ -2,17 +2,13 @@
 // Examples gallery and detail page browser checks; run with Puppeteer available in NODE_PATH.
 const fs = require("node:fs");
 const path = require("node:path");
-const {pathToFileURL} = require("node:url");
+// Exercise the same HTTP origin used by the real public static site.
+const HTTP_BASE="http://127.0.0.1:8765/";
 const puppeteer = require("puppeteer");
 const root = path.resolve(__dirname,"..");
 const widths = [360,390,768,1024,1440,1920];
-const pages = [
-  ["gallery","examples/index.html"],
-  ["flowbridge","examples/flowbridge/index.html"],
-  ["roomflow","examples/roomflow/index.html"],
-  ["orbitdesk","examples/orbitdesk/index.html"],
-  ["margin-magazine","examples/margin-magazine/index.html"],
-];
+const catalog=JSON.parse(fs.readFileSync(path.join(root,"examples/catalog.json"),"utf8")).examples;
+const pages=[["gallery","examples/index.html"],...catalog.map(item=>[item.slug,"examples/"+item.slug+"/index.html"])];
 const out = path.join(root,"tests","screenshots","examples");
 const record = [];
 function check(ok,message){if(!ok)throw Error(message)}
@@ -32,7 +28,7 @@ function check(ok,message){if(!ok)throw Error(message)}
         page.on("pageerror",e=>failures.push("JS "+e.message));
         page.on("requestfailed",r=>failures.push("Network "+r.url()));
         try {
-          await page.goto(pathToFileURL(path.join(root,relative)).href,{waitUntil:"load"});
+          await page.goto(HTTP_BASE+relative,{waitUntil:"networkidle0"});
           await page.evaluate(async()=>{
             for(const image of document.images) image.loading="eager";
             await Promise.all([...document.images].map(img=>img.decode().catch(()=>null)));
@@ -77,19 +73,19 @@ function check(ok,message){if(!ok)throw Error(message)}
             check(await page.$eval("[data-ex-toast]",el=>!el.hidden&&el.textContent.length>0),name+" prompt copy feedback missing");
           }else{
             check(await page.$eval("main",el=>el.querySelectorAll("section").length===0),"Examples must not contain hero/promotional sections");
-            check(await page.$$eval(".ex-card-full",imgs=>imgs.length===4&&imgs.every(img=>!img.hasAttribute("src"))),"Full-page assets should load only on hover");
+            check(await page.$$eval(".ex-card-full",(imgs,count)=>imgs.length===count&&imgs.every(img=>!img.hasAttribute("src")),catalog.length),"Full-page assets should load only on hover");
             check(await page.$eval(".ex-grid",el=>getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length)===(width>=1640?4:width>1040?3:width>640?2:1),"Responsive gallery grid columns mismatch at "+width);
             check(await page.$eval(".ex-card-art",el=>el.getBoundingClientRect().top)<400,"Cards must be visible without scrolling past a hero");
-            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===4,"Gallery should start with four real cards");
-            check(await page.$eval("[data-ex-total-label]",el=>el.textContent.includes("04 EXAMPLES")),"Catalog count mismatch");
-            check(await page.$eval("[data-ex-sort-group]",el=>el.hidden),"Sorting adds unnecessary clutter with only four examples");
-            check(await page.$eval("[data-ex-load-wrap]",el=>el.hidden),"Load more must be hidden with only four examples");
+            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===catalog.length,"Gallery should start with every real catalog card");
+            check(await page.$eval("[data-ex-total-label]",(el,total)=>el.textContent.includes(total),String(catalog.length).padStart(2,"0")+" EXAMPLES"),"Catalog count mismatch");
+            check(await page.$eval("[data-ex-sort-group]",el=>el.hidden),"Sorting should be hidden until seven real examples exist");
+            check(await page.$eval("[data-ex-load-wrap]",el=>el.hidden),"Load more must be hidden while the catalog fits the first page");
             await page.click('[data-ex-filter="dashboards"]');
             check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===1,"Dashboard filter failed");
             await page.type("[data-ex-search]","flowbridge");
             check(await page.$eval("[data-ex-empty]",el=>!el.hidden),"Empty state missing");
             await page.click("[data-ex-reset]");
-            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===4,"Filter/search reset failed");
+            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===catalog.length,"Filter/search reset failed");
             await page.type("[data-ex-search]","orbitdesk");
             check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===1,"OrbitDesk catalog search failed");
             await page.click("[data-ex-clear]");
@@ -97,8 +93,13 @@ function check(ok,message){if(!ok)throw Error(message)}
             check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===1,"MARGIN catalog search failed");
             await page.click("[data-ex-clear]");
             await page.click('[data-ex-filter="websites"]');
-            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===3,"Websites category count must include MARGIN");
+            check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===catalog.filter(item=>item.category==="websites").length,"Websites category must show all real website examples");
             await page.click('[data-ex-filter="all"]');
+            for(const term of ["sentrix","little fern"]){
+              await page.type("[data-ex-search]",term);
+              check(await page.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===1,term+" search failed");
+              await page.click("[data-ex-clear]");
+            }
             if(width===1440){
               await page.$eval("[data-ex-search]",el=>el.blur());
               await page.keyboard.press("/");
@@ -114,8 +115,8 @@ function check(ok,message){if(!ok)throw Error(message)}
     const nojs=await browser.newPage();
     await nojs.setJavaScriptEnabled(false);
     await nojs.setViewport({width:390,height:900});
-    await nojs.goto(pathToFileURL(path.join(root,"examples/index.html")).href,{waitUntil:"load"});
-    check(await nojs.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===4,"Static cards must remain visible with JS disabled");
+    await nojs.goto(HTTP_BASE+"examples/index.html",{waitUntil:"load"});
+    check(await nojs.$$eval("[data-ex-item]:not([hidden])",items=>items.length)===catalog.length,"Static cards must remain visible with JS disabled");
     check(await nojs.$$eval("[data-ex-item] h3 a",links=>links.every(link=>link.href.endsWith("/index.html")||link.href.endsWith("/"))),"Static detail links missing");
     await nojs.close();
     console.log("PASS gallery without JavaScript");

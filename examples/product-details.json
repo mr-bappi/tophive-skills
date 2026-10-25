@@ -270,6 +270,134 @@
       ],
       "quickStart": "Extract the ZIP and open margin-magazine/index.html. All six SVG artworks are bundled locally.",
       "limitation": "Fictional publication and sample stories. No real CMS, accounts, subscriptions, submissions processing or newsletter backend."
+    },
+    "sentrix": {
+      "kicker": "WEBSITE / SECURITY OPERATIONS",
+      "intro": "A security-focused marketing and interface concept featuring real interactive investigation scenarios instead of stock cybersecurity visuals.",
+      "highlights": [
+        "Interactive incident console",
+        "Scenario-driven timelines",
+        "Responsive security design"
+      ],
+      "features": [
+        {
+          "title": "Incident scenario console",
+          "description": "Switch among three illustrative security incidents and inspect the associated context."
+        },
+        {
+          "title": "Keyboard-friendly navigation",
+          "description": "Arrow-key scenario tabs, responsive mobile navigation and visible focus states."
+        },
+        {
+          "title": "Evidence-based timeline",
+          "description": "Selected incidents update their event sequence, assessment and next action."
+        },
+        {
+          "title": "Local response brief",
+          "description": "Add the current example action to a local brief, reset the case or download a concept note."
+        },
+        {
+          "title": "Clear security storytelling",
+          "description": "Operational dark canvases, restrained alert colors and editorial sections explain the product idea."
+        },
+        {
+          "title": "Motion with restraint",
+          "description": "Animated incident trace and scroll-reveal effects with a reduced-motion fallback."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG"
+      ],
+      "files": [
+        {
+          "path": "sentrix/index.html",
+          "note": "Front-end page"
+        },
+        {
+          "path": "sentrix/styles.css",
+          "note": "Responsive styling"
+        },
+        {
+          "path": "sentrix/app.js",
+          "note": "Demo interactions"
+        },
+        {
+          "path": "sentrix/assets/favicon.svg",
+          "note": "Local SVG mark"
+        }
+      ],
+      "useCases": [
+        "Cybersecurity SaaS concepts",
+        "Incident workflow prototypes",
+        "Operational UI studies"
+      ],
+      "limitation": "Fictional security product and sample events only. No actual detection, incident response, live telemetry, authentication, protected systems or infrastructure integration.",
+      "quickStart": "Unzip the original source package and open its standalone HTML entry point locally, or serve the folder with a static HTTP server."
+    },
+    "little-fern": {
+      "kicker": "WEBSITE / INTERACTIVE EDUCATION",
+      "intro": "A curiosity-first science learning experience with original inline illustrations, practical micro-lessons and carefully guided activity states.",
+      "highlights": [
+        "Interactive learning scenes",
+        "Three guided adventures",
+        "Parent-guided experiment"
+      ],
+      "features": [
+        {
+          "title": "Interactive plant illustration",
+          "description": "Tap the sunshine control to see a clearly labeled accelerated plant-growth explanation."
+        },
+        {
+          "title": "Browse by science topic",
+          "description": "Filter interactive adventures across nature, space and everyday science."
+        },
+        {
+          "title": "Complete mini lessons",
+          "description": "Question feedback, retries and a final mission form each of the three sample lessons."
+        },
+        {
+          "title": "Save a discovery",
+          "description": "Store sample lesson selections locally in the same browser without creating an account."
+        },
+        {
+          "title": "Guided home experiment",
+          "description": "Walking-water instructions follow a five-item checklist and adult-supervision guidance."
+        },
+        {
+          "title": "Keyboard-accessible dialogs",
+          "description": "Native dialog semantics, focus loop, Escape close and focus restoration support interaction."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG"
+      ],
+      "files": [
+        {
+          "path": "little-fern/dist/index.html",
+          "note": "Interactive science page"
+        },
+        {
+          "path": "little-fern/dist/styles.css",
+          "note": "Styles"
+        },
+        {
+          "path": "little-fern/dist/app.js",
+          "note": "Lesson logic"
+        }
+      ],
+      "useCases": [
+        "Kids' learning concepts",
+        "Science education prototypes",
+        "Interactive illustration studies"
+      ],
+      "limitation": "Fictional activity platform. No school certification, curriculum validation, child user studies, external accounts or backend. Experiments require adult supervision.",
+      "quickStart": "Unzip the original source package and open its standalone HTML entry point locally, or serve the folder with a static HTTP server."
     }
   }
 }

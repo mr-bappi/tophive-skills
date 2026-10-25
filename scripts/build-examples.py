@@ -139,6 +139,21 @@ def generate(html: str, source: dict) -> str:
     html = between(html, "COUNT", f"{len(examples):02d} EXAMPLES")
     html = between(html, "FILTERS", filter_markup(examples))
     html = between(html, "CARDS", "\n".join(card_markup(item) for item in examples))
+    # Keep actual HTML fallback counts honest even when JavaScript is disabled
+    # and before the progressive category/gallery controller runs.
+    html, count_match = re.subn(
+        r'(<p class="site-listing-summary-text" data-ex-results aria-live="polite">).*?(</p>)',
+        lambda m: m.group(1) + f"Showing {len(examples)} examples" + m.group(2), html, count=1
+    )
+    if count_match != 1:
+        raise ValueError("Missing static Examples result-count fallback")
+    html, progress_match = re.subn(
+        r'(<p data-ex-progress>).*?(</p>)',
+        lambda m: m.group(1) + f"Showing {min(len(examples), source['pageSize'])} of {len(examples)} examples" + m.group(2),
+        html, count=1
+    )
+    if progress_match != 1:
+        raise ValueError("Missing progressive gallery count fallback")
     attrs = f'<div class="ex-grid site-listing-results" data-ex-list data-ex-page-size="{source["pageSize"]}"'
     if len(examples) > 6:
         attrs += ' data-ex-layout="dense"'

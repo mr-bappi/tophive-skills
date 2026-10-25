@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "archiveRoot": "~/Documents/design-lab/archives",
+  "entries": [
+    {
+      "slug": "sentrix",
+      "name": "SENTRIX",
+      "source": "sentrix",
+      "runtime": "",
+      "sourceZip": "~/Downloads/SENTRIX-responsive-website.zip",
+      "zipPrefix": "sentrix/",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Cybersecurity SaaS website",
+      "description": "A fictional security operations website with an interactive incident console, evidence timelines, keyboard-driven scenarios and responsive editorial composition.",
+      "keywords": [
+        "security",
+        "cybersecurity",
+        "incident response",
+        "saas",
+        "console",
+        "SOC",
+        "engineering",
+        "investigation",
+        "dashboard",
+        "threats",
+        "web",
+        "landing page"
+      ],
+      "kicker": "WEBSITE / SECURITY OPERATIONS",
+      "hero": "A fictional cybersecurity operations concept that brings incident context, response decisions and interactive timelines into one evidence-led experience.",
+      "statusLabel": "Verified prototype trial",
+      "prompt": "Use Web & UI Design v1.5.0 to build a complete responsive website for SENTRIX, a fictional cybersecurity SaaS helping engineering teams investigate threats and coordinate incident response. Define its identity from the security domain rather than applying a generic SaaS template. Deliver a real working HTML/CSS/JS site with a demo incident console, accessible keyboard controls, responsive mobile layout, polished motion and a clear separation between illustrative interactions and real security features. Run actual browser tests and report limitations. Do not invent customers, certifications, integrations or performance metrics.",
+      "qa": "<p>The original SENTRIX QA used in-memory Chromium page content because direct URL navigation was blocked by its test container policy; the source's local HTTP assets independently returned 200. This gallery independently checks actual localhost HTTP navigation and responsive interactions.</p><dl class=\"examples-evidence\"><div><dt>Original responsive trial</dt><dd>360, 390, 768, 1024, 1440, 1920px — PASS</dd></div><div><dt>Incident demo</dt><dd>Three scenarios; keyboard tabs and timeline controls</dd></div><div><dt>Local actions</dt><dd>Add-to-brief, reset, and text download</dd></div><div><dt>Mobile navigation</dt><dd>Open and Escape dismissal</dd></div><div><dt>Cross-browser / screen reader</dt><dd>Not tested</dd></div></dl><p>All incidents are fictional simulations. No production security monitoring, external service, backend or user account is connected.</p>",
+      "provenance": "This is a manual prototype created using Web & UI Design guidance, not evidence of an automatically invoked official Skill evaluation. Direct live URL tests were not possible in the upstream Chromium container; the gallery retests over localhost.",
+      "intro": "A security-focused marketing and interface concept featuring real interactive investigation scenarios instead of stock cybersecurity visuals.",
+      "highlights": [
+        "Interactive incident console",
+        "Scenario-driven timelines",
+        "Responsive security design"
+      ],
+      "features": [
+        {
+          "title": "Incident scenario console",
+          "description": "Switch among three illustrative security incidents and inspect the associated context."
+        },
+        {
+          "title": "Keyboard-friendly navigation",
+          "description": "Arrow-key scenario tabs, responsive mobile navigation and visible focus states."
+        },
+        {
+          "title": "Evidence-based timeline",
+          "description": "Selected incidents update their event sequence, assessment and next action."
+        },
+        {
+          "title": "Local response brief",
+          "description": "Add the current example action to a local brief, reset the case or download a concept note."
+        },
+        {
+          "title": "Clear security storytelling",
+          "description": "Operational dark canvases, restrained alert colors and editorial sections explain the product idea."
+        },
+        {
+          "title": "Motion with restraint",
+          "description": "Animated incident trace and scroll-reveal effects with a reduced-motion fallback."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG"
+      ],
+      "files": [
+        {
+          "path": "sentrix/index.html",
+          "note": "Front-end page"
+        },
+        {
+          "path": "sentrix/styles.css",
+          "note": "Responsive styling"
+        },
+        {
+          "path": "sentrix/app.js",
+          "note": "Demo interactions"
+        },
+        {
+          "path": "sentrix/assets/favicon.svg",
+          "note": "Local SVG mark"
+        }
+      ],
+      "useCases": [
+        "Cybersecurity SaaS concepts",
+        "Incident workflow prototypes",
+        "Operational UI studies"
+      ],
+      "limitation": "Fictional security product and sample events only. No actual detection, incident response, live telemetry, authentication, protected systems or infrastructure integration."
+    },
+    {
+      "slug": "little-fern",
+      "name": "LITTLE FERN",
+      "source": "little-fern",
+      "runtime": "dist",
+      "sourceZip": "~/Downloads/little-fern-complete.zip",
+      "zipPrefix": "little-fern/",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Children's science learning website",
+      "description": "An illustrated science-learning website for ages 7–11 with interactive plant experiments, category-filtered adventures, complete demo lessons and parent-guided activities.",
+      "keywords": [
+        "science",
+        "kids",
+        "children",
+        "learning",
+        "education",
+        "nature",
+        "space",
+        "experiments",
+        "STEM",
+        "interactive",
+        "playful",
+        "responsive"
+      ],
+      "kicker": "WEBSITE / INTERACTIVE EDUCATION",
+      "hero": "A fictional playful science-learning experience for ages 7–11—designed to turn curiosity about nature, space and everyday science into little interactive discoveries.",
+      "statusLabel": "Verified prototype trial",
+      "prompt": "Use the Web & UI Design skill to build a complete responsive website for LITTLE FERN, a fictional interactive science platform for children ages 7–11 and the grown-ups who learn alongside them. Let the audience shape the typography, illustration, color, layout, copywriting and motion—not a generic SaaS template. Create real exploratory interactions for nature, space and everyday science, complete short lesson flows, a supervised at-home experiment, keyboard-accessible dialogs, and browser-local saved discoveries. Build in HTML, CSS and JavaScript and verify desktop and mobile. Do not request registration or claim real customers, qualifications or learning outcomes. Report actual checks and limitations.",
+      "qa": "<p>The source QA records a Chromium browser review of six responsive widths, interactive lessons and dialog focus handling. This gallery separately validates the actual HTTP-served preview and download archive.</p><dl class=\"examples-evidence\"><div><dt>Original responsive trial</dt><dd>360, 390, 768, 1024, 1440, 1920px — PASS</dd></div><div><dt>Science adventures</dt><dd>Nature, Space and Everyday filters</dd></div><div><dt>Learning interactions</dt><dd>Three sample lessons and quiz/mission progress</dd></div><div><dt>At-home experiment</dt><dd>Five-step supplies checklist and adult-guidance notice</dd></div><div><dt>Local persistence</dt><dd>Saved discoveries on the same browser only</dd></div><div><dt>Cross-browser / child testing</dt><dd>Not tested</dd></div></dl><p>Fictional educational concept, not formally reviewed curriculum. Adults should supervise science experiments. No child accounts, analytics or remote service are connected.</p>",
+      "provenance": "The supplied archive claims Web & UI Design guided creation but the exact installed Skill version was not independently certified. The original checks were browser emulations, not physical child-user testing or a formal accessibility assessment.",
+      "intro": "A curiosity-first science learning experience with original inline illustrations, practical micro-lessons and carefully guided activity states.",
+      "highlights": [
+        "Interactive learning scenes",
+        "Three guided adventures",
+        "Parent-guided experiment"
+      ],
+      "features": [
+        {
+          "title": "Interactive plant illustration",
+          "description": "Tap the sunshine control to see a clearly labeled accelerated plant-growth explanation."
+        },
+        {
+          "title": "Browse by science topic",
+          "description": "Filter interactive adventures across nature, space and everyday science."
+        },
+        {
+          "title": "Complete mini lessons",
+          "description": "Question feedback, retries and a final mission form each of the three sample lessons."
+        },
+        {
+          "title": "Save a discovery",
+          "description": "Store sample lesson selections locally in the same browser without creating an account."
+        },
+        {
+          "title": "Guided home experiment",
+          "description": "Walking-water instructions follow a five-item checklist and adult-supervision guidance."
+        },
+        {
+          "title": "Keyboard-accessible dialogs",
+          "description": "Native dialog semantics, focus loop, Escape close and focus restoration support interaction."
+        }
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG"
+      ],
+      "files": [
+        {
+          "path": "little-fern/dist/index.html",
+          "note": "Interactive science page"
+        },
+        {
+          "path": "little-fern/dist/styles.css",
+          "note": "Styles"
+        },
+        {
+          "path": "little-fern/dist/app.js",
+          "note": "Lesson logic"
+        }
+      ],
+      "useCases": [
+        "Kids' learning concepts",
+        "Science education prototypes",
+        "Interactive illustration studies"
+      ],
+      "limitation": "Fictional activity platform. No school certification, curriculum validation, child user studies, external accounts or backend. Experiments require adult supervision."
+    }
+  ]
+}

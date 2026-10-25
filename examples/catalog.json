@@ -87,6 +87,58 @@
         "responsive"
       ],
       "featuredOrder": 4
+    },
+    {
+      "slug": "sentrix",
+      "name": "SENTRIX",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Cybersecurity SaaS website",
+      "description": "A fictional security operations website with an interactive incident console, evidence timelines, keyboard-driven scenarios and responsive editorial composition.",
+      "statusLabel": "Verified prototype trial",
+      "keywords": [
+        "security",
+        "cybersecurity",
+        "incident response",
+        "saas",
+        "console",
+        "SOC",
+        "engineering",
+        "investigation",
+        "dashboard",
+        "threats",
+        "web",
+        "landing page"
+      ],
+      "cover": "media/sentrix-poster.webp",
+      "preview": "previews/sentrix/",
+      "featuredOrder": 5
+    },
+    {
+      "slug": "little-fern",
+      "name": "LITTLE FERN",
+      "category": "websites",
+      "categoryLabel": "Websites",
+      "typeLabel": "Children's science learning website",
+      "description": "An illustrated science-learning website for ages 7–11 with interactive plant experiments, category-filtered adventures, complete demo lessons and parent-guided activities.",
+      "statusLabel": "Verified prototype trial",
+      "keywords": [
+        "science",
+        "kids",
+        "children",
+        "learning",
+        "education",
+        "nature",
+        "space",
+        "experiments",
+        "STEM",
+        "interactive",
+        "playful",
+        "responsive"
+      ],
+      "cover": "media/little-fern-poster.webp",
+      "preview": "previews/little-fern/",
+      "featuredOrder": 6
     }
   ]
 }

@@ -10,13 +10,17 @@ const html = fs.readFileSync(path.join(root,"examples/index.html"),"utf8");
 const block = html.match(/<!-- EXAMPLES:CARDS:START -->([\s\S]*?)<!-- EXAMPLES:CARDS:END -->/);
 if (!block) throw Error("Missing generated Examples card markers");
 const originalCards = block[1].match(/<article class="ex-card"[\s\S]*?<\/article>/g);
-if (!originalCards || originalCards.length !== 4) throw Error("Expected exactly 4 real production cards");
+const realCount=JSON.parse(fs.readFileSync(path.join(root,"examples/catalog.json"),"utf8")).examples.length;
+if (!originalCards || originalCards.length !== realCount) throw Error("Fixture source does not match actual real Examples catalog");
 
 function fixtureCard(index) {
   const n = String(index).padStart(2,"0");
   const source = originalCards[(index-1)%originalCards.length];
   if (index <= originalCards.length) return source;
+  const category=index<=13?"dashboards":"websites";
   return source
+    .replace(/data-category="[^"]+"/,`data-category="${category}"`)
+    .replace(/data-ex-tone="[^"]+"/,`data-ex-tone="${category==="dashboards"?"dashboard":"website"}"`)
     .replace(/data-ex-name="[^"]+"/,`data-ex-name="Fixture ${n}"`)
     .replace(/data-ex-rank="\d+"/,`data-ex-rank="${index}"`)
     .replace(/data-ex-terms="[^"]+"/,`data-ex-terms="fixture scenario ${n} test example"`)
@@ -24,10 +28,10 @@ function fixtureCard(index) {
 }
 const cards = Array.from({length:30},(_,i)=>fixtureCard(i+1)).join("\n");
 const fixture = html.replace(block[0],`<!-- EXAMPLES:CARDS:START -->\n${cards}\n<!-- EXAMPLES:CARDS:END -->`)
-  .replace("04 EXAMPLES","30 EXAMPLES")
-  .replace('All examples <span>04</span>','All examples <span>30</span>')
+  .replace(String(realCount).padStart(2,"0")+" EXAMPLES","30 EXAMPLES")
+  .replace('All examples <span>'+String(realCount).padStart(2,"0")+'</span>','All examples <span>30</span>')
   .replace('Dashboards <span>01</span>','Dashboards <span>08</span>')
-  .replace('Websites <span>03</span>','Websites <span>22</span>')
+  .replace('Websites <span>'+String(realCount-1).padStart(2,"0")+'</span>','Websites <span>22</span>')
   .replace('data-ex-page-size="9"','data-ex-page-size="9"');
 
 const types = {".html":"text/html; charset=utf-8",".css":"text/css; charset=utf-8",".js":"text/javascript; charset=utf-8",".png":"image/png",".webp":"image/webp",".svg":"image/svg+xml",".json":"application/json"};

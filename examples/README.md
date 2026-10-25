@@ -2,7 +2,25 @@
 
 The public gallery lives in this `tophive-skills/examples/` folder. The separate `design-lab` repository remains the core design brain and evaluation workspace.
 
-## Adding genuine examples
+## Importing completed Design Lab site archives
+
+The canonical local source is `~/Documents/design-lab/archives/`. Public Examples belong to this independent GitHub Pages repository, not the Design Lab core.
+
+Run `python3 scripts/import-design-lab-examples.py --discover` to identify which archive directories are already listed, explicitly reviewed, or **NEEDS REVIEW**. Only reviewed records in `examples/archive-imports.json` may be imported. The importer verifies original ZIP contents byte-for-byte against the archived files, copies only runtime assets into the preview, and creates the case-page draft; it does **not** modify Design Lab, commit or push. For a new verified archive, add its accurate description, QA limits, real source package and feature metadata to the registry, then run:
+
+```sh
+python3 scripts/import-design-lab-examples.py --import
+python3 scripts/import-design-lab-examples.py --check
+NODE_PATH=<path-to-puppeteer> node tests/capture-example-full-pages.cjs <new-slug>
+python3 scripts/build-examples.py
+python3 scripts/build-example-products.py
+python3 scripts/sync-site-header.py
+python3 scripts/sync-example-sitemap.py
+```
+
+Follow with browser tests and visual QA; Git commit/push requires explicit owner approval. GitHub Pages subsequently deploys from main. This workflow is **on-demand, not a background archive watcher**. Adding an archive to a local Mac folder cannot automatically update the public website without executing the importer, verification and approved publishing workflow. AnyLicense is an earlier, real-product concept archive that is intentionally not auto-listed as a fictional free template without independent commercial review.
+
+## Adding genuine examples manually
 
 1. Create the case study at `examples/<slug>/index.html`, a runnable preview at `examples/previews/<slug>/`, and matching source ZIP at `examples/downloads/<slug>-source.zip`. The project may have its own original desktop/mobile screenshots, but gallery poster assets are generated from the preview.
 2. Add a **verified real** entry to `examples/catalog.json` and a corresponding `examples/product-details.json` record. List only features observed in working code and files truly inside the source ZIP. Never add synthetic items, fake commercial claims, or invented framework support.
@@ -39,6 +57,7 @@ The product download card carries a stable `data-ex-product-id` matching its cat
 python3 scripts/build-example-products.py --check
 python3 scripts/build-examples.py --check
 python3 scripts/sync-site-header.py --check
+NODE_PATH=<path-to-puppeteer> node tests/design-lab-archive-interactions.cjs
 NODE_PATH=<path-to-puppeteer> node tests/examples-smoke.cjs
 NODE_PATH=<path-to-puppeteer> node tests/examples-marketplace.cjs
 NODE_PATH=<path-to-puppeteer> node tests/examples-sticky-scroll.cjs
@@ -53,4 +72,4 @@ NODE_PATH=<path-to-puppeteer> node tests/examples-scale.cjs
 NODE_PATH=<path-to-puppeteer> node tests/site-smoke.cjs
 ```
 
-The 30-item stress test uses *in-memory, test-only* synthetic cards on loopback. They are never published. FlowBridge, RoomFlow, OrbitDesk and MARGIN are manual artifact trials, not official installed-Skill invocation results. OrbitDesk and MARGIN were imported from completed Downloads prototypes; their original source files remain unchanged. MARGIN additionally has independently rerun local HTTP/Chromium QA, but the originally requested v1.4.0-specific Skill activation cannot be confirmed from the source QA report.
+The 30-item stress test uses *in-memory, test-only* synthetic cards on loopback. They are never published. FlowBridge, RoomFlow, OrbitDesk, MARGIN, SENTRIX and LITTLE FERN are manual artifact trials, not official installed-Skill invocation results. OrbitDesk and MARGIN were imported from completed Downloads prototypes; their original source files remain unchanged. MARGIN additionally has independently rerun local HTTP/Chromium QA, but the originally requested v1.4.0-specific Skill activation cannot be confirmed from the source QA report.

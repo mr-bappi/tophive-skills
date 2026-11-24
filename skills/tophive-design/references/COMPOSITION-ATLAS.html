@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Composition Atlas · Eight information topologies</title>
+<style>
+:root{color-scheme:light;--bg:#edece8;--paper:#faf9f5;--ink:#171c1b;--muted:#626b67;--line:#c7cbc6;--signal:#ca603d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,sans-serif}
+main{max-width:1440px;margin:auto;padding:clamp(20px,4vw,60px)}
+header{border-bottom:1px solid var(--ink);padding-bottom:35px;margin-bottom:30px}
+small,.kicker{font:600 11px/1.3 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 clamp(44px,8vw,112px)/.95 Georgia,serif;letter-spacing:-.055em;margin:16px 0}
+header p{max-width:650px;font-size:16px;line-height:1.55}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.study{min-width:0;background:var(--paper);border:1px solid var(--line);padding:18px;display:grid;grid-template-rows:auto minmax(260px,auto) auto;gap:15px}
+.study-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.study h2{font-size:16px;margin:0;letter-spacing:-.02em}.study-head span{font:12px ui-monospace,monospace;color:var(--muted)}
+.canvas{min-height:280px;position:relative;overflow:hidden;border:1px solid #ced0c9;background:#f5f4ef;padding:20px;display:grid;gap:12px;isolation:isolate}
+.canvas>div{min-width:0}
+.mini{font:10px ui-monospace,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.block{background:var(--ink);color:var(--paper);padding:13px;min-height:32px}
+.rule{height:1px;background:var(--ink)}
+.faint{background:#dce0d7;min-height:30px;padding:10px}
+.signal{background:var(--signal);min-height:34px}
+.ghost{border:1px solid var(--line);padding:9px}
+.study p{margin:0;color:#4a5350;font-size:13px;line-height:1.5;max-width:63ch}
+.t01{grid-template-columns:1fr 70px;grid-template-rows:auto 1fr 1fr}
+.t01 .mass{font:700 clamp(50px,6vw,112px)/.78 Georgia,serif;letter-spacing:-.085em;grid-column:1/-1;align-self:center;padding:0 0 22px}
+.t01 .detail{max-width:270px;line-height:1.45;align-self:start}.t01 .side{writing-mode:vertical-rl;align-self:center;justify-self:end;color:var(--signal);font-size:12px}
+.t02{grid-template-columns:1fr 2fr 1fr;grid-template-rows:auto 1fr auto}
+.t02 .object{grid-column:2;grid-row:2;background:#252f2c;display:grid;place-items:center;border-radius:45% 45% 13% 13%;min-height:175px;transform:rotate(-7deg);color:#fff;font:italic 18px Georgia,serif}
+.t02 .left{align-self:end}.t02 .right{align-self:start}.t02 .base{grid-column:1/-1;text-align:center}
+.t03{grid-template-columns:92px 1fr 1.1fr;grid-template-rows:repeat(4,1fr)}
+.t03 .rail{grid-row:1/5;border-right:1px solid var(--line);padding-right:5px}
+.t03 .feature{grid-column:2/4;grid-row:1/3;background:#1c2825;color:#fff;display:flex;align-items:end;padding:15px;font:24px Georgia,serif}
+.t03 .a{grid-column:2;grid-row:3/5}.t03 .b{grid-column:3;grid-row:3}.t03 .c{grid-column:3;grid-row:4}
+.t04{grid-template-columns:1fr 1.8fr;grid-template-rows:auto 1fr auto}
+.t04 .controls{grid-column:1;grid-row:2;display:grid;gap:8px;align-content:start}
+.t04 .result{grid-column:2;grid-row:1/4;background:#22302b;position:relative;display:grid;place-items:center;color:#fff}
+.t04 .result .orb{width:95px;height:95px;border-radius:100%;background:var(--signal);box-shadow:0 0 0 25px #ffffff15,0 0 0 50px #ffffff0b}
+.t05{grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto 1fr auto}
+.t05 .track{grid-column:1/-1;grid-row:2;align-self:center;height:2px;background:var(--ink)}
+.t05 .node{border:2px solid var(--ink);width:38px;height:38px;border-radius:50%;background:var(--paper);z-index:1;place-self:center}
+.t05 .node:nth-of-type(3){background:var(--signal)}.t05 .top{grid-column:1/-1;display:flex;justify-content:space-between}
+.t05 .bottom{grid-column:1/-1;display:flex;justify-content:space-between}
+.t06{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto}
+.t06 .flag{grid-column:1/-1;display:flex;justify-content:space-between}
+.t06 .option{display:grid;grid-template-rows:1fr auto;gap:10px}
+.t06 .shape{min-height:130px;background:#d8ded3;border:1px solid var(--ink)}
+.t06 .option:last-of-type .shape{background:#29332f}
+.t06 .result{grid-column:1/-1;border-top:1px solid var(--ink);padding-top:10px}
+.t07{grid-template-columns:1fr 1.3fr 1fr;grid-template-rows:1fr 1fr 1fr}
+.t07 .scene1{grid-column:1/3;grid-row:1;background:#222d2a;color:#fff;padding:13px;min-height:65px}
+.t07 .scene2{grid-column:2/4;grid-row:2;background:#c96a49;color:#fff;padding:13px}
+.t07 .scene3{grid-column:1/3;grid-row:3;background:#d9ded5;padding:13px}
+.t08{grid-template-columns:90px 1.5fr .9fr;grid-template-rows:35px 1fr 1fr}
+.t08 .nav{grid-column:1/4;background:var(--ink);color:#fff;padding:10px}
+.t08 .sidebar{grid-column:1;grid-row:2/4;border-right:1px solid var(--line)}
+.t08 .work{grid-column:2;grid-row:2/4;background:#e1e5df;padding:12px;display:grid;gap:8px;grid-template-rows:27px 1fr 1fr}
+.t08 .inspect{grid-column:3;grid-row:2/4;border-left:1px solid var(--line);padding:12px}
+footer{border-top:1px solid var(--ink);padding-top:20px;margin-top:30px;color:var(--muted);font-size:13px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr}.study{grid-template-rows:auto minmax(260px,auto) auto}.t01 .mass{font-size:clamp(58px,14vw,96px)}}
+@media(max-width:410px){.canvas{padding:11px}.t03{grid-template-columns:65px 1fr 1fr}.t08{grid-template-columns:60px 1fr 70px}.t04{grid-template-columns:95px 1fr}}
+</style>
+</head>
+<body>
+<main>
+<header><small>Tophive Design Lab / Composition studies / 01—08</small><h1>Attention is an architecture.</h1><p>Eight original schematic compositions for studying information hierarchy, proof placement and reading paths. <strong>Not templates.</strong> No identity, palette or section sequence should be copied into a real product without deliberate justification.</p></header>
+<section class="gallery" aria-label="Eight topology studies">
+<article class="study"><div class="study-head"><h2>T01 / Typographic thesis</h2><span>READ / ARGUE</span></div><div class="canvas t01"><div class="mini">Argument → evidence</div><div class="mass">The<br>point.</div><div class="detail">A headline becomes the object. Supporting text enters as a deliberate counterweight.</div><div class="side">MARGINALIA / 01</div></div><p>Contrast content scale and marginal annotation; protect real reading measure.</p></article>
+<article class="study"><div class="study-head"><h2>T02 / Object stage</h2><span>OBSERVE / INSPECT</span></div><div class="canvas t02"><div class="mini left">Material<br>00—01</div><div class="mini right">Detail<br>02—04</div><div class="object">artifact</div><div class="mini base">Object → dimensions → selection</div></div><p>One artifact dominates; meaningful detail and options orbit it rather than becoming feature cards.</p></article>
+<article class="study"><div class="study-head"><h2>T03 / Editorial index</h2><span>DISCOVER / SORT</span></div><div class="canvas t03"><div class="rail mini">Index<br><br>01<br>02<br>03<br>04</div><div class="feature">Featured<br>work</div><div class="faint a">Deep<br>read</div><div class="ghost b mini">Entry A</div><div class="ghost c mini">Entry B</div></div><p>The index controls discovery; entries vary in weight based on content, not merely decoration.</p></article>
+<article class="study"><div class="study-head"><h2>T04 / Interactive instrument</h2><span>CAUSE / EFFECT</span></div><div class="canvas t04"><div class="mini">Variable → outcome</div><div class="controls"><div class="ghost mini">Parameter A</div><div class="ghost mini">Parameter B</div><div class="signal mini">Apply →</div></div><div class="result"><div class="orb"></div></div></div><p>Manipulation must visibly affect an honest result. Schematic controls here are intentionally inert.</p></article>
+<article class="study"><div class="study-head"><h2>T05 / Evidence trail</h2><span>TRACE / DECIDE</span></div><div class="canvas t05"><div class="top mini"><span>Trigger</span><span>Hypothesis</span><span>Outcome</span></div><div class="track"></div><div class="node"></div><div class="node"></div><div class="node"></div><div class="bottom mini"><span>Observed</span><span>Investigated</span><span>Action</span></div></div><p>Show origin, branching logic and accountability; never present fiction as verified system telemetry.</p></article>
+<article class="study"><div class="study-head"><h2>T06 / Comparison field</h2><span>EVALUATE / CHOOSE</span></div><div class="canvas t06"><div class="flag mini"><span>Criteria</span><span>Alternatives</span></div><div class="option"><div class="shape"></div><div class="mini">Option A</div></div><div class="option"><div class="shape"></div><div class="mini">Option B</div></div><div class="result mini">Difference → informed choice</div></div><p>Balance alternatives while emphasizing the *decision criteria*; color swap is not an argument.</p></article>
+<article class="study"><div class="study-head"><h2>T07 / Sequential narrative</h2><span>REVEAL / RESOLVE</span></div><div class="canvas t07"><div class="scene1">01 — Question</div><div class="scene2">02 — Evidence</div><div class="scene3">03 — Conclusion</div></div><p>Progressive scenes earn their space with new meaning; no scroll hijacking or empty full-screen chapters.</p></article>
+<article class="study"><div class="study-head"><h2>T08 / Active workspace</h2><span>OPERATE / VERIFY</span></div><div class="canvas t08"><div class="nav mini">Workspace / activity</div><div class="sidebar mini">Tasks<br><br>Queue<br>History</div><div class="work"><div class="ghost mini">Filter / sort</div><div class="ghost mini">Records</div><div class="ghost mini">States</div></div><div class="inspect mini">Detail<br><br>Actions<br><br>Evidence</div></div><p>Operator priority dictates density and navigation, not hero aesthetics.</p></article>
+</section><footer>TOPHIVE DESIGN LAB · Original abstract diagrams, not real product screens. These layouts are prompts for reasoning, not mandatory output patterns.</footer>
+</main>
+</body></html>

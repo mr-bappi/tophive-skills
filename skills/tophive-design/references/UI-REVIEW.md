@@ -1,43 +1,31 @@
-# Product UI & review — design quality gates
+# Visual and product-UI review — evidence → severity → fix → retest
 
-## Admin dashboard / Product UI workflow
+Use for screenshot/URL critiques, audit of existing dashboard, plugin settings, component, and targeted refine work. For constructing an entire new application load `DASHBOARD-WORKFLOW.md` instead.
 
-**Read this file first for dashboards, SaaS control planes, WordPress/plugin admin, workflow editors and developer consoles.** Do not start from the website creative-direction workflow.
+## Evidence discipline
 
-1. **Study the real app.** Inspect existing screens, user roles and workflows, locked AGENTS.md, design tokens, actual interactions and source ownership. Mark unknown features or mocked data clearly.
-2. **Map operational structure.** Preserve existing navigation, sidebar/topbar, tab context, toolbars, workspace zones, table columns, filters, bulk actions, forms and detail panels. Do not invent a new information architecture from a marketing template.
-3. **Use task-appropriate density.** Existing type/spacing tokens take precedence; maintain readable body/control labels, aligned controls and efficient table rows. Do not import enormous marketing headings, decorative serif pairing, expansive section padding, repeated SaaS cards or mandatory 12-column hero grids.
-4. **Model real states.** Show applicable default, hover, keyboard focus, selected, loading, empty, error, validation, success, disabled, unsaved, destructive confirmation and permission-restricted behavior. No invented backend functionality or fake analytics.
-5. **Respect responsiveness.** Test 360, 390, 768, 1024, 1440 and 1920 when possible. Reflow sidebar and inspector, preserve table usability (scroll or deliberate alternate layout), and keep interaction targets large enough—not tiny cards or horizontal overflow.
-6. **Motion should clarify state.** Subtle transitions, stable panel sizing and optional canvas relation animations; honor reduced motion. No decorative endless animations or scroll storytelling inside an admin workspace.
-7. **Make scoped, reversible changes.** Respect WordPress/native/React patterns, existing CSS/module boundaries, user-approved UX and pre-existing Git changes. Do not rewrite the whole dashboard when only one component is requested.
-8. **Verify.** Inspect the actual app or screenshots; test keyboard navigation, contrast, overflow, aligned controls and working interaction states. Mark PASS / FAIL / NOT TESTED truthfully.
+Describe observed pixels and verified behavior before making a diagnosis. Separate **visible** (clipping, inconsistent padding, misalignment, inappropriate scale, repeated cards) from **hypothesized cause** (CSS override, grid track sizing, stale generated styles, cache, unhandled state). Do not invent runtime errors or source-level causes from a screenshot. Mark NOT TESTED for inaccessible behavior.
 
-### Mandatory route boundary
+## Review and prioritization
 
-**Admin dashboard requests should produce an operational interface, not a landing page in dashboard clothes.** Three marketing art directions, conversion CTAs, billboard typography, huge empty spaces, decorative KPIs and invented charts are inappropriate by default.
+1. Intended user job and top task; existing navigation, forms, tables, toolbars and actual data.
+2. Hierarchy/density: Does the workspace communicate priority without marketing typography or decorative cards? Is there adequate scanning density and legibility?
+3. Component system: consistent spacing, borders, radii, content alignment, state styling and focus; shared components should behave consistently across compatible screens.
+4. Interaction: real control states, selection, filtering, keyboard semantics, loading/empty/error, permissions, undo/destructive confirmation.
+5. Responsive: no unexpected body-level horizontal scroll, clipping, tiny targets, unusable data tables or floating inspector conflicts.
+6. Visual/accessibility: contrast, reading order, proper labels, motion preferences, 200% zoom where applicable.
 
-Examples:
-- “Redesign AnyLicense license-management dashboard” → actual license table, license status controls, activation review, roles/permission states, nav and responsive data density. No editorial hero.
-- “Design AnyLicense landing page” → verified buyer narrative and distinct website compositions, without recreating admin navigation as an entire site.
-- “Polish WordPress settings UI” → preserve native platform components and accessible field states.
+Report severity by impact (blocker, major, minor) and identify **one root-cause fix** where possible rather than accumulating overrides. Preserve approved design and unrelated code.
 
-## Visual review workflow
+## Repair loop
 
-- **Observed:** What is visible in actual screenshot/render? Text clipped? Spacing inconsistent? Layout overfull? Unclear state? Accessible focus missing?
-- **Impact:** What question is not answered? Which action is obscured?
-- **Fix:** Highest-priority concrete change; preserve good existing work.
-- **Validation:** Before/after render/screenshots where possible; evidence-backed PASS/FAIL/NOT TESTED.
+When user asks "fix": inspect file ownership, CSS cascade/specificity, rendered before state, relevant markup, responsive breakpoints and tests. Apply minimal scoped edit; confirm desktop/mobile actual after state; test interactions. If browser unavailable report NOT TESTED and provide reproduction steps. Never claim pixel-perfect matching without side-by-side comparison.
 
-## Practical checklist
+## Quick audit checklist
 
-- [ ] Product, intended audience and primary action clear
-- [ ] One relevant focal point in each section/viewport
-- [ ] Responsive type scale, body measure and contrast appropriate
-- [ ] Consistent grid, container alignment and spacing vocabulary
-- [ ] No invented product proof or decorative fake UI
-- [ ] Real destinations/state behavior and keyboard focus
-- [ ] Mobile at 360/390, tablet 768, desktop 1024/1440/1920 checked as available
-- [ ] No clipped text, unwanted horizontal scroll or decorative perpetual motion
-- [ ] Reduced-motion behavior and meaningful animation fallbacks
-- [ ] Truthful reports: **PASS / FAIL / NOT TESTED** with evidence
+- User can complete core job and understand primary next action.
+- Visual signature fits actual product; product UI isn't a landing-page template.
+- UI copy/labels describe real actions; placeholders clearly marked.
+- Touch controls, focus, visible error/state, actual navigation.
+- No clipped content, unintended overflow, contrast failures, decorative perpetual motion.
+- Validation evidence and remaining limitations explicitly stated.

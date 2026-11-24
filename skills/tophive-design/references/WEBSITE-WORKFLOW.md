@@ -1,43 +1,36 @@
-# Website design — task contract
+# Website engine — complete, verifiable, product-led builds
 
-## Inputs
+Load this for new/reworked websites, marketing pages, SaaS landing pages and web sections. Pair with `CREATIVE-DIRECTION.md`, `CREATIVE-DIVERSITY.md` and `DISTINCTIVENESS-GATE.md`; choose typography and motion via `TYPOGRAPHY-INTELLIGENCE.md` and `MOTION-INTELLIGENCE.md`; check `MOTION-QUALITY-GATES.md`; for BUILD also read `ONE-SHOT-EXECUTION.md`, `IMPLEMENTATION-CONTRACT.md` and `QUALITY-GATES.md`.
 
-Required facts: actual product job, buyer, product/feature boundaries, brand assets, verified CTA and target website scope. Use the user's instructions and accessible repository/docs. Missing facts are **TBD**, not permission to invent them.
+New builds: load COMPOSITION-ENGINE.md and PRODUCT-EXPERIENCE-ENGINE.md and conduct VISUAL-CRITIC-LOOP.md after real rendering. Product interaction matters more than generic section count.
 
-A link such as `tophive.dev/products/anylicense/` can inform verified facts. It is **not** a request to update that existing page.
+For terse new landing-page BUILD prompts, first apply `SHORT-PROMPT-INTELLIGENCE.md` to establish a minimal, source-tagged product brief. This is a decision rule, not a generic section checklist; if the named project's purpose is truly unknown and cannot be recovered, do not invent features, audience or a fake brand story.
 
-## Creative-direction stage
+## Evidence and positioning
 
-Unless previously approved, propose **3 materially different** options:
+Extract product job, target visitor, pain/alternative, verified capabilities, brand assets, differentiators, primary CTA and user-requested artifact. A provided old product URL is a *reference*, not automatic permission to edit. Label each claim VERIFIED, USER-APPROVED, ILLUSTRATIVE or TBD; avoid claims of compliance, pricing, customer counts, integrations and reviews not supported by sources.
 
-1. Art direction and intended market perception.
-2. Hero composition, typography pairing/scale, container/grid approach.
-3. Product demonstration format (real screenshot, workflow, interaction, or clearly labeled concept).
-4. Section hierarchy and changing layouts.
-5. Purposeful micro-interaction/motion and mobile rules.
-6. Tradeoffs, accessibility/performance implications, recommendation.
+## Narrative architecture
 
-Do **not** deliver a generic SaaS template and re-label its accent color three times. Preserve previously accepted design direction; don't waste cycles re-asking settled questions.
+Decide the conversion sequence from the product truth, not a fixed template. Typical jobs: (1) decisive answer in hero—what, for whom, outcome; (2) mechanism or workflow; (3) authentic product proof; (4) significant benefits or use cases; (5) trust/evidence only when real; (6) next step. Design real structure appropriate to the content; omit filler and change section compositions when information needs change.
 
-## Build stage
+Define a **visual signature** in layout, typography, interaction or genuine UI demonstration; write a short anti-generic decision. Prefer varied content density and rhythm over repeated three-card rows. Distinct visual identity ≠ excessive visual decoration.
 
-When the user requests a prototype or has approved a direction:
+## Actual build
 
-- Build original responsive HTML/CSS/JS in an isolated workspace unless a different stack was authorized.
-- Product source/contract wins over illustrative creative examples.
-- Real functional nav/CTAs, clear focus-visible and reduced-motion fallbacks.
-- Hero, problem/mechanism, product experience, support/proof (only verified), decision/action. Section identities may differ by product.
-- Review the actual browser capture before reporting success. Mark tool-inaccessible checks `NOT TESTED`. Don't claim production readiness from a static render.
+- Honor existing stack, route structure, component library, SEO constraints, assets and approved direction. For independent static prototype, provide semantic HTML/CSS/JS with working links, menus, mobile behavior, copy actions and meaningful interactive demos as requested.
+- **Mandatory:** organize new site/theme CSS as readable, owned source modules from day one. Follow `MODULAR-CSS-ARCHITECTURE.md` for tokens/layout/components/pages/responsive ownership and a verifiable single runtime CSS entry or framework-native import graph; never accumulate one massive editable global stylesheet.
+- Design hero with a strong content hierarchy, readable type, responsive wrapping, purposeful product representation, real CTA and natural mobile composition.
+- Each major section gets clear question/answer hierarchy. Reuse shared tokens/components consistently but not identical card layouts everywhere. Sections should not rely on invented metrics or fake screenshot content.
+- Respect image aspect ratio, alt text and licensing. If actual screenshot unavailable, show a clearly labeled concept rather than representing illustration as product functionality.
+- Motion should clarify scroll or interaction meaning; support `prefers-reduced-motion`. Avoid inaccessible scroll hijacking or continuous decorative loops.
+- Working nav/CTA state, meaningful copy, footer, metadata, semantic landmarks and accessibility matter more than extra glossy mock visuals.
+- When "build" is explicit, finish implementation and validation without pausing for art direction approval, unless the user explicitly asks to compare options first.
 
-## AnyLicense regression guard
+## Acceptance gate
 
-Input: "Design a brand-new standalone premium AnyLicense SaaS landing page; here is our current product URL."
-Expected: **Website design.** First verified facts, then genuinely different art directions (unless approved), page story and eventual standalone prototype.
-Forbidden output: Rank Math settings, product SEO description, Gutenberg markup, buyer package for an existing WordPress product page.
+Actual browser at 360/390/768/1024/1440/1920 when available; no unwanted horizontal overflow, clipping or huge dead zones; real links/actions; no console errors; keyboard/focus and reduced motion; font contrast; hero answers product in five seconds; full narrative stays clear on mobile. Run an appropriate build/test command for the target stack. Record unrun gates NOT TESTED.
 
-Input: "Write an AnyLicense Gutenberg product description and Rank Math metadata."
-Expected: **Content/SEO** because that was explicitly requested; this skill must not hijack it into landing-page design.
+## Routing regression examples (not product-specific)
 
-## Product/source evidence ledger
-
-Before publishing buyer-facing facts, mark each item `VERIFIED`, `APPROVED`, `PROPOSED`, or `TBD`. Don't infer "secure", "certified", "marketplace-ready", "live", SDK support or price from a brand name or concept.
+"Build a standalone SaaS landing page; here is the existing product URL" → BUILD website in an isolated project, not SEO, Gutenberg or changing the existing live product page. "Write Gutenberg product copy and Rank Math metadata" → content task, not website. "Review this landing screenshot" → REVIEW, not new code unless requested.

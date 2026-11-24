@@ -1,23 +1,24 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-24",
+  "updated": "2026-11-24",
   "count": 1,
   "skills": [
     {
       "slug": "tophive-design",
       "name": "Web & UI Design",
-      "version": "1.2.0",
+      "version": "1.13.0",
       "category": "Design",
-      "description": "Premium websites, admin dashboards and product interfaces",
+      "description": "Premium websites, complex dashboards, product interfaces and motion experiences",
       "source": "https://github.com/mr-bappi/tophive-skills/tree/main/skills/tophive-design",
       "download": "downloads/tophive-design-skill.zip",
-      "sha256": "975585fed2a35856a0aa89536945c8c72840389aacf49b6520595446951308dc",
+      "sha256": "f08772936caf9152b67e8be0d6296941d1651653012c58ff7705c864d75b4315",
       "install": "npx skills add mr-bappi/tophive-skills -g",
       "tags": [
         "Websites",
         "Dashboards",
         "UI review"
-      ]
+      ],
+      "release_channel": "preview"
     }
   ]
 }
